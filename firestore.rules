@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function memberPath() { return /databases/$(database)/documents/teams/getraenke/members/$(request.auth.uid); }
+    function isMember() { return request.auth != null && exists(memberPath()); }
+    function role() { return get(memberPath()).data.role; }
+    function isAdmin() { return isMember() && role() == 'admin'; }
+    function canEdit() { return isMember() && role() in ['admin', 'bearbeiten']; }
+    function setupDone() { return exists(/databases/$(database)/documents/teams/getraenke/meta/setup); }
+
+    // Ersteinrichtung: nur solange noch kein Admin existiert
+    match /teams/getraenke/meta/setup {
+      allow read: if true;
+      allow create: if request.auth != null && !setupDone()
+        && getAfter(memberPath()).data.role == 'admin';
+    }
+
+    // Zugänge
+    match /teams/getraenke/members/{uid} {
+      allow read: if isMember();
+      allow create: if isAdmin()
+        || (request.auth != null && request.auth.uid == uid && !setupDone()
+            && request.resource.data.role == 'admin'
+            && existsAfter(/databases/$(database)/documents/teams/getraenke/meta/setup));
+      allow update, delete: if isAdmin() && uid != request.auth.uid;
+    }
+
+    // Plan: Mitarbeiter, Regeln, Wochen
+    match /teams/getraenke/plan/{doc} {
+      allow read: if isMember();
+      allow write: if canEdit();
+    }
+    match /teams/getraenke/weeks/{doc} {
+      allow read: if isMember();
+      allow write: if canEdit();
+    }
+  }
+}
