@@ -98,7 +98,9 @@ textarea{width:100%;min-height:70px;resize:vertical}
 .copyp small{font-weight:400;font-size:10px}
 .copyp input:disabled+span{opacity:.4}
 .seg{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap}
-.seg .tab{border:1px solid var(--line)}
+.seg .tab{border:0;padding:6px 12px;border-radius:6px}
+.seg .tab[aria-selected=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .12)}
+.ptop .seg{margin-bottom:0}
 table.ovt{border-collapse:collapse;width:100%;min-width:1080px;font-size:14px}
 .ovt th{background:var(--surface-2);text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;padding:8px}
 .ovt td{padding:8px;border-top:1px solid var(--line);vertical-align:top}
@@ -132,6 +134,116 @@ table.aht{border-collapse:collapse;min-width:420px;font-size:14px}
 .loginbox input{width:100%;padding:10px;font-size:16px}
 .loginbox .btn{justify-content:center;padding:11px}
 .err{color:var(--bad);font-weight:600;margin:0}
+.tpanel{margin-bottom:14px;display:grid;gap:10px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.tday{border:1px solid var(--line);border-radius:var(--r);padding:8px;display:grid;gap:6px;align-content:start}
+.tdh{font-family:var(--f-display);font-weight:700;font-size:16px}
+.titem{display:grid;grid-template-columns:22px 1fr auto;gap:6px;align-items:start;font-size:13px;cursor:pointer}
+.titem input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--ok)}
+.titem small{display:block;color:var(--muted);font-size:12px}
+.titem.isdone b{text-decoration:line-through;color:var(--muted)}
+.dtasks li.isdone>span:last-child{text-decoration:line-through;color:var(--muted)}
+.dtasks li.isdone .tk{color:var(--ok)}
+.dtasks .tk{color:var(--muted)}
+.mtx td{vertical-align:top}
+.mtx .daypick{flex-wrap:nowrap}
+.mtx .daypick span{padding:2px 6px;font-size:12px}
+.warnt{color:var(--warn);font-weight:600}
+.mgrid th{white-space:nowrap;font-size:11px}
+.mgrid td.mc{text-align:center;font-weight:700;font-family:var(--f-mono);min-width:40px}
+.mgrid td.mV{background:var(--accent);color:var(--accent-ink)}
+.mgrid td.m1{background:var(--accent-soft);color:var(--accent)}
+.mgrid td.m2{background:var(--surface-2);color:var(--ink)}
+.covbar .closedpart{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,transparent 0 5px,var(--line) 5px 7px)}
+
+/* ---- Wochenansicht (aufgeräumt) ---- */
+.ptop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.ptop .spacer{flex:1}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:8px;padding:3px;gap:2px;flex-wrap:wrap}
+.segb{border:0;background:transparent;padding:6px 12px;border-radius:6px;font-weight:600;font-size:14px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.segb[aria-selected=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .12)}
+.cnt{font-size:11px;min-width:18px;height:18px;border-radius:9px;display:inline-grid;place-items:center;padding:0 5px;background:var(--warn-soft);color:var(--warn)}
+.cnt.bad{background:var(--bad-soft);color:var(--bad)}.cnt.ok{background:var(--ok-soft);color:var(--ok)}
+.issuebtn{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:7px}
+.issuebtn .sdot{width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.issuebtn.bad{border-color:var(--bad);color:var(--bad)}.issuebtn.bad .sdot{background:var(--bad)}
+.issuebtn.warn{border-color:var(--warn);color:var(--warn)}.issuebtn.warn .sdot{background:var(--warn)}
+.more{position:relative}
+.menu{position:absolute;right:0;top:calc(100% + 4px);background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 30px rgb(0 0 0 / .18);padding:4px;min-width:260px;z-index:30;display:grid}
+.menu button{border:0;background:transparent;text-align:left;padding:9px 12px;border-radius:6px;font-size:14px}
+.menu button:hover{background:var(--surface-2)}.menu button.danger{color:var(--bad)}
+.lline{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px;margin:0 0 10px;padding:6px 10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.lline>span{display:inline-flex;align-items:center;gap:5px}
+.sm{font-size:12px}
+.dtop{display:flex;justify-content:space-between;align-items:flex-start;gap:6px}
+.cdot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex:none}
+.cdot.ok{background:var(--ok)}.cdot.bad{background:var(--bad)}
+.dayh .tags{min-height:0;margin-top:5px}
+.dtk{margin-top:6px;border:0;background:var(--warn-soft);color:var(--warn);font-size:11px;font-weight:700;border-radius:4px;padding:2px 6px;text-align:left}
+.dtk.bad{background:var(--bad-soft);color:var(--bad)}.dtk.ok{background:var(--ok-soft);color:var(--ok)}
+.grid th.hrs,.grid td.hrs{width:86px;min-width:86px;padding:8px;font-size:12px;vertical-align:middle;text-align:right}
+.grid td.hrs .pill{display:block;width:max-content;margin:4px 0 0 auto;font-size:11px}
+.grid .empcell{width:150px;min-width:140px}
+.grid td.empcell{position:sticky;left:0;z-index:2;background:var(--surface)}
+.grid th.empcell{position:sticky;left:0;z-index:2;background:var(--surface-2)}
+.grid tr.totrow td.empcell{background:var(--surface-2)}
+.grid .dayh{min-width:112px}
+td.cell{height:auto;min-height:54px;padding:4px}
+.chip{padding:5px 7px;margin-bottom:3px}
+.chip .t{display:block;font-weight:700;font-size:13px}
+.chip .k{display:block;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip .k i{font-style:normal;font-weight:700;color:var(--ink);opacity:.7}
+.chip.sub{margin-left:8px;width:calc(100% - 8px)}
+.mkp{display:inline-block;font-size:11px;font-weight:700;color:var(--holiday);background:var(--holiday-soft);border-radius:4px;padding:1px 6px;margin:2px 0}
+.addbtn{display:flex;justify-content:space-between;align-items:center;gap:4px;width:100%;min-height:40px;border:1px dashed transparent;background:transparent;border-radius:var(--r);color:var(--muted);font-size:12px;padding:4px 6px}
+.addbtn b{font-size:16px;font-weight:400;opacity:.35;margin-left:auto}
+td.cell:hover .addbtn,.addbtn:focus-visible{border-color:var(--line)}
+td.cell:hover .addbtn b{opacity:1;color:var(--accent)}
+.moreb{position:absolute;top:5px;right:6px;border:0;background:var(--surface);border-radius:4px;color:var(--muted);font-size:13px;line-height:1;padding:2px 5px;opacity:0}
+td.cell:hover .moreb,.moreb:focus-visible{opacity:1}
+@media (hover:none){.moreb{opacity:.75}}
+.overlay.side{justify-content:flex-end;align-items:stretch;padding:0}
+.overlay.side .modal{max-width:440px;max-height:none;height:100%;border-radius:0;padding:18px max(18px,env(safe-area-inset-right,0px)) 18px 18px;padding-top:calc(18px + env(safe-area-inset-top,0px))}
+.sheeth{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.ish{margin:16px 0 2px;font-size:17px}.ish.bad{color:var(--bad)}.ish.warn{color:var(--warn)}
+.mlist{display:grid;gap:6px;margin-top:12px}
+.mitem{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;text-align:left;display:grid;gap:2px}
+.mitem:hover{border-color:var(--accent);background:var(--accent-soft)}
+.mitem small{color:var(--muted);font-size:12px}
+.sect.coll>h3{cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.sect.coll>h3::after{content:"▾";font-size:14px;color:var(--muted);transition:transform .15s}
+.sect.coll.closed>h3::after{transform:rotate(-90deg)}
+.sect.coll.closed>:not(h3){display:none!important}
+.sect.coll.closed>h3{border-bottom-color:transparent;padding-bottom:0}
+.legend i.lgx{background:#b9d3dc}
+.btab{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+.btab th,.btab td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.btab thead th{background:var(--surface-2);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.btab th.bd{font-family:var(--f-display);font-size:18px;width:130px;white-space:nowrap}
+.btab th.bd span{display:block;font-size:12px;font-family:var(--f-mono);font-weight:400}
+.btab td.bc{width:45%}
+.btab td.closed{background:var(--holiday-soft)}
+.bs{display:inline-block;font-size:12px;font-weight:700;border-radius:4px;padding:2px 7px;margin:0 4px 6px 0}
+.bs.ok{background:var(--ok-soft);color:var(--ok)}.bs.bad{background:var(--bad-soft);color:var(--bad)}.bs.none{background:var(--surface-2);color:var(--muted)}
+.bp{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.bp li{display:grid;grid-template-columns:12px 112px max-content;gap:8px;align-items:center}
+.bp li .dot{width:9px;height:9px;border-radius:50%;background:hsl(var(--h) 55% 50%)}
+.bp li .mono{font-size:13px;color:var(--muted)}
+.covcol{min-width:0;display:grid;gap:4px}
+.covrow{align-items:start}.covrow .d{padding-top:6px}
+.lanes{position:relative}
+.lane{position:absolute;height:19px;border-radius:4px;background:hsl(var(--h) var(--chip-s) var(--chip-bg-l));border-left:3px solid hsl(var(--h) var(--chip-s) var(--chip-l));font-size:11px;line-height:19px;padding:0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.lane span{color:var(--muted);font-family:var(--f-mono);font-size:10px}
+.cov .covrow+.covrow{border-top:1px solid var(--line);padding-top:8px}
+.empbtn2{border:0;background:transparent;padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer}
+.empbtn2:disabled{cursor:default}
+.empbtn2:not(:disabled):hover .empname{color:var(--accent);text-decoration:underline}
+.autointro{margin-bottom:14px}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-items:start}
+.acard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.acard .ahead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.acard ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px}
+.acard li::marker{color:var(--accent)}
 .freep{display:grid;gap:10px;margin-bottom:14px}
 .freerow{display:grid;grid-template-columns:180px minmax(0,1fr);gap:10px;align-items:center}
 @media (max-width:560px){.freerow{grid-template-columns:1fr}}
@@ -191,7 +303,9 @@ td.cell:hover .addbtn{border-color:var(--line)}
 .covbar span{position:absolute;top:0;bottom:0}
 .covbar .need-ok{background:var(--ok)}
 .covbar .need-bad{background:var(--bad)}
-.covbar .extra{background:var(--accent);opacity:.35}
+.covbar .extra{background:#b9d3dc}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .covbar .extra{background:#2b4a55}}
+:root[data-theme="dark"] .covbar .extra{background:#2b4a55}
 .covbar .closedbar{position:absolute;inset:0;background:var(--holiday-soft);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--holiday);font-weight:700}
 .axis{display:grid;grid-template-columns:110px 1fr;gap:10px}
 .axis .ticks{position:relative;height:16px;font-size:11px;color:var(--muted);font-family:var(--f-mono)}
@@ -338,10 +452,10 @@ function dayInfo(k){
 }
 
 /* ---------- state ---------- */
-const S={cfg:null,weeks:{},week:mondayOf(addDays(new Date(),7)),tab:"plan",selEmp:null,ro:false,mode:"loading",lastPlan:null,role:null,me:null,members:[]};
+const S={cfg:null,weeks:{},week:mondayOf(addDays(new Date(),7)),tab:"plan",selEmp:null,ro:false,mode:"loading",lastPlan:null,role:null,me:null,members:[],done:{}};
 const pending={};const timers={};
 const LS="schichtplan-getraenke-v1";
-const APP_VERSION="1.0 · 31.10.2026";
+const APP_VERSION="1.9.1 · 01.11.2026";
 const TEAM="getraenke";
 const MAIL_DOMAIN="schichtplan.local";
 const FB_CONFIG=(window.FB_CONFIG&&window.FB_CONFIG.apiKey&&!/HIER/.test(window.FB_CONFIG.apiKey))?window.FB_CONFIG:null;
@@ -353,11 +467,11 @@ const toMail=u=>{u=String(u||"").trim().toLowerCase();return u.includes("@")?u:u
 const canEditRole=r=>r==="admin"||r==="bearbeiten";
 const ROLE_LBL={admin:"Admin (alles, Zugänge verwalten)",bearbeiten:"Bearbeiten",lesen:"Nur ansehen"};
 
-function saveLocal(){try{localStorage.setItem(LS,JSON.stringify({cfg:S.cfg,weeks:S.weeks}))}catch(e){}}
-function loadLocal(){try{const raw=localStorage.getItem(LS);if(raw){const o=JSON.parse(raw);S.cfg=o.cfg||null;S.weeks=o.weeks||{}}}catch(e){}}
+function saveLocal(){try{localStorage.setItem(LS,JSON.stringify({cfg:S.cfg,weeks:S.weeks,done:S.done}))}catch(e){}}
+function loadLocal(){try{const raw=localStorage.getItem(LS);if(raw){const o=JSON.parse(raw);S.cfg=o.cfg||null;S.weeks=o.weeks||{};S.done=o.done||{}}}catch(e){}}
 function track(p){inflight++;renderSync();p.then(()=>{syncErr=""},err=>{syncErr=err&&err.code==="permission-denied"?"Keine Berechtigung zum Speichern. Firestore-Regeln oder Rolle prüfen.":"Übertragung fehlgeschlagen: "+(err&&err.message||err);showNotice(syncErr)}).finally(()=>{inflight--;renderSync()});return p}
 function save(docPath,body){
-  if(S.ro)return;
+  if(S.ro||S.dry)return;
   saveLocal();
   if(S.mode!=="cloud"||!fdb)return;
   pending[docPath]=(pending[docPath]||0)+1;
@@ -367,7 +481,7 @@ function save(docPath,body){
   },450);
 }
 const saveCfg=()=>save("plan/config",()=>S.cfg);
-const saveWeek=wid=>save("weeks/"+wid,()=>({shifts:S.weeks[wid]||[]}));
+const saveWeek=wid=>save("weeks/"+wid,()=>({shifts:S.weeks[wid]||[],done:S.done[wid]||{}}));
 
 function showNotice(msg){$("#notice").innerHTML=msg?`<div class="notice">${esc(msg)}</div>`:""}
 
@@ -392,6 +506,7 @@ async function init(){
     S.mode="local";
     if(!S.cfg){try{const r=await fetch("startdaten.json");const o=await r.json();if(o&&o.cfg){S.cfg=o.cfg;S.weeks=o.weeks||{};saveLocal()}}catch(e){}}
     if(!S.cfg)S.cfg=blankCfg();
+    {const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover();if(m1||m2||m3)saveLocal()}
     showNotice(FB_CONFIG?"Die Firebase-Dateien (fb-app.js, fb-auth.js, fb-firestore.js) fehlen. Der Plan wird nur auf diesem Gerät gespeichert.":"Firebase ist noch nicht eingerichtet (firebase-config.js). Der Plan wird nur auf diesem Gerät gespeichert.");
     render();return;
   }
@@ -423,13 +538,14 @@ async function onUser(u){
     if(pending["plan/config"])return;
     const d=snap.exists?snap.data():null;
     if(d)S.cfg=clean(d);else if(!S.cfg)S.cfg=blankCfg();
+    if(d){const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover();if(m1||m2||m3)saveCfg()}
     saveLocal();
     if(!d&&S.role==="admin")maybeSeed();
     if(gotWeeks)render();
   },e=>{showNotice("Plan konnte nicht geladen werden ("+(e&&e.code||"Fehler")+").");if(!S.cfg)S.cfg=blankCfg();render()}));
   unsubs.push(teamRef().collection("weeks").onSnapshot(qs=>{
     gotWeeks=true;
-    qs.docs.forEach(d=>{if(pending["weeks/"+d.id])return;S.weeks[d.id]=clean(d.data().shifts||[])});
+    qs.docs.forEach(d=>{if(pending["weeks/"+d.id])return;S.weeks[d.id]=clean(d.data().shifts||[]);S.done[d.id]=clean(d.data().done||{})});
     saveLocal();
     if(gotCfg)render();
   },e=>{}));
@@ -448,9 +564,9 @@ async function maybeSeed(){
 }
 async function importBackup(o,silent){
   if(!o||!o.cfg)throw new Error("Keine gültige Sicherung");
-  S.cfg=clean(o.cfg);S.weeks=clean(o.weeks||{});saveLocal();
+  S.cfg=clean(o.cfg);S.weeks=clean(o.weeks||{});S.done=clean(o.done||{});migrateFixed();migrateHours();migrateCover();saveLocal();
   if(S.mode==="cloud"&&fdb){
-    const ops=[["plan/config",S.cfg],...Object.entries(S.weeks).map(([w,sh])=>["weeks/"+w,{shifts:sh}])];
+    const ops=[["plan/config",S.cfg],...Object.entries(S.weeks).map(([w,sh])=>["weeks/"+w,{shifts:sh,done:S.done[w]||{}}])];
     for(let i=0;i<ops.length;i+=400){const b=fdb.batch();ops.slice(i,i+400).forEach(([p,d])=>b.set(refFor(p),clean(d)));await track(b.commit())}
   }
   render();
@@ -514,6 +630,25 @@ function authError(err){
   return "Fehler: "+(err&&err.message||c||err);
 }
 
+function migrateFixed(){
+  if(!S.cfg||S.cfg.migrFixed1||S.ro)return false;
+  const tim=(S.cfg.employees||[]).find(e=>e.id==="einw"),jo=(S.cfg.employees||[]).find(e=>e.role==="azubi");
+  if(tim&&!tim.fixed){tim.fixed=[{days:[1,3,5],from:"17:00",to:"22:00",task:"einweg"}];tim.avail=tim.avail||{};[1,3,5].forEach(d=>{const a=tim.avail[d]||(tim.avail[d]={on:true,from:"07:00",to:"22:00"});a.on=true;if(a.to<"22:00")a.to="22:00"})}
+  if(jo&&!jo.fixed)jo.fixed=[{days:[3],from:"16:00",to:"21:15",task:"auto_lf"}];
+  S.cfg.migrFixed1=true;return true;
+}
+function migrateCover(){
+  if(!S.cfg||S.cfg.migrCover1||S.ro)return false;
+  const tim=(S.cfg.employees||[]).find(e=>e.id==="einw");
+  if(tim&&tim.fixed)tim.fixed.forEach(f=>{if(f.task==="einweg"&&f.coverLead==null)f.coverLead=true});
+  S.cfg.migrCover1=true;return true;
+}
+function migrateHours(){
+  if(!S.cfg||S.cfg.migrHours1||S.ro)return false;
+  S.cfg.dayOverrides=S.cfg.dayOverrides||{};
+  [["2026-12-24","06:00","13:00","Heiligabend"],["2026-12-31","07:00","14:00","Silvester"]].forEach(([k,o,c,n])=>{const x=S.cfg.dayOverrides[k]||{};if(!x.open)S.cfg.dayOverrides[k]={...x,open:o,close:c,note:x.note||n}});
+  S.cfg.migrHours1=true;return true;
+}
 function blankCfg(){return {settings:{open:"07:00",close:"21:00",workStart:"07:00",workEnd:"21:15",state:"HE"},employees:[],rules:[],dayOverrides:{}}}
 
 /* ---------- derived ---------- */
@@ -532,7 +667,20 @@ function weekMinutes(empId,wid){return (S.weeks[wid]||[]).filter(s=>s.empId===em
 const skillsList=()=>S.cfg?.skills||[];
 const skillTags=e=>(e.skills||[]).map(id=>skillsList().find(x=>x.id===id)).filter(Boolean).map(x=>`<span class="sk">${esc(x.label)}</span>`).join("");
 const defTask=e=>e.role==="al"||e.role==="stv"?"leitung":e.role==="azubi"?"leergut":e.role;
-function weekTarget(e){return e.weekHours>0?e.weekHours*60:e.monthHours>0?Math.round(e.monthHours*60*12/52/15)*15:0}
+function baseTarget(e){return e.weekHours>0?e.weekHours*60:e.monthHours>0?Math.round(e.monthHours*60*12/52/15)*15:0}
+function abbauOf(e,wid){const a=S.cfg?.abbau?.[wid]?.[e.id];return a==null?0:a}
+function weekTarget(e,wid){wid=wid||curWid();const b=baseTarget(e),a=abbauOf(e,wid);if(a==="all")return 0;return Math.max(0,b-(+a||0))}
+/* Stundenkonto: Startwert + Summe (Ist − Soll) aller geplanten Wochen vor der angegebenen Woche */
+function kontoStartWid(e){const d=e.konto?.date;return d?weekId(mondayOf(pdate(d))):null}
+function saldo(e,wid){
+  const sw=kontoStartWid(e);let m=Math.round((+e.konto?.hours||0)*60);if(!sw)return m;
+  Object.keys(S.weeks).sort().forEach(w=>{if(w<sw||w>=wid)return;const arr=S.weeks[w]||[];if(!arr.length)return;
+    if(!baseTarget(e))return;m+=weekMinutes(e.id,w)-baseTarget(e)});
+  return m;
+}
+function planTarget(e,wid){const t=weekTarget(e,wid);if(!t)return 0;if(S.cfg?.settings?.autoAusgleich===false||!kontoStartWid(e))return t;
+  const sd=saldo(e,wid);return Math.max(0,Math.min(t+120,t-sd))}
+const fmtSaldo=m=>(m>0?"+":m<0?"−":"")+fmtH(Math.abs(m))+" h";
 function weekState(e,wm){const t=weekTarget(e);if(!t)return null;const d=wm-t;if(d>60)return {cls:"bad",txt:"+"+fmtH(d)+" h"};if(d<-60)return {cls:"warn",txt:"−"+fmtH(-d)+" h"};return {cls:"ok",txt:"passt"}}
 const vacOk=v=>!v.state||v.state===(S.cfg?.settings?.state||"HE");
 function ferienOn(k){return (S.cfg?.vacations||[]).find(v=>vacOk(v)&&v.from&&v.to&&k>=v.from&&k<=v.to)}
@@ -546,8 +694,9 @@ function availFor(e,k,noRot){const wd=pdate(k).getDay();let a=(e.vacAvail?.on&&f
     if(on&&!isSD)return null;
     if(!on&&isSD)a={on:true,from:S.cfg.settings.workStart,to:"21:15"};}if(!a||!a.on)return null;let f=toMin(a.from),t=toMin(a.to);
   const kd=noRot?null:empRotKind(e,k);if(kd){const r=e.rot;f=Math.max(f,toMin(kd==="frueh"?r.eFrom:r.lFrom));t=Math.min(t,toMin(kd==="frueh"?r.eTo:r.lTo));if(t-f<SLOT)return null}
+  const w=dayWindow(k);if(w.special){if(f<=w.nws)f=Math.min(f,toMin(w.open));f=Math.max(f,w.ws);t=Math.min(t,w.we);if(t-f<SLOT)return null}
   return {from:f,to:t}}
-function absentOn(e,k){if(e.dayMarks?.[k]==="seminar")return {kind:"Seminar"};if((e.freeDays||[]).includes(k))return {kind:"Frei"};return (e.absences||[]).find(a=>a.from&&a.to&&k>=a.from&&k<=a.to)}
+function absentOn(e,k){if(e.dayMarks?.[k]==="seminar")return {kind:"Seminar"};if(S.cfg?.abbau?.[weekId(mondayOf(pdate(k)))]?.[e.id]==="all")return {kind:"Abbau"};if((e.freeDays||[]).includes(k))return {kind:"Frei"};return (e.absences||[]).find(a=>a.from&&a.to&&k>=a.from&&k<=a.to)}
 const isLead=e=>e&&(e.role==="al"||e.role==="stv");
 function empRoles(e){const r=new Set([defTask(e)]);if(isLead(e)){r.add("leitung");r.add("flaeche")}if(e.canLeergut)r.add("leergut");if(e.canFlaeche)r.add("flaeche");if(e.canEinweg)r.add("einweg");return [...r]}
 const tasksOf=s=>(s.tasks&&s.tasks.length?s.tasks:[s.task||"leergut"]);
@@ -557,11 +706,17 @@ function parentOf(s,shifts){return shifts.find(o=>o!==s&&o.id!==s.id&&!o.sub&&o.
 const shiftAreas=s=>{const e=empById(s.empId);if(!e)return[];if(e.role==="al"||e.role==="stv"){return [...new Set([...tasksOf({...s,task:s.task||"leitung"}),"leitung","flaeche"])]}return s.tasks&&s.tasks.length?[...s.tasks]:[s.task||defTask(e)]};
 const taskArea=s=>{const e=empById(s.empId);if(!e)return null;if(e.role==="al"||e.role==="stv")return s.task&&s.task!=="leitung"?s.task:"leitung";return s.task||defTask(e)};
 
+function dayWindow(k){const st=S.cfg.settings,ov=S.cfg.dayOverrides?.[k];const nws=toMin(st.workStart),nwe=toMin(st.workEnd);
+  if(ov&&ov.open&&ov.close){const o=toMin(ov.open),c=toMin(ov.close);return {special:true,open:ov.open,close:ov.close,ws:Math.min(o,nws),we:Math.min(nwe,c+15),nws,nwe}}
+  return {special:false,ws:nws,we:nwe,nws,nwe}}
+function clipToDay(k,from,to){const w=dayWindow(k);let f=toMin(from),t=toMin(to);if(w.special){if(f<=w.nws)f=toMin(w.open);f=Math.max(f,w.ws);t=Math.min(t,w.we)}if(t-f<SLOT)return null;return {from:toT(f),to:toT(t)}}
 function rulesFor(k){
   const di=dayInfo(k);if(di.type==="geschlossen")return[];
   const wd=pdate(k).getDay();
   const ah=[];Object.entries(S.cfg.areaHours||{}).forEach(([area,m])=>{const x=m?.[wd];if(x&&x.on&&(+x.min||0)>0)ah.push({area,days:[wd],applies:"immer",from:x.from,to:x.to,min:+x.min||1})});
-  return (S.cfg.rules||[]).filter(r=>r.days?.includes(wd)&&(r.applies==="immer"||r.applies===di.type)).concat(ah);
+  const all=(S.cfg.rules||[]).filter(r=>r.days?.includes(wd)&&(r.applies==="immer"||r.applies===di.type)).concat(ah);
+  const w=dayWindow(k);if(!w.special)return all;
+  return all.map(r=>({...r,from:toT(Math.max(toMin(r.from),toMin(w.open))),to:toT(Math.min(toMin(r.to),w.we))})).filter(r=>toMin(r.to)-toMin(r.from)>=SLOT);
 }
 function areaHoursTable(area,dis){const m=(S.cfg.areaHours||{})[area]||{};
   return `<div class="ahwrap"><table class="aht"><thead><tr><th>Tag</th><th>Besetzt</th><th>von</th><th>bis</th><th>mind. Personen</th></tr></thead><tbody>${WD.map(d=>{const x=m[d]||{on:false,from:"08:00",to:"20:00",min:1};
@@ -571,7 +726,7 @@ function areaHoursTable(area,dis){const m=(S.cfg.areaHours||{})[area]||{};
     <td><input type="number" min="1" max="9" style="width:64px" data-ah="${area}|${d}" data-k="min" value="${x.min||1}" aria-label="${DNL[d]} Personen" ${x.on?"":"disabled"} ${dis}></td></tr>`}).join("")}</tbody></table></div>
   <div class="edit-only" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" data-ahcopy="${area}">Zeiten vom ersten Tag auf alle angehakten übertragen</button></div>`}
 function coverage(k,shifts){
-  const ws=toMin(S.cfg.settings.workStart),we=toMin(S.cfg.settings.workEnd);
+  const dw=dayWindow(k),ws=Math.min(dw.ws,dw.nws),we=dw.nwe;
   const n=Math.ceil((we-ws)/SLOT);const res={};
   for(const area of Object.keys(AREAS)){
     const req=new Array(n).fill(0),have=new Array(n).fill(0);
@@ -593,13 +748,13 @@ function shiftIssues(s,shifts){
   const ab=absentOn(e,s.date);if(ab)out.push({lv:"err",m:`${ab.kind||"Abwesend"} eingetragen`});
   const av=availFor(e,s.date,!!s.autoLead);
   if(!av)out.push({lv:"err",m:`${e.name} arbeitet ${DNL[pdate(s.date).getDay()]}s nicht`});
-  else if(f<av.from||t>av.to)out.push({lv:"err",m:`Außerhalb der Verfügbarkeit (${toT(av.from)}–${toT(av.to)})`});
+  else if(f<av.from||(t>av.to&&!s.coverFix))out.push({lv:"err",m:`Außerhalb der Verfügbarkeit (${toT(av.from)}–${toT(av.to)})`});
   if(e.maxBlock&&dur(s)>e.maxBlock*60)out.push({lv:"err",m:`Länger als ${e.maxBlock} Std. Arbeit am Stück`});
   if(s.sub&&!parentOf(s,shifts))out.push({lv:"warn",m:"Einsatz liegt nicht mehr innerhalb einer Schicht"});
   tasksOf(s).forEach(t=>{if(!empRoles(e).includes(t)&&t!=="leitung")out.push({lv:"warn",m:`${e.name} hat die Rolle ${TASKS[t]} nicht`})});
   if(!tasksOf(s).length)out.push({lv:"err",m:"Keine Aufgabe gewählt"});
   if(shifts.some(o=>o!==s&&o.empId===s.empId&&o.date===s.date&&toMin(o.from)<t&&toMin(o.to)>f&&parentOf(s,shifts)!==o&&parentOf(o,shifts)!==s))out.push({lv:"err",m:"Überschneidet sich mit einer anderen Schicht"});
-  if(f<toMin(S.cfg.settings.workStart)||t>toMin(S.cfg.settings.workEnd))out.push({lv:"warn",m:"Außerhalb der Arbeitszeiten der Abteilung"});
+  {const w=dayWindow(s.date);if(f<w.ws||t>w.we)out.push({lv:"warn",m:w.special?`Außerhalb der Öffnungszeit an diesem Tag (${w.open}–${w.close})`:"Außerhalb der Arbeitszeiten der Abteilung"})}
   // Ruhezeit
   const prevK=dkey(addDays(pdate(s.date),-1));
   const prev=allShifts().filter(o=>o.empId===s.empId&&o.date===prevK);
@@ -613,7 +768,15 @@ function weekReport(){
     const cv=coverage(k,shifts);
     for(const a in cv)cv[a].gaps.forEach(g=>issues.push({lv:"err",k,m:`${DN[pdate(k).getDay()]} ${shortD(k)}: ${AREAS[a]} unbesetzt ${toT(g.s)}–${toT(g.e)}${g.miss>1?` (fehlen ${g.miss})`:""}`}));
   });
-  dates.forEach(k=>dayTasks(k,shifts).filter(x=>!x.ok).forEach(x=>issues.push({lv:"err",k,m:`${DN[pdate(k).getDay()]} ${shortD(k)}: ${x.t.label} – niemand mit „${(skillsList().find(y=>y.id===x.t.skill)||{}).label||""}“ ${x.t.time?"um "+x.t.time+" ":""}eingeplant`})));
+  dates.forEach(k=>dayTasks(k,shifts).forEach(x=>{const dl=`${DN[pdate(k).getDay()]} ${shortD(k)}: ${x.t.label}`;
+    if(!x.ok&&!x.done)issues.push({lv:"err",k,m:x.chain.length?`${dl} – weder ${x.chain.map(e=>e.name).join(" noch ")} ${x.t.time?"vor "+x.t.time+" ":""}eingeplant`:`${dl} – niemand mit „${(skillsList().find(y=>y.id===x.t.skill)||{}).label||""}“ ${x.t.time?"vor "+x.t.time+" ":""}eingeplant`});
+    else if(x.overdue)issues.push({lv:"warn",k,m:`${dl} – noch nicht als erledigt abgehakt`});
+    if(x.doer&&x.t.skill&&!(x.doer.skills||[]).includes(x.t.skill))issues.push({lv:"warn",k,m:`${dl} – ${x.doer.name} hat die Fähigkeit „${(skillsList().find(y=>y.id===x.t.skill)||{}).label||""}“ nicht`});}));
+  emps().forEach(e=>(e.fixed||[]).filter(f=>f.coverLead).forEach(f=>dates.forEach(k=>{
+    if(!(f.days||[]).includes(pdate(k).getDay())||dayInfo(k).type==="geschlossen"||!absentOn(e,k))return;
+    const end=Math.min(toMin(f.to),dayWindow(k).we);
+    if(!shifts.some(x=>x.date===k&&!x.sub&&isLead(empById(x.empId))&&toMin(x.to)>=end))issues.push({lv:"err",k,m:`${DN[pdate(k).getDay()]} ${shortD(k)}: ${e.name} fehlt (${absentOn(e,k).kind||"abwesend"}) – niemand aus der Leitung bis ${toT(end)} für ${TASKS[coverTask(f)]} eingeplant`});
+  })));
   const leaders=emps().filter(e=>e.role==="al"||e.role==="stv");
   dates.forEach(k=>{const f=leaders.filter(e=>(e.freeDays||[]).includes(k));if(f.length>1&&dayInfo(k).type!=="geschlossen")issues.push({lv:"err",k,m:`${DN[pdate(k).getDay()]} ${shortD(k)}: ${f.map(e=>e.name).join(" und ")} haben beide frei`})});
   shifts.forEach(s=>shiftIssues(s,shifts).forEach(i=>issues.push({lv:i.lv,k:s.date,m:`${empById(s.empId)?.name}, ${DN[pdate(s.date).getDay()]} ${shortD(s.date)}: ${i.m}`})));
@@ -645,6 +808,7 @@ function planWeek(){
   const freeMsgs=autoFreeDays();
   fillLeadWeek();
   const added=gapFill();
+  added.push(...fixedFill());
   added.push(...hourFill());
   const shifts=weekShifts(wid);
   added.push(...shifts.filter(s=>(s.autoRot||s.autoLead)&&!added.includes(s)));
@@ -652,6 +816,42 @@ function planWeek(){
   S.freeMsg=freeMsgs.length?"Freie Tage automatisch gewählt: "+freeMsgs.join(", ")+".":"";
   saveWeek(wid);
   return added;
+}
+const FIX_TASKS={leergut:"Leergut",flaeche:"Fläche",einweg:"Einweg",leitung:"Leitung",auto_lf:"Leergut oder Fläche (automatisch)"};
+function needCover(k){const wd=pdate(k).getDay();return emps().some(e=>(e.fixed||[]).some(f=>f.coverLead&&(f.days||[]).includes(wd))&&absentOn(e,k))}
+function coverTask(f){return f.task==="auto_lf"?"leergut":(f.task||"einweg")}
+function coverByLead(e,f,k,arr){
+  const end=dayWindow(k).special?Math.min(toMin(f.to),dayWindow(k).we):toMin(f.to);
+  const ls=arr.filter(x=>x.date===k&&!x.sub&&isLead(empById(x.empId))).sort((a,b)=>toMin(b.to)-toMin(a.to));
+  const s=ls[0]||null;
+  if(!s)return null;
+  if(toMin(s.to)<end){const old=s.to;s.to=toT(end);if(dur({...s,sub:false})>600){s.to=old;return null}}
+  const tk=coverTask(f);s.tasks=[...new Set([...tasksOf({...s,task:s.task||"leitung"}),tk])];s.task=s.tasks[0];
+  s.coverFix=e.name;
+  /* Ruhezeit: am Folgetag frühestens 11 Std. nach Schichtende anfangen (nur automatische Schichten) */
+  const nk=dkey(addDays(pdate(k),1));const minStart=toMin(s.to)+660-1440;
+  arr.filter(x=>x.empId===s.empId&&x.date===nk&&!x.sub&&(x.autoLead||x.autoRot||x.auto)&&toMin(x.from)<minStart).forEach(x=>{if(toMin(x.to)-minStart>=120)x.from=toT(Math.ceil(minStart/SLOT)*SLOT)});
+  return s;
+}
+function fixedFill(){
+  const wid=curWid();let arr=weekShifts(wid);const added=[];
+  emps().forEach(e=>(e.fixed||[]).forEach(f=>{
+    weekDates().forEach(k=>{
+      if(!(f.days||[]).includes(pdate(k).getDay())||dayInfo(k).type==="geschlossen")return;
+      if(absentOn(e,k)){if(f.coverLead){const r=coverByLead(e,f,k,arr);if(r)added.push(r)}return}
+      const av=availFor(e,k,true);if(!av)return;
+      const a=Math.max(toMin(f.from),av.from),b=Math.min(toMin(f.to),av.to);if(b-a<SLOT)return;
+      const ex=arr.filter(x=>x.empId===e.id&&x.date===k&&!x.sub);
+      if(ex.some(x=>!x.auto))return;
+      let task=f.task||defTask(e);
+      if(task==="auto_lf"){const prev=ex[0]?.task;const others=arr.filter(x=>!(x.empId===e.id&&x.date===k));const cv=coverage(k,others);
+        const def=ar=>{const c=cv[ar];let m=0;for(let i=0;i<c.n;i++){const t=c.ws+i*SLOT;if(t>=a&&t<b)m+=Math.max(0,c.req[i]-c.have[i])}return m};
+        task=prev==="leergut"||def("leergut")>0?"leergut":"flaeche"}
+      arr=arr.filter(x=>!ex.includes(x));
+      const ns={id:uid(),empId:e.id,date:k,from:toT(a),to:toT(b),task,tasks:[task],auto:true,fixed:true};arr.push(ns);added.push(ns);
+    });
+  }));
+  S.weeks[wid]=arr;return added;
 }
 function autoFreeDays(){
   const L=leadersL(),dates=weekDates(),msgs=[];
@@ -665,6 +865,7 @@ function autoFreeDays(){
     for(const wd of pref){if(need<=0)break;
       const k=open.find(x=>pdate(x).getDay()===wd);if(!k||absentOn(e,k))continue;
       if(L.some(o=>o!==e&&(o.freeDays||[]).includes(k)))continue;
+      if(needCover(k))continue;
       e.freeDays=[...new Set([...(e.freeDays||[]),k])].sort();need--;msgs.push(`${e.name} ${DN[wd]} ${shortD(k)}`);
     }
   });
@@ -675,8 +876,8 @@ function hourFill(){
   const wid=curWid(),shifts=weekShifts(wid),added=[],dates=weekDates();
   const dayRank=k=>[4,5,6,1,2,3].indexOf(pdate(k).getDay());
   for(let guard=0;guard<60;guard++){
-    const cands=emps().filter(e=>!e.onDemand&&e.role!=="al"&&e.role!=="stv"&&weekTarget(e)>0)
-      .map(e=>({e,rem:weekTarget(e)-weekMinutes(e.id,wid)})).filter(x=>x.rem>=60).sort((a,b)=>b.rem-a.rem);
+    const cands=emps().filter(e=>!e.onDemand&&e.role!=="al"&&e.role!=="stv"&&planTarget(e,wid)>0)
+      .map(e=>({e,rem:planTarget(e,wid)-weekMinutes(e.id,wid)})).filter(x=>x.rem>=60).sort((a,b)=>b.rem-a.rem);
     let placed=false;
     for(const {e,rem} of cands){
       const days=new Set(shifts.filter(s=>s.empId===e.id).map(s=>s.date)).size;
@@ -708,18 +909,19 @@ function hourFill(){
 }
 function gapFill(){
   const wid=curWid(),shifts=weekShifts(wid),added=[];
-  for(const k of weekDates()){
-    if(dayInfo(k).type==="geschlossen")continue;
-    for(const area of Object.keys(AREAS)){
+  for(const area of Object.keys(AREAS)){
+    for(const k of weekDates()){
+      if(dayInfo(k).type==="geschlossen")continue;
       for(let guard=0;guard<30;guard++){
         const gaps=coverage(k,shifts)[area].gaps.filter(g=>g.e-g.s>=SLOT);
         if(!gaps.length)break;
         let best=null;
-        for(const phase of [1,2]){
+        for(const phase of [1,2,3]){
           const pool=emps().filter(e=>{
             if(area==="leitung")return phase===1&&(e.role==="al"||e.role==="stv");
             if(phase===1)return e.role===area;
-            return e.role!==area&&(area==="leergut"?e.canLeergut:area==="einweg"?e.canEinweg:e.canFlaeche);
+            const can=e.role!==area&&(area==="leergut"?e.canLeergut:area==="einweg"?e.canEinweg:e.canFlaeche);
+            return can&&(phase===2?!e.maxDays:!!e.maxDays);
           });
           for(const g of gaps)for(const e of pool){
             if(absentOn(e,k))continue;
@@ -732,12 +934,13 @@ function gapFill(){
             let L=(e.maxBlock||8)*60;
             if(e.monthHours){const rem=e.monthHours*60-used;L=Math.min(L,Math.floor(rem/SLOT)*SLOT)}
             if(e.weekHours){const rem=e.weekHours*60-weekMinutes(e.id,wid);L=Math.min(L,Math.floor(rem/SLOT)*SLOT)}
+            if(abbauOf(e,wid)){const rem=weekTarget(e,wid)-weekMinutes(e.id,wid);if(rem<120)continue;L=Math.min(L,Math.floor(rem/SLOT)*SLOT)}
             if(L<60)continue;
             L=grossFor(e,L);
             const opts=[[ws,Math.min(ws+L,we)],[Math.max(we-L,ws),we]];
             for(const [a,b] of opts){
               const cov=b-a;if(cov<60||!restOK(e,k,a,b,shifts))continue;
-              const score=[cov,-flexMinutes(e),-used];
+              const score=[cov,b===g.e?1:0,-flexMinutes(e),-used];
               if(!best||cmp(score,best.score)>0)best={score,e,a,b};
             }
           }
@@ -762,12 +965,12 @@ function fillLead(k,arr){
   if(dayInfo(k).type==="geschlossen")return arr;
   const L=leadersL(),R=rot(),C=lc(),sat=pdate(k).getDay()===6;
   const az=emps().find(x=>x.role==="azubi");
-  if(sat&&az&&L.some(o=>(o.freeDays||[]).includes(k))&&!absentOn(az,k)&&!arr.some(s=>s.empId===az.id&&s.date===k&&!s.sub))arr.push({id:uid(),empId:az.id,date:k,from:C.azFrom,to:C.azTo,task:"flaeche",autoLead:true});
+  if(sat&&az&&L.some(o=>(o.freeDays||[]).includes(k))&&!absentOn(az,k)&&!arr.some(s=>s.empId===az.id&&s.date===k&&!s.sub)){const c=clipToDay(k,C.azFrom,C.azTo);if(c)arr.push({id:uid(),empId:az.id,date:k,...c,task:"flaeche",autoLead:true})}
   L.forEach(e=>{
     if(absentOn(e,k)||arr.some(s=>s.empId===e.id&&s.date===k&&!s.sub))return;
     const otherFree=L.some(o=>o!==e&&(o.freeDays||[]).includes(k));
-    if(otherFree)arr.push({id:uid(),empId:e.id,date:k,from:sat?C.saFrom:C.wdFrom,to:sat?C.saTo:C.wdTo,task:"leitung",autoLead:true});
-    else{const kd=leadKind(e,k);arr.push({id:uid(),empId:e.id,date:k,from:kd==="frueh"?R.eFrom:R.lFrom,to:kd==="frueh"?R.eTo:R.lTo,task:"leitung",autoRot:kd})}
+    if(otherFree){const c=clipToDay(k,sat?C.saFrom:C.wdFrom,sat?C.saTo:C.wdTo);if(c)arr.push({id:uid(),empId:e.id,date:k,...c,task:"leitung",autoLead:true})}
+    else{const kd=leadKind(e,k);const c=clipToDay(k,kd==="frueh"?R.eFrom:R.lFrom,kd==="frueh"?R.eTo:R.lTo);if(c&&toMin(c.to)-toMin(c.from)>=120)arr.push({id:uid(),empId:e.id,date:k,...c,task:"leitung",autoRot:kd})}
   });
   return arr;
 }
@@ -787,8 +990,8 @@ function toggleFree(e,k){
     free.add(k);
     a=a.filter(s=>!(s.date===k&&(s.empId===e.id||s.autoLead)));
     const add=[];
-    if(other&&!absentOn(other,k)){a=a.filter(s=>!(s.date===k&&s.empId===other.id));add.push({id:uid(),empId:other.id,date:k,from:sat?L.saFrom:L.wdFrom,to:sat?L.saTo:L.wdTo,task:"leitung",autoLead:true})}
-    if(sat&&az&&!absentOn(az,k)){a=a.filter(s=>!(s.date===k&&s.empId===az.id));add.push({id:uid(),empId:az.id,date:k,from:L.azFrom,to:L.azTo,task:"flaeche",autoLead:true})}
+    if(other&&!absentOn(other,k)){a=a.filter(s=>!(s.date===k&&s.empId===other.id));const c=clipToDay(k,sat?L.saFrom:L.wdFrom,sat?L.saTo:L.wdTo);if(c)add.push({id:uid(),empId:other.id,date:k,...c,task:"leitung",autoLead:true})}
+    if(sat&&az&&!absentOn(az,k)){a=a.filter(s=>!(s.date===k&&s.empId===az.id));const c=clipToDay(k,L.azFrom,L.azTo);if(c)add.push({id:uid(),empId:az.id,date:k,...c,task:"flaeche",autoLead:true})}
     a=a.concat(add);
     S.freeMsg=add.length?`${e.name} hat frei. Eingeplant: ${add.map(s=>`${empById(s.empId).name} ${s.from}–${s.to}`).join(", ")}.`:`${e.name} hat frei.`;
   }
@@ -809,7 +1012,7 @@ function renderChrome(){
   $("#prevW").onclick=()=>{S.week=addDays(S.week,-7);render()};
   $("#nextW").onclick=()=>{S.week=addDays(S.week,7);render()};
   $("#todayW").onclick=()=>{S.week=mondayOf(new Date());render()};
-  const tabs=[["plan","Wochenplan"],["team","Mitarbeiter"],["rules","Regeln & Feiertage"]].concat(S.role==="admin"?[["access","Zugänge"]]:[]).concat([["data","Konto & Sicherung"]]);
+  const tabs=[["plan","Wochenplan"],["team","Mitarbeiter"],["matrix","Vertretung"],["rules","Regeln & Feiertage"],["auto","Automatik"]];
   $("#tabs").innerHTML=tabs.map(([id,l])=>`<button class="tab" role="tab" aria-selected="${S.tab===id}" data-tab="${id}">${l}</button>`).join("");
   $("#tabs").querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;render()});
 }
@@ -817,7 +1020,7 @@ function renderChrome(){
 function renderAccess(){
   if(S.role!=="admin"){$("#view").innerHTML=`<div class="panel empty">Nur der Admin kann Zugänge verwalten.</div>`;return}
   const list=[...S.members].sort((a,b)=>(a.name||"").localeCompare(b.name||""));
-  $("#view").innerHTML=`<div class="form" style="gap:22px">
+  $("#view").innerHTML=`<button class="btn ghost" id="accBack" style="margin-bottom:10px">‹ Konto & Sicherung</button><div class="form" style="gap:22px">
   <div class="sect"><h3>Zugänge</h3>
     <p class="muted" style="margin:0;font-size:14px">Jeder Zugang meldet sich mit Benutzername und Passwort an. „Nur ansehen“ sieht den Plan und kann die PDF erzeugen, aber nichts ändern.</p>
     <div class="ahwrap"><table class="aht" style="min-width:520px"><thead><tr><th>Name</th><th>Benutzername</th><th>Rolle</th><th></th></tr></thead><tbody>
@@ -835,6 +1038,7 @@ function renderAccess(){
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit" id="na_btn">Zugang anlegen</button><span class="muted" style="font-size:13px">Dafür wird Internet gebraucht. Notiere dir das Passwort und gib es der Person weiter.</span></div>
     ${S.accMsg?`<p class="${S.accErr?"err":"freemsg"}" style="margin:0">${esc(S.accMsg)}</p>`:""}
   </form></div>`;
+  $("#accBack").onclick=()=>{S.tab="data";render()};
   document.querySelectorAll("[data-mrole]").forEach(s=>s.onchange=()=>{track(teamRef().collection("members").doc(s.dataset.mrole).update({role:s.value})).catch(()=>{})});
   document.querySelectorAll("[data-mdel]").forEach(b=>b.onclick=()=>{const id=b.dataset.mdel;if(S.confirmMem!==id){S.confirmMem=id;render();return}S.confirmMem=null;track(teamRef().collection("members").doc(id).delete()).catch(()=>{});S.accMsg="Zugang gesperrt. Die Person kann den Plan nicht mehr öffnen.";S.accErr=false;render()});
   $("#newAcc").onsubmit=async ev=>{ev.preventDefault();
@@ -867,16 +1071,18 @@ function renderData(){
     <form id="pwForm" class="absrow" novalidate><input type="password" id="pwNew" placeholder="Neues Passwort" autocomplete="new-password" aria-label="Neues Passwort"><button class="btn" type="submit">Passwort ändern</button></form>`:""}
     ${S.dataMsg?`<p class="freemsg" style="margin:0">${esc(S.dataMsg)}</p>`:""}
   </div>
+  ${S.role==="admin"?`<div class="sect"><h3>Zugänge</h3><p class="muted" style="margin:0;font-size:14px">Benutzer anlegen, Rollen ändern, Zugänge sperren.</p><div><button class="btn" id="goAcc">Zugänge verwalten</button></div></div>`:""}
   <div class="sect"><h3>Sicherung</h3>
     <p class="muted" style="margin:0;font-size:14px">Speichert Mitarbeiter, Regeln und alle Wochen als Datei. Damit kannst du den Plan wiederherstellen oder auf ein anderes Gerät übertragen.</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="bkSave">Sicherung speichern</button>
     ${S.ro?"":`<label class="btn" for="bkLoad">Sicherung laden …</label><input type="file" id="bkLoad" accept=".json,application/json" hidden>`}</div>
   </div>
   <p class="muted" style="font-size:12px">Version ${APP_VERSION}</p></div>`;
+  const ga=$("#goAcc");if(ga)ga.onclick=()=>{S.tab="access";render()};
   const o=$("#dOut");if(o)o.onclick=async()=>{await fauth.signOut();S.dataMsg="";};
   const pf=$("#pwForm");if(pf)pf.onsubmit=async ev=>{ev.preventDefault();const pw=$("#pwNew").value;if(pw.length<6){S.dataMsg="Das Passwort braucht mindestens 6 Zeichen.";render();return}
     try{await fauth.currentUser.updatePassword(pw);S.dataMsg="Passwort geändert."}catch(err){S.dataMsg=/requires-recent-login/.test(err.code||"")?"Bitte einmal ab- und wieder anmelden, dann erneut versuchen.":authError(err)}render()};
-  $("#bkSave").onclick=()=>shareFile(new Blob([JSON.stringify({format:"schichtplan-sicherung",version:1,erstellt:new Date().toISOString(),cfg:S.cfg,weeks:S.weeks},null,1)],{type:"application/json"}),`Schichtplan-Sicherung_${dkey(new Date())}.json`);
+  $("#bkSave").onclick=()=>shareFile(new Blob([JSON.stringify({format:"schichtplan-sicherung",version:1,erstellt:new Date().toISOString(),cfg:S.cfg,weeks:S.weeks,done:S.done},null,1)],{type:"application/json"}),`Schichtplan-Sicherung_${dkey(new Date())}.json`);
   const bl=$("#bkLoad");if(bl)bl.onchange=async()=>{const f=bl.files[0];if(!f)return;try{const o=JSON.parse(await f.text());if(o.format!=="schichtplan-sicherung")throw new Error("Das ist keine Schichtplan-Sicherung.");await importBackup(o);S.dataMsg="Sicherung geladen."}catch(e){S.dataMsg="Laden fehlgeschlagen: "+(e.message||e)}render()};
 }
 async function shareFile(blob,name){
@@ -885,128 +1091,350 @@ async function shareFile(blob,name){
   const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
 }
 
+/* ---------- Vertretungsmatrix ---------- */
+function renderMatrix(){
+  const dis=S.ro?"disabled":"";const tasks=S.cfg.dayTasks||[];const list=emps();
+  const opt=(sel,ex)=>`<option value="">–</option>${list.map(e=>`<option value="${e.id}" ${sel===e.id?"selected":""} ${ex.includes(e.id)&&sel!==e.id?"disabled":""}>${esc(e.name)}</option>`).join("")}`;
+  const skl=id=>(skillsList().find(x=>x.id===id)||{}).label||"";
+  const lacks=(t,id)=>{const e=empById(id);return e&&t.skill&&!(e.skills||[]).includes(t.skill)};
+  let h=`<div class="form" style="gap:24px">
+  <div class="sect"><h3>Vertretungsmatrix</h3>
+  <p class="muted" style="margin:0;font-size:14px">Für jede Aufgabe: wer sie normalerweise macht und wer sie übernimmt, wenn diese Person nicht eingeplant ist (frei, Urlaub, andere Schicht). Der Wochenplan nimmt automatisch den ersten, der an dem Tag arbeitet. Ist eine Uhrzeit eingetragen, gilt sie als „erledigt bis“: Die Person muss vor dieser Uhrzeit im Dienst sein.</p>
+  <div class="ahwrap"><table class="aht mtx"><thead><tr><th>Aufgabe</th><th>Tage</th><th>bis</th><th>Verantwortlich</th><th>1. Vertretung</th><th>2. Vertretung</th><th>Fähigkeit</th><th></th></tr></thead><tbody>
+  ${tasks.map((t,i)=>{const used=[t.owner,...(t.deps||[])].filter(Boolean);return `<tr>
+    <td><input type="text" data-mt="${i}" data-k="label" value="${esc(t.label)}" aria-label="Aufgabe" ${dis} style="min-width:150px"></td>
+    <td><div class="daypick">${WD.map(d=>`<label><input type="checkbox" data-mtd="${i}" value="${d}" ${(t.days||[]).includes(d)?"checked":""} ${dis}><span>${DN[d]}</span></label>`).join("")}</div></td>
+    <td><select data-mt="${i}" data-k="time" aria-label="Erledigt bis" ${dis}><option value="">egal</option>${timeOptions(t.time||"")}</select></td>
+    <td><select data-mt="${i}" data-k="owner" aria-label="Verantwortlich" ${dis}>${opt(t.owner,used)}</select>${lacks(t,t.owner)?`<div class="sm warnt">ohne Fähigkeit</div>`:""}</td>
+    ${[0,1].map(j=>`<td><select data-mtdep="${i}|${j}" aria-label="${j+1}. Vertretung" ${dis}>${opt((t.deps||[])[j],used)}</select>${lacks(t,(t.deps||[])[j])?`<div class="sm warnt">ohne Fähigkeit</div>`:""}</td>`).join("")}
+    <td><select data-mt="${i}" data-k="skill" aria-label="Fähigkeit" ${dis}><option value="">–</option>${skillsList().map(x=>`<option value="${x.id}" ${t.skill===x.id?"selected":""}>${esc(x.label)}</option>`).join("")}</select></td>
+    <td>${S.ro?"":S.confirmMt===i?`<button class="btn danger" data-mtdel="${i}">Löschen?</button>`:`<button class="btn ghost danger" data-mtdel="${i}" aria-label="Aufgabe entfernen">✕</button>`}</td></tr>`}).join("")||`<tr><td colspan="8" class="muted">Noch keine Aufgaben.</td></tr>`}
+  </tbody></table></div>
+  <div class="edit-only"><button class="btn" id="mtAdd">+ Aufgabe hinzufügen</button></div></div>
+  <div class="sect"><h3>Übersicht: Wer übernimmt was</h3>
+  <p class="muted" style="margin:0;font-size:14px"><b>V</b> = verantwortlich, <b>1</b> und <b>2</b> = Vertretung.</p>
+  <div class="ahwrap"><table class="aht mgrid"><thead><tr><th>Aufgabe</th>${list.map(e=>`<th title="${esc(e.name)}">${esc(e.name)}</th>`).join("")}</tr></thead><tbody>
+  ${tasks.map(t=>`<tr><td><b>${esc(t.label)}</b>${(t.deps||[]).filter(Boolean).length<2?` <span class="pill warn">${t.owner?"Vertretung fehlt":"niemand zugeteilt"}</span>`:""}</td>${list.map(e=>{const l=t.owner===e.id?"V":(t.deps||[])[0]===e.id?"1":(t.deps||[])[1]===e.id?"2":"";return `<td class="mc ${l?"m"+l:""}">${l}</td>`}).join("")}</tr>`).join("")}
+  </tbody></table></div></div></div>`;
+  $("#view").innerHTML=h;
+  if(S.ro)return;
+  const v=$("#view");
+  v.querySelectorAll("[data-mt]").forEach(x=>x.addEventListener(x.tagName==="SELECT"?"change":"input",()=>{const t=S.cfg.dayTasks[+x.dataset.mt];t[x.dataset.k]=x.value;saveCfg();if(x.tagName==="SELECT")render()}));
+  v.querySelectorAll("[data-mtdep]").forEach(x=>x.onchange=()=>{const [i,j]=x.dataset.mtdep.split("|").map(Number);const t=S.cfg.dayTasks[i];t.deps=(t.deps||["",""]).slice(0,2);while(t.deps.length<2)t.deps.push("");t.deps[j]=x.value;saveCfg();render()});
+  v.querySelectorAll("[data-mtd]").forEach(x=>x.onchange=()=>{const t=S.cfg.dayTasks[+x.dataset.mtd];const d=+x.value;t.days=(t.days||[]).filter(y=>y!==d);if(x.checked)t.days.push(d);t.days.sort();saveCfg()});
+  v.querySelectorAll("[data-mtdel]").forEach(b=>b.onclick=()=>{const i=+b.dataset.mtdel;if(S.confirmMt!==i){S.confirmMt=i;render();return}S.confirmMt=null;S.cfg.dayTasks.splice(i,1);saveCfg();render()});
+  $("#mtAdd").onclick=()=>{S.cfg.dayTasks=S.cfg.dayTasks||[];S.cfg.dayTasks.push({id:uid(),label:"Neue Aufgabe",days:[],skill:"",time:"",owner:"",deps:["",""]});saveCfg();render()};
+}
+/* ---------- Automatik-Übersicht ---------- */
+function renderAuto(){
+  const st=S.cfg.settings,R=rot(),C=lc(),L=leadersL(),az=emps().find(x=>x.role==="azubi");
+  const nm=id=>esc(empById(id)?.name||"–");
+  const dl=ds=>(ds||[]).map(d=>DN[d]).join(", ")||"–";
+  const card=(title,items,tab,btn)=>`<section class="acard"><div class="ahead"><h3>${title}</h3>${tab?`<button class="btn ghost" data-goto="${tab}">${btn||"Ändern"} ›</button>`:""}</div><ul>${items.filter(Boolean).map(i=>`<li>${i}</li>`).join("")}</ul></section>`;
+  const rules=(S.cfg.rules||[]).map(r=>`<b>${esc(r.label)}</b>: ${TASKS[r.area]||AREAS[r.area]}, ${dl(r.days)} ${r.from}–${r.to}, mind. ${r.min} ${r.applies==="vorFeiertag"?"(nur Tag vor Feiertag)":r.applies==="normal"?"(nur normale Tage)":""}`);
+  const ah=Object.entries(S.cfg.areaHours||{}).flatMap(([a,m])=>WD.filter(d=>m?.[d]?.on).map(d=>`<b>${TASKS[a]}</b> ${DN[d]} ${m[d].from}–${m[d].to}, mind. ${m[d].min}`));
+  const fixed=emps().flatMap(e=>(e.fixed||[]).filter(f=>(f.days||[]).length).map(f=>`<b>${esc(e.name)}</b>: ${dl(f.days)} ${f.from}–${f.to}, ${FIX_TASKS[f.task]||f.task}${f.coverLead?` · bei Urlaub/Abwesenheit bleibt die Leitung im Spätdienst bis ${f.to} und übernimmt`:""}`));
+  const rots=emps().filter(e=>e.rot?.on).map(e=>`<b>${esc(e.name)}</b>: wöchentlich Früh ${e.rot.eFrom}–${e.rot.eTo} / Spät ${e.rot.lFrom}–${e.rot.lTo}${(e.rot.except||[]).length?` (nicht am ${dl(e.rot.except)})`:""} · diese Woche: ${weekRotKind(e,S.week)==="frueh"?"Früh":"Spät"}`);
+  const school=emps().filter(e=>e.school?.on).map(e=>`<b>${esc(e.name)}</b>: Berufsschule ${dl(e.school.days)}, in den Schulferien automatisch keine Schule. Seminar-Tage gelten als ganztags abwesend.`);
+  const vacs=emps().filter(e=>e.vacAvail?.on).map(e=>`<b>${esc(e.name)}</b>: in den Ferien eigene Verfügbarkeit`);
+  const sp=Object.entries(S.cfg.dayOverrides||{}).filter(([k,o])=>o&&o.open).sort().map(([k,o])=>`${DN[pdate(k).getDay()]} ${pdate(k).toLocaleDateString("de-DE")}: geöffnet ${o.open}–${o.close}${o.note?` (${esc(o.note)})`:""}`);
+  const tasks=(S.cfg.dayTasks||[]).filter(t=>(t.days||[]).length).map(t=>`<b>${esc(t.label)}</b> ${dl(t.days)}${t.time?` bis ${t.time}`:""}: ${[t.owner,...(t.deps||[])].filter(Boolean).map(nm).join(" → ")||"noch niemand zugeteilt"}`);
+  const ab=Object.entries(S.cfg.abbau||{}).sort().flatMap(([w,m])=>Object.entries(m).map(([id,v])=>`KW ${w.slice(-2)}: <b>${nm(id)}</b> ${v==="all"?"ganze Woche frei":"−"+fmtH(v)+" h"}`));
+  const konten=emps().filter(e=>kontoStartWid(e)).map(e=>`${esc(e.name)} ${fmtSaldo(saldo(e,curWid()))}`);
+  const onDemand=emps().filter(e=>e.onDemand).map(e=>esc(e.name));
+  $("#view").innerHTML=`<div class="autointro panel"><h2>Was die App automatisch macht</h2><p class="muted" style="margin:4px 0 0">Alles, was „Automatisch planen“ und die Prüfung im Wochenplan berücksichtigen. Die Liste wird aus deinen aktuellen Einstellungen erzeugt.</p></div>
+  <div class="agrid">
+  ${card("1 · Ablauf „Automatisch planen“",[
+    "Ersetzt nur automatisch erzeugte Schichten. <b>Von Hand eingetragene Schichten bleiben stehen.</b>",
+    "Reihenfolge: freie Tage der Leitung → Früh/Spät der Leitung → Besetzungsregeln füllen (erst Leergut für die ganze Woche, dann Fläche, Einweg, Leitung) → feste Schichten → restliche Wochenstunden verteilen.",
+    "Lücken füllt zuerst das Team des Bereichs, dann Aushilfen ohne Tagesgrenze, zuletzt Schüler (deren Tage sind knapp).",
+    onDemand.length?`Nur bei Bedarf (nur für Lücken): ${onDemand.join(", ")}`:""],"plan","Zum Plan")}
+  ${card("2 · Leitung",[
+    L.length?`${L.map(e=>esc(e.name)).join(" und ")} wechseln wöchentlich: Früh ${R.eFrom}–${R.eTo}, Spät ${R.lFrom}–${R.lTo}.`:"Keine Leitung angelegt.",
+    `Freie Tage: Ist kein Tag gewählt, wählt die App selbst (bevorzugt Mo–Mi), damit niemand über ${L[0]?.maxDays||5} Arbeitstage kommt. <b>Nie beide gleichzeitig.</b>`,
+    `Hat einer frei, arbeitet der andere ${C.wdFrom}–${C.wdTo}, samstags ${C.saFrom}–${C.saTo}${az?` und ${esc(az.name)} ${C.azFrom}–${C.azTo}`:""}.`,
+    "Leitung zählt automatisch als Besetzung der Fläche.",
+    "Nach einem Spätdienst bis 22 Uhr beginnt eine Vertretungsschicht am Folgetag frühestens nach 11 Std. Ruhezeit."],"rules")}
+  ${card("3 · Feste Schichten",fixed.length?fixed:["Keine festen Schichten."],"team","Mitarbeiter")}
+  ${card("4 · Wechselschicht, Schule & Ferien",[...rots,...school,...vacs].length?[...rots,...school,...vacs]:["Nichts eingestellt."],"team","Mitarbeiter")}
+  ${card("5 · Besetzungsregeln",[...ah,...rules].length?[...ah,...rules,"Gelten mehrere Regeln gleichzeitig, zählt die strengste."]:["Keine Regeln."],"rules")}
+  ${card("6 · Feiertage & Öffnungszeiten",[
+    `Gesetzliche Feiertage (${STATES[st.state]||st.state}) schließen den Markt, der letzte Öffnungstag davor wird „Tag vor Feiertag“.`,
+    ...sp,sp.length?"An diesen Tagen werden Regeln und automatische Schichten auf die Öffnungszeit + 15 Min. begrenzt, ein früherer Beginn wird übernommen.":"",
+    "Schulferien werden im Plan markiert."],"rules")}
+  ${card("7 · Aufgaben & Vertretung",tasks.length?[...tasks,"Erledigt wird von der ersten Person der Kette, die an dem Tag eingeplant ist. Eine Uhrzeit bedeutet „erledigt bis“: Die Person muss vorher im Dienst sein. Nicht abgehakte Aufgaben vergangener Tage werden als überfällig gemeldet."]:["Keine Aufgaben mit Tagen."],"matrix")}
+  ${card("8 · Stunden, Pausen & Konto",[
+    "Pausen gesetzlich: über 6 Std. 30 Min., über 9 Std. 45 Min. (oder feste Pause im Profil). Stunden zählen ohne Pause.",
+    "Ruhezeit unter 11 Std. und mehr Stunden am Stück als erlaubt werden gemeldet.",
+    "Wochen-Soll: Wochenstunden aus dem Profil, sonst Monatsstunden × 12 ÷ 52. Fehlende Stunden verteilt die Automatik dorthin, wo am wenigsten los ist.",
+    st.autoAusgleich===false?"Mehr- oder Minusstunden werden <b>nicht</b> automatisch ausgeglichen.":"Mehr- oder Minusstunden aus dem Stundenkonto gleicht die Automatik in den Folgewochen aus.",
+    konten.length?`Stundenkonten: ${konten.join(" · ")}`:"",
+    ...(ab.length?["Überstundenabbau: "+ab.join(" · ")]:[])],"plan","Zum Plan")}
+  ${card("9 · Anzeigen im Plan",[
+    "„LG besetzt“: Die Leergut-Pflicht des Tages ist schon abgedeckt, die Person wird nicht gebraucht.",
+    "Grüner/roter Punkt im Tageskopf: Besetzung passt / hat Lücken.",
+    "Konflikte und Hinweise sammelt der Knopf oben im Wochenplan."],null)}
+  </div>`;
+  document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{const t=b.dataset.goto;if(t==="plan"){S.tab="plan";S.planView="plan"}else S.tab=t;render()});
+}
+
 function render(){
   renderChrome();
   if(!S.cfg){$("#view").innerHTML=`<div class="empty">Plan wird geladen …</div>`;return}
   const y=window.scrollY;
   renderSync();
-  if(S.tab==="plan")renderPlan();else if(S.tab==="team")renderTeam();else if(S.tab==="access")renderAccess();else if(S.tab==="data")renderData();else renderRules();
+  if(S.tab==="plan")renderPlan();else if(S.tab==="team")renderTeam();else if(S.tab==="access")renderAccess();else if(S.tab==="matrix")renderMatrix();else if(S.tab==="auto")renderAuto();else if(S.tab==="data")renderData();else renderRules();
   window.scrollTo(0,y);
 }
 
 function renderPlan(){
   const wid=curWid(),shifts=weekShifts(wid),dates=weekDates();
   if(!emps().length){$("#view").innerHTML=`<div class="panel empty"><h2>Noch keine Mitarbeiter</h2><p>Hast du eine Sicherung (z. B. die Startdaten-Datei), lade sie unter „Konto & Sicherung“. Oder lege unter „Mitarbeiter“ dein Team neu an.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary edit-only" id="goData">Sicherung laden</button><button class="btn edit-only" id="goTeam">Mitarbeiter anlegen</button></div></div>`;const gd=$("#goData");if(gd)gd.onclick=()=>{S.tab="data";render()};const g=$("#goTeam");if(g)g.onclick=()=>{S.tab="team";addEmployee()};return}
-  const issues=weekReport();
+  const issues=weekReport();S.issues=issues;
   const errs=issues.filter(i=>i.lv==="err").length,warns=issues.length-errs;
   const covs=Object.fromEntries(dates.map(k=>[k,coverage(k,shifts)]));
-  const recent=S.lastPlan&&S.lastPlan.wid===wid?S.lastPlan.ids.length:null;
-  let h=`<div class="toolbar">
-    <div class="status">${errs?`<span class="pill bad">${errs} Konflikt${errs>1?"e":""}</span>`:`<span class="pill ok">Alle Regeln erfüllt</span>`}${warns?`<span class="pill warn">${warns} Hinweis${warns>1?"e":""}</span>`:""}<span class="muted">${shifts.length} Schichten · Ist ${fmtH(shifts.reduce((a,s)=>a+dur(s),0))} h / Soll ${fmtH(emps().reduce((a,e)=>a+weekTarget(e),0))} h</span>${ferienPill(dates)}${recent!==null?`<span class="pill acc">${recent} Schicht${recent===1?"":"en"} automatisch geplant</span>`:""}</div>
+  const allT=dates.flatMap(k=>dayTasks(k,shifts)),openT=allT.filter(x=>!x.done).length,badT=allT.filter(x=>!x.done&&(!x.ok||x.overdue)).length;
+  const view=S.planView||"plan";
+  const segs=[["plan","Plan"],["tasks",`Aufgaben${allT.length?` <b class="cnt ${badT?"bad":openT?"":"ok"}">${openT}</b>`:""}`],["cov","Besetzung"],["hours","Stunden"]];
+  let h=`<div class="ptop">
+    <div class="seg" role="tablist" aria-label="Ansicht">${segs.map(([k,l])=>`<button class="segb" role="tab" aria-selected="${view===k}" data-pv="${k}">${l}</button>`).join("")}</div>
     <span class="spacer"></span>
-    <button class="btn primary edit-only" id="autoPlan">Woche automatisch planen</button>
-    <button class="btn" id="pdfBtn">PDF / Drucken (A4 quer)</button>
-    <button class="btn edit-only" id="clearWeek">${S.confirmClear?"Wirklich alle löschen?":"Woche leeren"}</button>
-  </div>
-  ${freePanel(dates)}
-  <div class="gridbox"><table class="grid"><thead><tr><th class="empcell"><span class="lbl">Mitarbeiter</span></th>`;
+    <button class="issuebtn ${errs?"bad":warns?"warn":"ok"}" id="issBtn" aria-haspopup="dialog"><span class="sdot"></span>${errs?`${errs} Konflikt${errs>1?"e":""}`:"Alles in Ordnung"}${warns?` · ${warns} Hinweis${warns>1?"e":""}`:""}</button>
+    <button class="btn primary edit-only" id="autoPlan">Automatisch planen</button>
+    <div class="more"><button class="btn" id="moreBtn" aria-haspopup="menu" aria-expanded="${!!S.moreOpen}">Mehr ▾</button>${S.moreOpen?`<div class="menu" role="menu">
+      <button role="menuitem" id="pdfBtn">PDF / Drucken (A4 quer)</button>
+      ${S.ro?"":`<button role="menuitem" id="fillLead">Früh/Spät der Leitung eintragen</button><button role="menuitem" id="swapRot">Früh und Spät der Leitung tauschen</button><button role="menuitem" class="danger" id="clearWeek">${S.confirmClear?"Wirklich alle Schichten löschen?":"Woche leeren"}</button>`}</div>`:""}</div>
+  </div>`;
+  const leaders=leadersL();
+  if(leaders.length){const R=rot();const fr=leaders.flatMap(e=>(e.freeDays||[]).filter(k=>dates.includes(k)).map(k=>`${esc(e.name)} ${DN[pdate(k).getDay()]}`));
+    h+=`<div class="lline"><span class="lbl">Leitung</span>${leaders.map(e=>{const kd=leadKind(e,dates[0]);return `<span><span class="dot" style="--h:${e.hue}"></span>${esc(e.name)} <span class="pill ${kd==="frueh"?"acc":"warn"}">${kd==="frueh"?"Früh":"Spät"}</span></span>`}).join("")}<span class="muted">frei: ${fr.length?fr.join(", "):"–"}</span>${S.ro?"":`<span class="muted sm">Freien Tag: Feld antippen</span>`}</div>`}
+  if(S.freeMsg)h+=`<p class="freemsg">${esc(S.freeMsg)}</p>`;
+  if(view==="tasks")h+=tasksPanel(dates,shifts)||`<div class="panel empty">In dieser Woche stehen keine Aufgaben an. Aufgaben legst du im Reiter „Vertretung“ an.</div>`;
+  else if(view==="cov")h+=covView(dates,covs);
+  else if(view==="hours")h+=hoursView(wid);
+  else h+=gridView(dates,shifts,covs,wid);
+  $("#view").innerHTML=h;
+  const v=$("#view");
+  v.querySelectorAll("[data-pv]").forEach(b=>b.onclick=()=>{S.planView=b.dataset.pv;S.moreOpen=false;render()});
+  $("#issBtn").onclick=openIssues;
+  $("#moreBtn").onclick=ev=>{ev.stopPropagation();S.moreOpen=!S.moreOpen;S.confirmClear=false;render()};
+  v.querySelectorAll("[data-shift]").forEach(b=>b.onclick=()=>openShift(shifts.find(s=>s.id===b.dataset.shift)));
+  v.querySelectorAll("[data-emp-ab]").forEach(b=>b.onclick=()=>openAbbau(empById(b.dataset.empAb)));
+  v.querySelectorAll("[data-cell]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.cell.split("|");openCellMenu(empById(id),k)});
+  v.querySelectorAll("[data-gotasks]").forEach(b=>b.onclick=()=>{S.planView="tasks";render()});
+  v.querySelectorAll("[data-done]").forEach(c=>c.onchange=()=>{const k=c.dataset.done.split("|")[0];const x=dayTasks(k,weekShifts(weekId(mondayOf(pdate(k))))).find(y=>y.key===c.dataset.done);if(x)toggleDone(x)});
+  const fl=$("#fillLead");if(fl)fl.onclick=()=>{S.moreOpen=false;fillLeadWeek();S.freeMsg="Früh- und Spätschichten der Leitung eingetragen.";render()};
+  const sr=$("#swapRot");if(sr)sr.onclick=()=>{S.moreOpen=false;swapRotation();S.freeMsg="Früh und Spät getauscht. Der Wechsel läuft ab dieser Woche so weiter."};
+  const ap=$("#autoPlan");if(ap)ap.onclick=()=>{planWeek();S.planView="plan";render()};
+  const pb=$("#pdfBtn");if(pb)pb.onclick=()=>{S.moreOpen=false;render();exportPdf(pb)};
+  const cw=$("#clearWeek");if(cw)cw.onclick=ev=>{ev.stopPropagation();if(!S.confirmClear){S.confirmClear=true;render();return}S.confirmClear=false;S.moreOpen=false;S.weeks[wid]=[];S.lastPlan=null;saveWeek(wid);render()};
+  if(S.moreOpen)setTimeout(()=>document.addEventListener("click",function c(){document.removeEventListener("click",c);if(S.moreOpen){S.moreOpen=false;S.confirmClear=false;render()}}),0);
+}
+function gridView(dates,shifts,covs,wid){
+  let h=`<div class="gridbox"><table class="grid"><thead><tr><th class="empcell"><span class="lbl">Mitarbeiter</span></th>`;
   dates.forEach(k=>{
-    const di=dayInfo(k),d=pdate(k);
-    const gapCount=Object.values(covs[k]).reduce((a,c)=>a+c.gaps.length,0);
-    const hasReq=Object.values(covs[k]).some(c=>c.req.some(x=>x>0));
+    const di=dayInfo(k),d=pdate(k),dw=dayWindow(k);
+    const gaps=Object.values(covs[k]).reduce((a,c)=>a+c.gaps.length,0),hasReq=Object.values(covs[k]).some(c=>c.req.some(x=>x>0));
     const tags=[];
     if(di.type==="geschlossen")tags.push(`<span class="pill hol">${esc(di.hol||"Geschlossen")}</span>`);
-    else{
-      if(di.type==="vorFeiertag")tags.push(`<span class="pill warn" title="${esc(di.nextHol?"Vor "+di.nextHol:"")}">Vor Feiertag</span>`);
-      if(hasReq)tags.push(gapCount?`<span class="pill bad">Lücke</span>`:`<span class="pill ok">Besetzt</span>`);
-    }
+    else{if(dw.special)tags.push(`<span class="pill hol">${dw.open}–${dw.close}</span>`);if(di.type==="vorFeiertag")tags.push(`<span class="pill warn" title="${esc(di.nextHol?"Vor "+di.nextHol:"")}">Vor Feiertag</span>`);}
     const fv=ferienOn(k);if(fv)tags.push(`<span class="pill fer" title="${esc(fv.name)}">Ferien</span>`);
     if(di.override?.note)tags.push(`<span class="pill acc">${esc(di.override.note)}</span>`);
-    h+=`<th class="dayh ${di.type==="geschlossen"?"closed":""}"><div class="dn">${DNL[d.getDay()]}</div><div class="dd">${shortD(k)}</div><div class="tags">${tags.join("")}</div>${(()=>{const dt=dayTasks(k,shifts);return dt.length?`<ul class="dtasks">${dt.map(x=>`<li class="${x.ok?"":"miss"}" title="${esc(x.t.skill?(x.who.length?"Kann erledigen: "+x.who.join(", "):"Niemand mit dieser Fähigkeit eingeplant"):"")}"><span class="tk">${x.ok?"✓":"!"}</span><span>${esc(x.t.label)}${x.t.time?` <span class="mono">bis ${x.t.time}</span>`:""}<small>${x.t.skill?(x.who.length?esc(x.who.join(", ")):"niemand eingeplant"):""}</small></span></li>`).join("")}</ul>`:""})()}</th>`;
+    const dt=dayTasks(k,shifts),dOpen=dt.filter(x=>!x.done).length,dBad=dt.some(x=>!x.done&&(!x.ok||x.overdue));
+    h+=`<th class="dayh ${di.type==="geschlossen"?"closed":""}"><div class="dtop"><div><div class="dn">${DNL[d.getDay()]}</div><div class="dd">${shortD(k)}</div></div>${di.type!=="geschlossen"&&hasReq?`<span class="cdot ${gaps?"bad":"ok"}" title="${gaps?"Besetzung hat Lücken":"Besetzung passt"}"></span>`:""}</div>
+      ${tags.length?`<div class="tags">${tags.join("")}</div>`:""}
+      ${dt.length?`<button class="dtk ${dBad?"bad":dOpen?"":"ok"}" data-gotasks="1">${dOpen?`${dOpen} Aufgabe${dOpen>1?"n":""} offen`:"Aufgaben erledigt"}</button>`:""}</th>`;
   });
-  h+=`</tr></thead><tbody>`;
+  h+=`<th class="hrs"><span class="lbl">Woche</span></th></tr></thead><tbody>`;
   emps().forEach(e=>{
-    const wm=weekMinutes(e.id,wid);
-    const ym=dkey(addDays(S.week,2)).slice(0,7);const mm=monthMinutes(e.id,ym);
-    const pct=e.monthHours?Math.min(100,mm/(e.monthHours*60)*100):0;
-    const days=new Set(shifts.filter(s=>s.empId===e.id).map(s=>s.date)).size;
-    h+=`<tr><td class="empcell" style="--h:${e.hue??200}"><div class="empname"><span class="dot"></span>${esc(e.name)}</div><div class="emprole">${esc(ROLES[e.role]||"")}${e.contract?" · "+esc(e.contract):""}${(()=>{const kd=weekRotKind(e,S.week);return kd?` <span class="pill ${kd==="frueh"?"acc":"warn"}">${kd==="frueh"?"Früh":"Spät"}</span>`:""})()}</div>${(e.skills||[]).length?`<div class="sks">${skillTags(e)}</div>`:""}
-      <div class="hours">Woche ${fmtH(wm)}${weekTarget(e)?` / ${fmtH(weekTarget(e))}`:""} h ${(()=>{const st=weekState(e,wm);return st?`<span class="pill ${st.cls}">${st.txt}</span>`:""})()}${e.maxDays?`<br>${days}/${e.maxDays} Tage`:""}<br>${monthName(ym)} ${fmtH(mm)}${e.monthHours?` / ${e.monthHours}`:""} h</div>
-      ${e.monthHours?`<div class="meter"><i class="${mm>e.monthHours*60?"over":""}" style="width:${pct}%"></i></div>`:""}</td>`;
+    const wm=weekMinutes(e.id,wid),t=weekTarget(e),stt=weekState(e,wm),kd=weekRotKind(e,S.week)||(isLead(e)?leadKind(e,dates[0]):null);
+    h+=`<tr><td class="empcell" style="--h:${e.hue??200}"><button class="empbtn2" data-emp-ab="${e.id}" ${S.ro||!baseTarget(e)?"disabled":""}><span class="empname"><span class="dot"></span>${esc(e.name)}</span></button><div class="emprole">${esc(ROLES[e.role]||"")}${kd?` · ${kd==="frueh"?"Früh":"Spät"}`:""}</div></td>`;
     dates.forEach(k=>{
       const di=dayInfo(k),av=availFor(e,k),ab=absentOn(e,k);
       const mine=shifts.filter(s=>s.empId===e.id&&s.date===k).sort((a,b)=>toMin(a.from)-toMin(b.from));
-      const cls=di.type==="geschlossen"?"closed":(!av||ab)?"off":"";
+      const cls=di.type==="geschlossen"?"closed":(!av||ab)&&!mine.length?"off":"";
       h+=`<td class="cell ${cls}" style="--h:${e.hue??200}">`;
-      mine.forEach(s=>{
-        const is=shiftIssues(s,shifts);const lv=is.some(i=>i.lv==="err")?"err":is.length?"wrn":"";
-        if(s.sub){h+=`<button class="chip sub ${lv}" data-shift="${s.id}" title="${esc(is.map(i=>i.m).join("\n"))}"><div class="t">${s.from}–${s.to}</div><div class="k"><span>Einsatz ${taskLabel(s)}</span></div></button>`;return}
-        h+=`<button class="chip ${lv}" data-shift="${s.id}" title="${esc(is.map(i=>i.m).join("\n"))}"><div class="t">${s.from}–${s.to}</div><div class="k"><span>${taskLabel(s)}</span><span>${fmtH(dur(s))} h${gross(s)!==dur(s)?"*":""}${s.autoLead?" · Vertretung":s.autoRot?(s.autoRot==="frueh"?" · Früh":" · Spät"):s.auto?" · Vorschlag":""}</span></div></button>`;
-      });
-      if(mine.some(x=>!x.sub)&&!S.ro&&di.type!=="geschlossen")h+=`<button class="subadd edit-only" data-addsub="${e.id}|${k}" aria-label="Einsatz in anderer Rolle für ${esc(e.name)} am ${shortD(k)}">+ Einsatz</button>`;
-      if(!mine.length&&di.type!=="geschlossen"){
-        const note=ab?esc(ab.kind||"Abwesend"):!av?"frei":"";const cov=coveredNote(e,k,shifts);
-        if(cov)h+=`<div class="covd">${cov}</div>`;
-        h+=S.ro?(note?`<span class="availnote">${note}</span>`:""):`<button class="addbtn edit-only ${cov?"small":""}" data-add="${e.id}|${k}" aria-label="Schicht für ${esc(e.name)} am ${shortD(k)} anlegen">${note?note+" · ":""}+ Schicht</button>`;
+      if(di.type!=="geschlossen"){
+        mine.forEach(s=>{const is=shiftIssues(s,shifts);const lv=is.some(i=>i.lv==="err")?"err":is.length?"wrn":"";
+          const tag=s.coverFix?"für "+s.coverFix:s.fixed?"fest":s.autoLead?"Vertr.":"";
+          h+=`<button class="chip ${s.sub?"sub":""} ${lv}" data-shift="${s.id}" title="${esc([`${fmtH(dur(s))} Std.`,...is.map(i=>i.m)].join("\n"))}"><span class="t">${s.from}–${s.to}</span><span class="k">${s.sub?"↳ ":""}${taskLabel(s)}${tag?` <i>${tag}</i>`:""}</span></button>`});
+        const sch=hasSchool(e)&&schoolOn(e,k),sem=e.dayMarks?.[k]==="seminar";
+        if(sch||sem)h+=`<span class="mkp">${sem?"Seminar":"Schule"}</span>`;
+        if(!mine.length){const note=sem?"":sch&&!av?"":ab?esc(ab.kind||"Abwesend"):!av?"frei":coveredNote(e,k,shifts)?"LG besetzt":"";
+          h+=S.ro?(note?`<span class="availnote">${note}</span>`:""):`<button class="addbtn" data-cell="${e.id}|${k}" aria-label="${esc(e.name)}, ${DNL[pdate(k).getDay()]} ${shortD(k)}: Aktionen">${note?`<span>${note}</span>`:""}<b>+</b></button>`}
+        else if(!S.ro)h+=`<button class="moreb" data-cell="${e.id}|${k}" aria-label="Weitere Aktionen für ${esc(e.name)} am ${shortD(k)}">⋯</button>`;
       }
-      if(hasSchool(e)&&di.type!=="geschlossen"){const isSD=(e.school.days||[]).includes(pdate(k).getDay());const sch=schoolOn(e,k),sem=e.dayMarks?.[k]==="seminar";
-        h+=`<div class="marks">${(isSD||sch)?`<button class="mk ${sch?"on":""}" data-mark="${e.id}|${k}|schule" aria-pressed="${sch}" ${S.ro?"disabled":""}>${sch?"✓ ":""}Schule</button>`:""}<button class="mk ${sem?"on":""}" data-mark="${e.id}|${k}|seminar" aria-pressed="${sem}" ${S.ro?"disabled":""}>${sem?"✓ ":""}Seminar</button></div>`}
       h+=`</td>`;
     });
-    h+=`</tr>`;
+    const ab=abbauOf(e,wid);
+    h+=`<td class="hrs"><span class="mono">${fmtH(wm)}${t||ab?`/${fmtH(t)}`:""}</span>${ab?`<span class="pill acc">Abbau${ab==="all"?" Woche":" −"+fmtH(ab)+" h"}</span>`:stt?`<span class="pill ${stt.cls}">${stt.txt}</span>`:""}</td></tr>`;
   });
-  {const tot=dates.map(k=>shifts.filter(s=>s.date===k).reduce((a,s)=>a+dur(s),0));
-   const ist=tot.reduce((a,b)=>a+b,0),soll=emps().reduce((a,e)=>a+weekTarget(e),0);
-   h+=`<tr class="totrow"><td class="empcell"><div class="empname">Gesamt</div><div class="hours">Ist ${fmtH(ist)} h${soll?` / Soll ${fmtH(soll)} h`:""}</div></td>${tot.map(m=>`<td class="cell"><span class="mono" style="font-weight:600">${fmtH(m)} h</span></td>`).join("")}</tr>`;}
-  h+=`</tbody></table></div>`;
-
-  // coverage bars
-  const ws=toMin(S.cfg.settings.workStart),we=toMin(S.cfg.settings.workEnd),span=we-ws;
-  const P=m=>((m-ws)/span*100).toFixed(3)+"%";
-  const ticks=[];for(let m=Math.ceil(ws/120)*120;m<=we;m+=120)ticks.push(m);
-  ["leergut","flaeche"].forEach(area=>{
-  h+=`<section class="cov" aria-label="Besetzung ${TASKS[area]}"><div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px"><h2>Besetzung ${TASKS[area]}</h2><div class="legend"><span><i style="background:var(--ok)"></i>Pflicht erfüllt</span><span><i style="background:var(--bad)"></i>Pflicht fehlt</span><span><i style="background:var(--accent);opacity:.35"></i>besetzt ohne Pflicht</span></div></div>`;
-  dates.forEach(k=>{
-    const di=dayInfo(k),c=covs[k][area];
-    let bars="";
-    if(di.type==="geschlossen")bars=`<div class="closedbar">${esc(di.hol||"Geschlossen")}</div>`;
-    else for(let i=0;i<c.n;i++){const t=ws+i*SLOT;const r=c.req[i],hv=c.have[i];const cls=r>0?(hv>=r?"need-ok":"need-bad"):(hv>0?"extra":"");if(cls)bars+=`<span class="${cls}" style="left:${P(t)};width:calc(${(SLOT/span*100).toFixed(3)}% + .5px)" title="${toT(t)}: ${hv} von ${r} nötig"></span>`}
-    h+=`<div class="covrow"><div class="d">${DN[pdate(k).getDay()]} <span class="muted mono" style="font-size:12px;font-weight:400">${shortD(k)}</span></div><div class="covbar">${bars}</div></div>`;
+  const tot=dates.map(k=>shifts.filter(s=>s.date===k).reduce((a,s)=>a+dur(s),0));
+  h+=`<tr class="totrow"><td class="empcell"><b>Gesamt</b></td>${tot.map(m=>`<td class="cell mono">${fmtH(m)} h</td>`).join("")}<td class="hrs mono">${fmtH(tot.reduce((a,b)=>a+b,0))}</td></tr></tbody></table></div>`;
+  return h;
+}
+function areaPeople(k,shifts,area){
+  const day=shifts.filter(s=>s.date===k),out=[];
+  day.filter(s=>!s.sub||!parentOf(s,day)).forEach(s=>{const e=empById(s.empId);if(!e)return;const subs=s.sub?[]:day.filter(x=>x.sub&&x.empId===s.empId&&parentOf(x,day)===s);const base=shiftAreas(s);const lead=isLead(e);
+    let cur=null;for(let t=toMin(s.from);t<toMin(s.to);t+=SLOT){const sb=subs.find(x=>t>=toMin(x.from)&&t<toMin(x.to));const ar=sb?(lead?[...tasksOf(sb),"leitung"]:tasksOf(sb)):base;
+      if(ar.includes(area)){if(cur&&cur.to===t)cur.to=t+SLOT;else{cur={e,from:t,to:t+SLOT,lead};out.push(cur)}}}});
+  out.sort((a,b)=>a.from-b.from||b.to-a.to);
+  const lanes=[];out.forEach(p=>{let i=lanes.findIndex(end=>end<=p.from);if(i<0){i=lanes.length;lanes.push(0)}lanes[i]=p.to;p.lane=i});
+  return {list:out,lanes:lanes.length};
+}
+function covView(dates,covs){
+  const st=t=>{const x=toT(t);return x.endsWith(":00")?String(+x.slice(0,2)):x.replace(/^0/,"")};
+  const reqSpan=c=>{let f=null,l=null;for(let i=0;i<c.n;i++)if(c.req[i]>0){const t=c.ws+i*SLOT;if(f==null)f=t;l=t+SLOT}return f==null?null:[f,l]};
+  const cell=(k,area)=>{const di=dayInfo(k);if(di.type==="geschlossen")return `<td class="bc closed"><span class="muted">${esc(di.hol||"geschlossen")}</span></td>`;
+    const c=covs[k][area],rs=reqSpan(c),ap=areaPeople(k,weekShifts(weekId(mondayOf(pdate(k)))),area).list;
+    let stat;
+    if(!rs)stat=`<span class="bs none">keine Pflicht</span>`;
+    else if(c.gaps.length)stat=c.gaps.map(g=>`<span class="bs bad">fehlt ${st(g.s)}–${st(g.e)}${g.miss>1?` (${g.miss} Pers.)`:""}</span>`).join("");
+    else stat=`<span class="bs ok">✓ besetzt ${st(rs[0])}–${st(rs[1])}</span>`;
+    return `<td class="bc">${stat}<ul class="bp">${ap.map(p=>`<li style="--h:${p.e.hue??200}"><span class="dot"></span><b>${esc(p.e.name)}</b><span class="mono">${st(p.from)}–${st(p.to)}</span></li>`).join("")||`<li class="muted">niemand eingeplant</li>`}</ul></td>`};
+  return `<div class="gridbox"><table class="btab"><thead><tr><th>Tag</th><th>Leergut</th><th>Fläche</th></tr></thead><tbody>${dates.map(k=>`<tr><th class="bd">${DNL[pdate(k).getDay()]}<span class="mono muted">${shortD(k)}</span></th>${cell(k,"leergut")}${cell(k,"flaeche")}</tr>`).join("")}</tbody></table></div>
+  <p class="muted sm" style="margin-top:8px">Bei der Fläche zählen Daniel und Philipp automatisch mit. Kurze Einsätze in einer anderen Rolle sind berücksichtigt.</p>`;
+}
+function addWid(wid,n){const m=pdate(wid.replace(/^(\d{4})-W(\d{2})$/,(x,y,w)=>dkey(isoMonday(+y,+w))));return weekId(addDays(m,7*n))}
+function hoursView(wid){
+  const ym=dkey(addDays(S.week,2)).slice(0,7);
+  const ist=emps().reduce((a,e)=>a+weekMinutes(e.id,wid),0),istS=emps().filter(e=>weekTarget(e)).reduce((a,e)=>a+weekMinutes(e.id,wid),0),soll=emps().reduce((a,e)=>a+weekTarget(e),0),d=istS-soll;
+  return `<div class="panel"><table class="wt"><thead><tr><th>Mitarbeiter</th><th>Woche Ist</th><th>Soll</th><th></th><th>Konto</th><th>${monthName(ym)}</th><th></th></tr></thead><tbody>${emps().map(e=>{const wm=weekMinutes(e.id,wid),t=weekTarget(e),st=weekState(e,wm),mm=monthMinutes(e.id,ym);
+    return `<tr><td><span class="dot" style="--h:${e.hue};display:inline-block;margin-right:6px"></span>${esc(e.name)}</td><td class="mono">${fmtH(wm)} h</td><td class="mono">${t?fmtH(t)+" h":"–"}</td><td>${st?`<span class="pill ${st.cls}">${st.txt}</span>`:`<span class="muted" style="font-size:12px">kein Soll</span>`}</td><td class="mono">${kontoStartWid(e)?fmtSaldo(saldo(e,addWid(wid,1))):"–"}</td><td class="mono">${fmtH(mm)}${e.monthHours?` / ${e.monthHours}`:""} h</td><td>${baseTarget(e)&&!S.ro?`<button class="btn ghost" data-emp-ab="${e.id}">Abbauen</button>`:""}</td></tr>`}).join("")}</tbody>
+    <tfoot><tr><td>Gesamt mit Soll</td><td class="mono">${fmtH(istS)} h</td><td class="mono">${fmtH(soll)} h</td><td><span class="pill ${Math.abs(d)<=60?"ok":d>0?"bad":"warn"}">${Math.abs(d)<=60?"passt":(d>0?"+":"−")+fmtH(Math.abs(d))+" h"}</span></td><td></td><td></td><td></td></tr>${ist!==istS?`<tr><td>Alle inkl. ohne Soll</td><td class="mono">${fmtH(ist)} h</td><td></td><td></td><td></td><td></td><td></td></tr>`:""}</tfoot></table>
+  <p class="muted" style="font-size:12px;margin:10px 0 0">Soll pro Woche: eingetragene Wochenstunden, sonst Monatsstunden × 12 ÷ 52. Abweichung bis 1 Std. gilt als passend. Stunden ohne Pausen. „Konto“ = Stundenkonto nach dieser Woche (Startwert im Profil). Mehr- oder Minusstunden gleicht „Automatisch planen“ in den Folgewochen von selbst aus.</p></div>`;
+}
+function openSheet(html,onBind,cls){
+  const close=()=>{$("#modal").innerHTML="";document.removeEventListener("keydown",esck)};
+  const esck=ev=>{if(ev.key==="Escape")close()};
+  document.addEventListener("keydown",esck);
+  $("#modal").innerHTML=`<div class="overlay ${cls||""}" id="ov"><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`;
+  $("#ov").onclick=ev=>{if(ev.target.id==="ov")close()};
+  $("#modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=close);
+  if(onBind)onBind(close);
+  const f=$("#modal").querySelector("button");if(f)f.focus();
+}
+function openIssues(){
+  const is=S.issues||[];const errs=is.filter(i=>i.lv==="err"),warns=is.filter(i=>i.lv!=="err");
+  const list=(arr,lv)=>`<ul class="issues">${arr.map(i=>`<li><span class="sev ${lv}"></span><span>${esc(i.m)}</span></li>`).join("")}</ul>`;
+  openSheet(`<div class="sheeth"><h2>Konflikte & Hinweise</h2><button class="btn ghost" data-close>Schließen</button></div>
+    ${!is.length?`<p><span class="pill ok">Alles in Ordnung</span></p><p class="muted">In dieser Woche sind alle Regeln erfüllt.</p>`:""}
+    ${errs.length?`<h3 class="ish bad">Konflikte (${errs.length})</h3><p class="muted sm" style="margin:0 0 6px">Müssen gelöst werden: Lücken, Verstöße gegen Verfügbarkeit oder Regeln.</p>${list(errs,"err")}`:""}
+    ${warns.length?`<h3 class="ish warn">Hinweise (${warns.length})</h3><p class="muted sm" style="margin:0 0 6px">Zum Prüfen: Stunden, Ruhezeiten, offene Aufgaben.</p>${list(warns,"warn")}`:""}`,null,"side");
+}
+function simulateWeek(wid,mutate){
+  const keep={cfg:clean(S.cfg),weeks:clean(S.weeks),week:S.week,lastPlan:S.lastPlan,freeMsg:S.freeMsg};
+  S.dry=true;let res;
+  try{
+    mutate&&mutate();
+    S.week=pdate(wid.replace(/^(\d{4})-W(\d{2})$/,(m,y,w)=>dkey(isoMonday(+y,+w))));
+    planWeek();
+    const shifts=weekShifts(wid),dates=weekDates();
+    let gaps=0;dates.forEach(k=>{const c=coverage(k,shifts);Object.values(c).forEach(x=>gaps+=x.gaps.reduce((a,g)=>a+(g.e-g.s)*g.miss,0))});
+    const mins={};emps().forEach(e=>mins[e.id]=weekMinutes(e.id,wid));
+    res={gaps,mins};
+  }finally{S.cfg=keep.cfg;S.weeks=keep.weeks;S.week=keep.week;S.lastPlan=keep.lastPlan;S.freeMsg=keep.freeMsg;S.dry=false}
+  return res;
+}
+function isoMonday(y,w){const j4=new Date(y,0,4);const m=mondayOf(j4);return addDays(m,(w-1)*7)}
+function openAbbau(e,startWid){
+  const wid0=startWid||curWid();
+  const sd=saldo(e,wid0);
+  let mode=abbauOf(e,wid0)==="all"||!baseTarget(e)?"all":"all";let hrs=4;
+  const weeks=[];let mon=pdate(wid0.replace(/^(\d{4})-W(\d{2})$/,(m,y,w)=>dkey(isoMonday(+y,+w))));
+  for(let i=0;i<8;i++){weeks.push(weekId(addDays(mon,i*7)))}
+  const draw=()=>{
+    const amount=mode==="all"?"all":Math.round(hrs*60);
+    const rows=weeks.map(w=>{const cur=abbauOf(e,w);
+      const base=simulateWeek(w,()=>{if(S.cfg.abbau?.[w])delete S.cfg.abbau[w][e.id]});
+      const sim=simulateWeek(w,()=>{S.cfg.abbau=S.cfg.abbau||{};S.cfg.abbau[w]=S.cfg.abbau[w]||{};S.cfg.abbau[w][e.id]=amount;clearEmpWeek(e,w)});
+      const over=emps().filter(o=>o!==e&&!isLead(o)).map(o=>({e:o,d:(sim.mins[o.id]||0)-(base.mins[o.id]||0)})).filter(x=>x.d>30);
+      const r={gaps:Math.max(0,sim.gaps-base.gaps),over};r.ok=!r.gaps&&!over.length;
+      const m=pdate(w.replace(/^(\d{4})-W(\d{2})$/,(x,y,ww)=>dkey(isoMonday(+y,+ww))));
+      const st=r.ok?`<span class="pill ok">passt</span>`:r.gaps?`<span class="pill bad">Lücke ${fmtH(r.gaps)} h</span>`:`<span class="pill warn">${r.over.map(o=>`${esc(o.e.name)} +${fmtH(o.d)} h`).join(", ")}</span>`;
+      return `<tr><td><b>KW ${w.slice(-2)}</b> <span class="muted mono sm">${m.getDate()}.${m.getMonth()+1}.</span></td><td>${st}${!r.ok&&!r.gaps?`<div class="muted sm">wird in den Folgewochen ausgeglichen</div>`:""}</td><td>${cur?`<span class="pill acc">${cur==="all"?"ganze Woche":fmtH(cur)+" h"} eingetragen</span> <button class="btn ghost danger" data-abdel="${w}">entfernen</button>`:`<button class="btn ${r.ok?"primary":""}" data-abset="${w}">Eintragen</button>`}</td></tr>`}).join("");
+    openSheet(`<div class="sheeth"><h2>Überstunden abbauen</h2><button class="btn ghost" data-close>Schließen</button></div>
+      <p style="margin:0"><b>${esc(e.name)}</b> · Stundenkonto vor KW ${wid0.slice(-2)}: <span class="pill ${sd>60?"warn":sd<-60?"acc":"ok"}">${kontoStartWid(e)?fmtSaldo(sd):"noch kein Startwert"}</span></p>
+      ${kontoStartWid(e)?"":`<p class="muted sm">Trag im Profil unter „Vertrag & Stunden“ den aktuellen Stand des Stundenkontos ein, dann rechnet die App weiter.</p>`}
+      <div class="frow"><span class="lbl">Wie viel?</span><div class="seg"><button class="segb" aria-selected="${mode==="all"}" data-am="all">Ganze Woche frei</button><button class="segb" aria-selected="${mode==="h"}" data-am="h">Stunden weniger</button></div>
+      ${mode==="h"?`<label class="absrow"><input type="number" id="abH" min="1" max="40" step="0.5" value="${hrs}" style="width:80px"> Stunden weniger als Soll</label>`:""}</div>
+      <p class="muted sm" style="margin:12px 0 6px">Beim Eintragen werden die Schichten von ${esc(e.name)} in dieser Woche neu geplant, auch von Hand eingetragene. Die App plant jede Woche probeweise einmal mit und einmal ohne Abbau. „Passt“ heißt: keine neue Lücke und niemand anderes arbeitet dadurch mehr.</p>
+      <div class="ahwrap"><table class="aht" style="min-width:0;width:100%"><tbody>${rows}</tbody></table></div>`,close=>{
+      $("#modal").querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{mode=b.dataset.am;draw()});
+      const ih=$("#abH");if(ih)ih.onchange=()=>{hrs=Math.max(0.5,parseFloat(ih.value)||1);draw()};
+      $("#modal").querySelectorAll("[data-abset]").forEach(b=>b.onclick=()=>{const w=b.dataset.abset;S.cfg.abbau=S.cfg.abbau||{};S.cfg.abbau[w]=S.cfg.abbau[w]||{};S.cfg.abbau[w][e.id]=mode==="all"?"all":Math.round(hrs*60);saveCfg();clearEmpWeek(e,w);saveWeek(w);replanWeek(w);draw()});
+      $("#modal").querySelectorAll("[data-abdel]").forEach(b=>b.onclick=()=>{const w=b.dataset.abdel;if(S.cfg.abbau?.[w]){delete S.cfg.abbau[w][e.id];if(!Object.keys(S.cfg.abbau[w]).length)delete S.cfg.abbau[w]}saveCfg();replanWeek(w);draw()});
+    },"side");
+  };
+  draw();
+}
+function clearEmpWeek(e,w){const arr=S.weeks[w];if(!arr)return;S.weeks[w]=arr.filter(x=>x.empId!==e.id||x.fixed)}
+function replanWeek(w){const keep=S.week;S.week=pdate(w.replace(/^(\d{4})-W(\d{2})$/,(m,y,ww)=>dkey(isoMonday(+y,+ww))));planWeek();S.week=keep;render()}
+function openCellMenu(e,k){
+  const di=dayInfo(k),closed=di.type==="geschlossen";if(closed)return;
+  const shifts=weekShifts(weekId(mondayOf(pdate(k))));const mine=shifts.filter(s=>s.empId===e.id&&s.date===k&&!s.sub);
+  const lead=isLead(e),free=(e.freeDays||[]).includes(k),other=leadersL().find(o=>o!==e);
+  const sd=hasSchool(e),sch=sd&&schoolOn(e,k),sem=e.dayMarks?.[k]==="seminar";
+  const vac=(e.absences||[]).find(a=>a.from===k&&a.to===k);
+  const btn=(id,l,sub,cls)=>`<button class="mitem ${cls||""}" id="${id}"><b>${l}</b>${sub?`<small>${sub}</small>`:""}</button>`;
+  openSheet(`<span class="lbl">${DNL[pdate(k).getDay()]}, ${pdate(k).toLocaleDateString("de-DE")}</span><h2>${esc(e.name)}</h2>
+    <div class="mlist">
+    ${btn("cmShift",mine.length?"Weitere Schicht anlegen":"Schicht anlegen","")}
+    ${mine.length?btn("cmSub","Kurzer Einsatz in anderer Rolle","z. B. eine Stunde Leergut, zählt nicht extra"):""}
+    ${lead?btn("cmFree",free?"Freien Tag aufheben":"Freien Tag geben",free?"":`${other?esc(other.name)+" übernimmt automatisch":""}`):""}
+    ${sd?btn("cmSchool",sch?"Keine Schule an diesem Tag":"Schule an diesem Tag",""):""}
+    ${sd?btn("cmSem",sem?"Seminar entfernen":"Seminar an diesem Tag","ganzer Tag abwesend"):""}
+    ${btn("cmVac",vac?"Urlaub an diesem Tag entfernen":"Urlaub an diesem Tag","")}
+    ${baseTarget(e)?btn("cmAbbau","Überstunden abbauen …",kontoStartWid(e)?`Stundenkonto: ${fmtSaldo(saldo(e,curWid()))}`:"Woche frei oder weniger Stunden, mit Prüfung"):""}
+    </div><div class="mactions"><span></span><button class="btn" data-close>Abbrechen</button></div>`,close=>{
+    const on=(id,fn)=>{const b=$("#"+id);if(b)b.onclick=()=>{close();fn()}};
+    on("cmShift",()=>newShift(e.id,k));
+    on("cmAbbau",()=>openAbbau(e,weekId(mondayOf(pdate(k)))));
+    on("cmSub",()=>newSub(e.id,k));
+    on("cmFree",()=>toggleFree(e,k));
+    on("cmSchool",()=>{e.dayMarks=e.dayMarks||{};const isSD=(e.school.days||[]).includes(pdate(k).getDay());const def=isSD&&!ferienOn(k);const want=!sch;if(want===def)delete e.dayMarks[k];else e.dayMarks[k]=want?"schule":"keine";saveCfg();render()});
+    on("cmSem",()=>{e.dayMarks=e.dayMarks||{};if(sem)delete e.dayMarks[k];else e.dayMarks[k]="seminar";saveCfg();render()});
+    on("cmVac",()=>{e.absences=e.absences||[];if(vac)e.absences=e.absences.filter(a=>a!==vac);else e.absences.push({from:k,to:k,kind:"Urlaub"});saveCfg();
+      if((e.fixed||[]).some(f=>f.coverLead&&(f.days||[]).includes(pdate(k).getDay()))){const w=weekId(mondayOf(pdate(k)));if(!vac)S.weeks[w]=weekShifts(w).filter(x=>!(x.empId===e.id&&x.date===k));saveWeek(w);replanWeek(w);S.freeMsg=vac?`${e.name} arbeitet am ${shortD(k)} wieder. Woche neu geplant.`:`${e.name} hat am ${shortD(k)} Urlaub. Woche neu geplant, die Leitung im Spätdienst übernimmt bis ${(e.fixed.find(f=>f.coverLead)||{}).to}.`;render()}else render()});
   });
-  h+=`<div class="axis"><div></div><div class="ticks">${ticks.map(m=>`<span style="left:${P(m)}">${toT(m)}</span>`).join("")}</div></div></section>`;
-  });
-
-  h+=`<div class="cols"><div class="panel"><h3>Konflikte & Hinweise</h3>${issues.length?`<ul class="issues">${issues.slice(0,40).map(i=>`<li><span class="sev ${i.lv==="err"?"err":"warn"}"></span><span>${esc(i.m)}</span></li>`).join("")}</ul>`:`<p class="muted">Keine Konflikte in dieser Woche.</p>`}</div>
-  <div class="panel"><h3>Wochenstunden</h3><table class="wt"><thead><tr><th>Mitarbeiter</th><th>Ist</th><th>Soll</th><th></th></tr></thead><tbody>${emps().map(e=>{const wm=weekMinutes(e.id,wid),t=weekTarget(e),st=weekState(e,wm);return `<tr><td><span class="dot" style="--h:${e.hue};display:inline-block;margin-right:6px"></span>${esc(e.name)}</td><td class="mono">${fmtH(wm)} h</td><td class="mono">${t?fmtH(t)+" h":"–"}</td><td>${st?`<span class="pill ${st.cls}">${st.txt}</span>`:`<span class="muted" style="font-size:12px">kein Soll</span>`}</td></tr>`}).join("")}</tbody>${(()=>{const ist=emps().reduce((a,e)=>a+weekMinutes(e.id,wid),0),istS=emps().filter(e=>weekTarget(e)).reduce((a,e)=>a+weekMinutes(e.id,wid),0),soll=emps().reduce((a,e)=>a+weekTarget(e),0),d=istS-soll;
-    return `<tfoot><tr><td>Gesamt mit Soll</td><td class="mono">${fmtH(istS)} h</td><td class="mono">${fmtH(soll)} h</td><td><span class="pill ${Math.abs(d)<=60?"ok":d>0?"bad":"warn"}">${Math.abs(d)<=60?"passt":(d>0?"+":"−")+fmtH(Math.abs(d))+" h"}</span></td></tr>${ist!==istS?`<tr><td>Alle inkl. ohne Soll</td><td class="mono">${fmtH(ist)} h</td><td class="mono">–</td><td></td></tr>`:""}</tfoot>`})()}</table>
-  <p class="muted" style="font-size:12px;margin:10px 0 0">Soll pro Woche: eingetragene Wochenstunden, sonst Monatsstunden × 12 ÷ 52. Abweichung bis 1 Std. gilt als passend. Stunden sind ohne Pausen gerechnet; * an einer Schicht heißt, sie enthält eine Pause.</p></div></div>
-  <p class="muted" style="font-size:13px;margin-top:16px">Klick in ein Feld legt eine Schicht an, Klick auf eine Schicht ändert oder löscht sie. „Woche automatisch planen“ ersetzt alle bisherigen Vorschläge: freie Tage und Früh/Spät der Leitung, dann alle Besetzungsregeln, dann die restlichen Wochenstunden. Selbst eingetragene Schichten bleiben unverändert. Schraffiert: nicht verfügbar oder abwesend.</p>`;
-  $("#view").innerHTML=h;
-  $("#view").querySelectorAll("[data-shift]").forEach(b=>b.onclick=()=>openShift(shifts.find(s=>s.id===b.dataset.shift)));
-  const fl=$("#fillLead");if(fl)fl.onclick=()=>{fillLeadWeek();S.freeMsg="Früh- und Spätschichten der Leitung eingetragen.";render()};
-  const sr=$("#swapRot");if(sr)sr.onclick=()=>{swapRotation();S.freeMsg="Früh und Spät getauscht. Der Wechsel läuft ab dieser Woche so weiter."};
-  $("#view").querySelectorAll("[data-free]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.free.split("|");toggleFree(empById(id),k)});
-  $("#view").querySelectorAll("[data-mark]").forEach(b=>b.onclick=()=>{const [id,k,m]=b.dataset.mark.split("|");const e=empById(id);e.dayMarks=e.dayMarks||{};
-    if(m==="seminar"){if(e.dayMarks[k]==="seminar")delete e.dayMarks[k];else e.dayMarks[k]="seminar"}
-    else{const isSD=(e.school.days||[]).includes(pdate(k).getDay());const on=schoolOn(e,k);const def=isSD&&!ferienOn(k);const want=!on;
-      if(want===def)delete e.dayMarks[k];else e.dayMarks[k]=want?"schule":"keine"}
-    saveCfg();render()});
-  $("#view").querySelectorAll("[data-addsub]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.addsub.split("|");newSub(id,k)});
-  $("#view").querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.add.split("|");newShift(id,k)});
-  const ap=$("#autoPlan");if(ap)ap.onclick=()=>{planWeek();render()};
-  const pb=$("#pdfBtn");if(pb)pb.onclick=()=>exportPdf(pb);
-  const cw=$("#clearWeek");if(cw)cw.onclick=()=>{if(!S.confirmClear){S.confirmClear=true;render();setTimeout(()=>{if(S.confirmClear){S.confirmClear=false;render()}},4000);return}S.confirmClear=false;S.weeks[wid]=[];S.lastPlan=null;saveWeek(wid);render()};
+}
+function collapsible(root,openDefault){
+  S.openSect=S.openSect||{};
+  root.querySelectorAll(".sect>h3").forEach(h3=>{const key=(S.tab||"")+"|"+h3.textContent.trim();const sect=h3.parentElement;
+    const open=key in S.openSect?S.openSect[key]:openDefault.includes(h3.textContent.trim());
+    sect.classList.add("coll");sect.classList.toggle("closed",!open);h3.tabIndex=0;h3.setAttribute("role","button");h3.setAttribute("aria-expanded",open);
+    const tg=()=>{const o=sect.classList.toggle("closed");S.openSect[key]=!o;h3.setAttribute("aria-expanded",!o)};
+    h3.onclick=tg;h3.onkeydown=ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();tg()}}});
 }
 
+/* Uhrzeit bei Aufgaben = "erledigt bis": Die Person muss vor dieser Uhrzeit im Dienst sein */
+function workingAt(e,k,shifts,at){return shifts.some(x=>x.empId===e.id&&x.date===k&&!x.sub&&(at==null||toMin(x.from)<at))}
+const LEVEL=["verantwortlich","1. Vertretung","2. Vertretung"];
+function taskChain(t){return [t.owner,...(t.deps||[])].filter(Boolean).map(empById).filter(Boolean)}
 function dayTasks(k,shifts){
   if(dayInfo(k).type==="geschlossen")return [];
-  const wd=pdate(k).getDay();
+  const wd=pdate(k).getDay(),wid=weekId(mondayOf(pdate(k)));
   return (S.cfg.dayTasks||[]).filter(t=>(t.days||[]).includes(wd)).map(t=>{
-    const at=t.time?toMin(t.time):null;
-    const ws=shifts.filter(s=>s.date===k&&!s.sub).filter(s=>{const e=empById(s.empId);if(!e)return false;if(t.skill&&!(e.skills||[]).includes(t.skill))return false;return at==null||(toMin(s.from)<=at&&toMin(s.to)>at)});
-    const who=[...new Set(ws.map(s=>empById(s.empId).name))];
-    return {t,who,ok:!t.skill||who.length>0};
+    const at=t.time?toMin(t.time):null;const key=k+"|"+t.id;
+    const chain=taskChain(t);let doer=null,level=-1;
+    chain.some((e,i)=>{if(workingAt(e,k,shifts,at)){doer=e;level=i;return true}return false});
+    const ws=shifts.filter(x=>x.date===k&&!x.sub).filter(x=>{const e=empById(x.empId);if(!e)return false;if(t.skill&&!(e.skills||[]).includes(t.skill))return false;return at==null||toMin(x.from)<at});
+    const who=doer?[doer.name]:[...new Set(ws.map(x=>empById(x.empId).name))];
+    const ok=chain.length?!!doer:(!t.skill||who.length>0);
+    const done=!!(S.done[wid]&&S.done[wid][key]);
+    const past=k<dkey(new Date());
+    return {t,who,ok,doer,level,done,key,wid,overdue:past&&!done,chain};
   });
+}
+function toggleDone(x){const m=S.done[x.wid]=S.done[x.wid]||{};if(m[x.key])delete m[x.key];else m[x.key]=true;saveWeek(x.wid);render()}
+function tasksPanel(dates,shifts){
+  const rows=dates.map(k=>({k,list:dayTasks(k,shifts)})).filter(r=>r.list.length);
+  if(!rows.length)return "";
+  const all=rows.flatMap(r=>r.list),open=all.filter(x=>!x.done).length;
+  return `<div class="panel tpanel"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap"><h3>Aufgaben diese Woche</h3><span class="pill ${open?"warn":"ok"}">${open?`${open} offen`:"alle erledigt"}</span></div>
+  <div class="tgrid">${rows.map(r=>`<div class="tday"><div class="tdh">${DN[pdate(r.k).getDay()]} <span class="mono muted">${shortD(r.k)}</span></div>${r.list.map(x=>{
+    const st=x.done?`<span class="pill ok">erledigt</span>`:!x.ok?`<span class="pill bad">niemand da</span>`:x.overdue?`<span class="pill bad">überfällig</span>`:"";
+    return `<label class="titem ${x.done?"isdone":""}"><input type="checkbox" data-done="${x.key}" ${x.done?"checked":""} ${S.ro?"disabled":""}><span><b>${esc(x.t.label)}</b>${x.t.time?` <span class="mono muted">bis ${x.t.time}</span>`:""}<small>${x.doer?`${esc(x.doer.name)}${x.level>0?` · ${LEVEL[x.level]}`:""}`:x.chain.length?"Verantwortlicher und Vertretungen nicht da":x.who.length?esc(x.who.join(", ")):"niemand eingeplant"}</small></span>${st}</label>`}).join("")}</div>`).join("")}</div></div>`;
 }
 function areaFull(k,shifts,area){const c=coverage(k,shifts)[area];return !!c&&c.req.some(x=>x>0)&&!c.gaps.length}
 function coveredNote(e,k,shifts){if(e.role!=="leergut"||absentOn(e,k)||!availFor(e,k))return "";return areaFull(k,shifts,"leergut")?"Leergut besetzt":""}
@@ -1021,7 +1449,7 @@ function freePanel(dates){
   ${S.freeMsg?`<p class="freemsg">${esc(S.freeMsg)}</p>`:""}</div>`;
 }
 function ferienPill(dates){const names=[...new Set(dates.map(ferienOn).filter(Boolean).map(v=>v.name))];return names.map(n=>`<span class="pill fer">${esc(n)}</span>`).join("")}
-function timeOptions(sel){const ws=toMin(S.cfg.settings.workStart),we=toMin(S.cfg.settings.workEnd);let o="";for(let m=ws;m<=we;m+=SLOT)o+=`<option ${toT(m)===sel?"selected":""}>${toT(m)}</option>`;return o}
+function timeOptions(sel){const ws=Math.min(toMin(S.cfg.settings.workStart),...Object.values(S.cfg.dayOverrides||{}).filter(o=>o&&o.open).map(o=>toMin(o.open))),we=toMin(S.cfg.settings.workEnd);let o="";for(let m=ws;m<=we;m+=SLOT)o+=`<option ${toT(m)===sel?"selected":""}>${toT(m)}</option>`;return o}
 function newSub(empId,k){
   const e=empById(empId),shifts=weekShifts(curWid());const par=shifts.filter(s=>s.empId===e.id&&s.date===k&&!s.sub).sort((a,b)=>gross(b)-gross(a))[0];if(!par)return;
   const task=empRoles(e).find(t=>!tasksOf(par).includes(t)&&t!=="leitung"&&!(isLead(e)&&t==="flaeche"))||"leergut";
@@ -1059,6 +1487,7 @@ function openShift(s){
         <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn ghost" id="cpAll" type="button" ${openOk.length?"":"disabled"}>Alle passenden Tage</button>${copy.size?`<button class="btn ghost" id="cpNone" type="button">Keine</button>`:""}</div>
         ${[...copy].some(k=>st(k).n==="ersetzen")?`<p class="muted" style="font-size:12px;margin:0">Bestehende Schichten an markierten Tagen werden ersetzt.</p>`:""}</div>`})()}
       ${is.length?`<ul class="issues" style="margin-top:10px">${is.map(i=>`<li><span class="sev ${i.lv}"></span><span>${esc(i.m)}</span></li>`).join("")}</ul>`:`<p style="margin:8px 0 0"><span class="pill ok">Passt zu allen Regeln</span></p>`}
+      ${draft.id&&!draft.sub&&!S.ro?`<button class="btn ghost" id="ssub" style="margin-top:10px">+ Kurzer Einsatz in anderer Rolle</button>`:""}
       <div class="mactions">${draft.id&&!S.ro?`<button class="btn danger" id="sdel">Löschen</button>`:"<span></span>"}<div><button class="btn" id="scancel">${S.ro?"Schließen":"Abbrechen"}</button>${S.ro?"":`<button class="btn primary" id="ssave">${copy.size?`An ${copy.size+1} Tagen speichern`:"Speichern"}</button>`}</div></div>
     </div></div>`;
     $("#ov").onclick=ev=>{if(ev.target.id==="ov")close()};
@@ -1078,6 +1507,7 @@ function openShift(s){
           else arr=arr.filter(x=>!(x.empId===e.id&&x.date===k));
           arr.push(ns)});
         S.weeks[wid]=arr;saveWeek(wid);close();render()};
+      const sb=$("#ssub");if(sb)sb.onclick=()=>{close();newSub(draft.empId,draft.date)};
       const d=$("#sdel");if(d)d.onclick=()=>{const wid=curWid();const all=weekShifts(wid);const kids=draft.sub?[]:all.filter(x=>x.sub&&parentOf(x,all)?.id===draft.id).map(x=>x.id);S.weeks[wid]=all.filter(x=>x.id!==draft.id&&!kids.includes(x.id));saveWeek(wid);close();render()};
     }
     ($("#sf")||$("#scancel")).focus();
@@ -1116,7 +1546,7 @@ function renderOverview(){
       <td>${esc(e.contract||"")}<div class="muted sm">${e.weekHours?`${e.weekHours} h/Woche`:e.monthHours?`${e.monthHours} h/Monat`:"kein Soll"}</div></td>
       <td class="mono">${fmtH(wm)}${t?` / ${fmtH(t)}`:""} h ${st?`<span class="pill ${st.cls}">${st.txt}</span>`:""}<div class="muted sm">${monthName(ym)}: ${fmtH(mm)}${e.monthHours?` / ${e.monthHours}`:""} h</div></td>
       <td>${availSummary(e.avail)}${e.vacAvail?.on?`<div class="sm"><span class="pill fer">Ferien</span> ${availSummary(e.vacAvail.days)}</div>`:""}</td>
-      <td class="sm">${[e.maxBlock?`max. ${fmtH(e.maxBlock*60)} h am Stück`:"",e.maxDays?`max. ${e.maxDays} Tage/Woche`:"",e.breakMin?`${e.breakMin} Min. Pause`:"",e.onDemand?"nur bei Bedarf":""].filter(Boolean).join("<br>")||"–"}</td>
+      <td class="sm">${[e.maxBlock?`max. ${fmtH(e.maxBlock*60)} h am Stück`:"",e.maxDays?`max. ${e.maxDays} Tage/Woche`:"",e.breakMin?`${e.breakMin} Min. Pause`:"",e.onDemand?"nur bei Bedarf":"",...(e.fixed||[]).filter(f=>(f.days||[]).length).map(f=>`fest: ${f.days.map(d=>DN[d]).join(", ")} ${f.from}–${f.to}`)].filter(Boolean).join("<br>")||"–"}</td>
       <td>${kd?`<span class="pill ${kd==="frueh"?"acc":"warn"}">${kd==="frueh"?"Früh":"Spät"}</span>`:`<span class="muted">–</span>`}</td>
       <td><div class="sks" style="margin:0">${skillTags(e)}${ein.map(x=>`<span class="sk">kann ${x}</span>`).join("")}</div>${!(e.skills||[]).length&&!ein.length?`<span class="muted">–</span>`:""}</td>
       <td class="sm">${ab?`${esc(ab.kind)} ${shortD(ab.from)}${ab.to!==ab.from?"–"+shortD(ab.to):""}`:"–"}${(e.freeDays||[]).filter(k=>weekDates().includes(k)).length?`<div>frei: ${(e.freeDays||[]).filter(k=>weekDates().includes(k)).map(k=>DN[pdate(k).getDay()]).join(", ")}</div>`:""}</td>
@@ -1149,6 +1579,8 @@ function renderTeam(){
       <div class="field"><label class="lbl" for="e_contract">Vertragsart</label><select id="e_contract" data-f="contract" ${dis}>${CONTRACTS.map(c=>`<option ${e.contract===c?"selected":""}>${c}</option>`).join("")}</select></div>
       <div class="field"><label class="lbl" for="e_mh">Stunden pro Monat</label><input type="number" id="e_mh" data-f="monthHours" data-num min="0" step="1" value="${e.monthHours||0}" ${dis}></div>
       <div class="field"><label class="lbl" for="e_wh">Stunden pro Woche</label><input type="number" id="e_wh" data-f="weekHours" data-num min="0" step="0.5" value="${e.weekHours||0}" ${dis}><span class="muted" style="font-size:12px">0 = aus Monatsstunden berechnen</span></div>
+      <div class="field"><label class="lbl" for="e_kh">Stundenkonto (Überstunden)</label><input type="number" id="e_kh" data-kt="hours" step="0.25" value="${e.konto?.hours??0}" ${dis}><span class="muted" style="font-size:12px">+ = Überstunden, − = Minusstunden</span></div>
+      <div class="field"><label class="lbl" for="e_kd">Stand vom (Montag der Woche)</label><input type="date" id="e_kd" data-kt="date" value="${e.konto?.date||""}" ${dis}><span class="muted" style="font-size:12px">${e.konto?.date?`aktuell: ${fmtSaldo(saldo(e,curWid()))} vor KW ${curWid().slice(-2)}`:"ab dieser Woche rechnet die App weiter"}</span></div>
       <div class="field"><label class="lbl" for="e_br">Pause pro Schicht (Min.)</label><input type="number" id="e_br" data-f="breakMin" data-num min="0" step="5" value="${e.breakMin||0}" ${dis}><span class="muted" style="font-size:12px">0 = nur gesetzlich: über 6 Std. 30 Min., über 9 Std. 45 Min.</span></div>
       <div class="field"><label class="lbl" for="e_mb">Max. Stunden am Stück</label><input type="number" id="e_mb" data-f="maxBlock" data-num min="0" step="0.25" value="${e.maxBlock||0}" ${dis}></div>
       <div class="field"><label class="lbl" for="e_md">Max. Arbeitstage pro Woche</label><input type="number" id="e_md" data-f="maxDays" data-num min="0" max="6" step="1" value="${e.maxDays||0}" ${dis}><span class="muted" style="font-size:12px">0 = keine Grenze</span></div>
@@ -1161,6 +1593,14 @@ function renderTeam(){
     <div class="sect"><h3>Verfügbarkeit in den Ferien</h3>
       <label class="check"><input type="checkbox" id="vac_on" ${e.vacAvail?.on?"checked":""} ${dis}>In den Schulferien andere Tage und Zeiten</label>
       ${e.vacAvail?.on?availRows(e.vacAvail.days,"vav",dis):""}</div>
+    <div class="sect"><h3>Feste Schichten</h3>
+      <p class="muted" style="margin:0;font-size:13px">Trägt die Automatik jede Woche ein, solange ${esc(e.name)} nicht frei, im Urlaub oder bei Seminar/Schule ist.</p>
+      ${(e.fixed||[]).map((f,i)=>`<div class="rule"><div class="daypick">${WD.map(d=>`<label><input type="checkbox" data-fxd="${i}" value="${d}" ${(f.days||[]).includes(d)?"checked":""} ${dis}><span>${DN[d]}</span></label>`).join("")}</div>
+        <div class="rparams"><div class="field"><span class="lbl">von</span><select data-fx="${i}" data-k="from" ${dis}>${timeOptions(f.from)}</select></div><div class="field"><span class="lbl">bis</span><select data-fx="${i}" data-k="to" ${dis}>${timeOptions(f.to)}</select></div>
+        <div class="field"><span class="lbl">Aufgabe</span><select data-fx="${i}" data-k="task" ${dis}>${Object.entries(FIX_TASKS).map(([k,l])=>`<option value="${k}" ${f.task===k?"selected":""}>${l}</option>`).join("")}</select></div>
+        <button class="btn ghost danger edit-only" data-fxdel="${i}">Entfernen</button></div>
+        <label class="check"><input type="checkbox" data-fxc="${i}" ${f.coverLead?"checked":""} ${dis}>Bei Urlaub/Abwesenheit: Leitung im Spätdienst bleibt bis ${f.to} und übernimmt</label></div>`).join("")}
+      <div class="edit-only"><button class="btn" id="fxAdd">+ Feste Schicht</button></div></div>
     <div class="sect"><h3>Wechselschicht</h3>
       <label class="check"><input type="checkbox" id="rot_on" ${e.rot?.on?"checked":""} ${dis}>Früh und Spät im Wochenwechsel</label>
       ${e.rot?.on?`<div class="fgrid">${[["eFrom","Früh ab"],["eTo","Früh bis"],["lFrom","Spät ab"],["lTo","Spät bis"]].map(([k,l])=>`<div class="field"><label class="lbl" for="rot_${k}">${l}</label><select id="rot_${k}" data-rot="${k}" ${dis}>${timeOptions(e.rot[k])}</select></div>`).join("")}</div>
@@ -1184,6 +1624,7 @@ function renderTeam(){
 }
 function bindTeam(){
   const v=$("#view");
+  collapsible(v,["Stammdaten","Vertrag & Stunden","Rollen"]);
   v.querySelectorAll("[data-tv]").forEach(b=>b.onclick=()=>{S.teamView=b.dataset.tv;render()});
   v.querySelectorAll("[data-emp]").forEach(b=>b.onclick=()=>{S.selEmp=b.dataset.emp;S.confirmDel=null;render()});
   const ae=$("#addEmp");if(ae)ae.onclick=addEmployee;
@@ -1199,6 +1640,12 @@ function bindTeam(){
   const vo=$("#vac_on");if(vo)vo.onchange=()=>{if(!e.vacAvail){const days={};WD.forEach(d=>days[d]={on:true,from:S.cfg.settings.workStart,to:"21:15"});e.vacAvail={days}}e.vacAvail.on=vo.checked;saveCfg();render()};
   v.querySelectorAll("[data-vav]").forEach(inp=>inp.addEventListener("change",()=>{const d=inp.dataset.vav,k=inp.dataset.k;const t=e.vacAvail.days;t[d]=t[d]||{on:false,from:S.cfg.settings.workStart,to:"21:15"};t[d][k]=k==="on"?inp.checked:inp.value;saveCfg();if(k==="on")render()}));
   v.querySelectorAll("[data-av]").forEach(inp=>inp.addEventListener("change",()=>{const d=inp.dataset.av,k=inp.dataset.k;e.avail=e.avail||{};e.avail[d]=e.avail[d]||{on:false,from:S.cfg.settings.workStart,to:S.cfg.settings.workEnd};e.avail[d][k]=k==="on"?inp.checked:inp.value;saveCfg();if(k==="on")render()}));
+  v.querySelectorAll("[data-kt]").forEach(x=>x.onchange=()=>{e.konto=e.konto||{hours:0,date:""};if(x.dataset.kt==="hours")e.konto.hours=parseFloat(x.value)||0;else e.konto.date=x.value?dkey(mondayOf(pdate(x.value))):"";if(e.konto.hours&&!e.konto.date)e.konto.date=dkey(S.week);saveCfg();render()});
+  v.querySelectorAll("[data-fx]").forEach(x=>x.onchange=()=>{e.fixed[+x.dataset.fx][x.dataset.k]=x.value;saveCfg()});
+  v.querySelectorAll("[data-fxd]").forEach(x=>x.onchange=()=>{const f=e.fixed[+x.dataset.fxd];const d=+x.value;f.days=(f.days||[]).filter(y=>y!==d);if(x.checked)f.days.push(d);f.days.sort();saveCfg()});
+  v.querySelectorAll("[data-fxc]").forEach(x=>x.onchange=()=>{e.fixed[+x.dataset.fxc].coverLead=x.checked;saveCfg()});
+  v.querySelectorAll("[data-fxdel]").forEach(b=>b.onclick=()=>{e.fixed.splice(+b.dataset.fxdel,1);saveCfg();render()});
+  const fa=$("#fxAdd");if(fa)fa.onclick=()=>{e.fixed=e.fixed||[];e.fixed.push({days:[],from:"17:00",to:"21:00",task:defTask(e)});saveCfg();render()};
   const ro=$("#rot_on");if(ro)ro.onchange=()=>{e.rot={eFrom:"07:00",eTo:"15:30",lFrom:"13:15",lTo:"21:15",except:[],refMon:dkey(S.week),refEarly:true,...(e.rot||{}),on:ro.checked};saveCfg();render()};
   v.querySelectorAll("[data-rot]").forEach(x=>x.onchange=()=>{e.rot[x.dataset.rot]=x.value;saveCfg()});
   v.querySelectorAll("[data-rotex]").forEach(x=>x.onchange=()=>{const d=+x.dataset.rotex;e.rot.except=(e.rot.except||[]).filter(y=>y!==d);if(x.checked)e.rot.except.push(d);saveCfg()});
@@ -1222,6 +1669,7 @@ function renderRules(){
     <div class="field"><label class="lbl" for="s_close">Markt schließt</label><select id="s_close" data-s="close" ${dis}>${timeOptions(st.close)}</select></div>
     <div class="field"><label class="lbl" for="s_ws">Frühester Arbeitsbeginn</label><select id="s_ws" data-s="workStart" ${dis}>${tAll(st.workStart)}</select></div>
     <div class="field"><label class="lbl" for="s_we">Spätestes Arbeitsende</label><select id="s_we" data-s="workEnd" ${dis}>${tAll(st.workEnd)}</select></div>
+    <div class="field"><label class="lbl" for="s_aa">Mehr-/Minusstunden ausgleichen</label><select id="s_aa" data-saa ${dis}><option value="1" ${st.autoAusgleich!==false?"selected":""}>automatisch in Folgewochen</option><option value="0" ${st.autoAusgleich===false?"selected":""}>nicht ausgleichen</option></select></div>
     <div class="field"><label class="lbl" for="s_state">Bundesland (Feiertage)</label><select id="s_state" data-s="state" ${dis}>${Object.entries(STATES).map(([k,l])=>`<option value="${k}" ${st.state===k?"selected":""}>${l}</option>`).join("")}</select></div>
   </div></div>
   <div class="sect"><h3>Schichten der Leitung</h3>
@@ -1242,13 +1690,7 @@ function renderRules(){
       <div class="field"><span class="lbl">Mindestens</span><input type="number" min="0" max="9" style="width:70px" data-r="${i}" data-k="min" data-num value="${r.min}" ${dis}></div>
     </div></div>`).join("")||`<p class="muted">Noch keine Regeln.</p>`}</div>
   <div><button class="btn edit-only" id="addRule">+ Regel hinzufügen</button></div></div>
-  <div class="sect"><h3>Aufgaben & Bestellungen</h3>
-  <p class="muted" style="margin:0;font-size:14px">Wiederkehrende Aufgaben je Wochentag. Sie stehen im Wochenplan oben beim Tag. Ist eine Fähigkeit gewählt, prüft der Plan, ob an dem Tag jemand damit eingeplant ist (mit Uhrzeit: zu dieser Zeit).</p>
-  <div class="rules">${(S.cfg.dayTasks||[]).map((t,i)=>`<div class="rule"><div class="rhead"><input type="text" data-dt="${i}" data-k="label" value="${esc(t.label)}" aria-label="Aufgabe" ${dis}><button class="btn ghost danger edit-only" data-dtdel="${i}">Entfernen</button></div>
-    <div class="daypick" role="group" aria-label="Wochentage">${WD.map(d=>`<label><input type="checkbox" data-dtd="${i}" value="${d}" ${(t.days||[]).includes(d)?"checked":""} ${dis}><span>${DN[d]}</span></label>`).join("")}</div>
-    <div class="rparams"><div class="field"><span class="lbl">Braucht Fähigkeit</span><select data-dt="${i}" data-k="skill" ${dis}><option value="">– keine –</option>${skillsList().map(x=>`<option value="${x.id}" ${t.skill===x.id?"selected":""}>${esc(x.label)}</option>`).join("")}</select></div>
-    <div class="field"><span class="lbl">Erledigt bis (optional)</span><select data-dt="${i}" data-k="time" ${dis}><option value="">– egal –</option>${timeOptions(t.time||"")}</select></div></div></div>`).join("")||`<p class="muted">Noch keine Aufgaben.</p>`}</div>
-  <div><button class="btn edit-only" id="addDt">+ Aufgabe hinzufügen</button></div></div>
+  <div class="sect"><h3>Aufgaben & Bestellungen</h3><p class="muted" style="margin:0;font-size:14px">Aufgaben, Tage und Vertretungen stellst du im Reiter „Vertretung“ ein.</p></div>
   <div class="sect"><h3>Fähigkeiten</h3>
   <p class="muted" style="margin:0;font-size:14px">Was einzelne Mitarbeiter zusätzlich können. Zuordnen kannst du sie im Profil, im Plan stehen sie unter dem Namen.</p>
   <div class="abslist">${skillsList().map((x,i)=>`<div class="absrow"><input type="text" data-sk="${i}" value="${esc(x.label)}" aria-label="Fähigkeit" ${dis}><span class="muted" style="font-size:13px">${emps().filter(e=>(e.skills||[]).includes(x.id)).map(e=>esc(e.name)).join(", ")||"noch niemand"}</span><button class="btn ghost danger edit-only" data-skdel="${i}">Entfernen</button></div>`).join("")}
@@ -1259,28 +1701,30 @@ function renderRules(){
   <div><button class="btn edit-only" id="addVa">+ Ferien hinzufügen</button></div></div></div>
   <div class="sect"><h3>Feiertage & besondere Tage</h3>
   <p class="muted" style="margin:0;font-size:14px">Gesetzliche Feiertage schließen den Markt automatisch, der letzte Öffnungstag davor wird zum „Tag vor Feiertag“. Hier kannst du jeden Tag anders einstufen, z. B. für Inventur oder Aktionen.</p>
-  <ul class="hlist">${upcomingSpecial().map(x=>`<li><span class="mono">${DN[pdate(x.k).getDay()]} ${pdate(x.k).toLocaleDateString("de-DE")}</span><span>${esc(x.label)}${x.override?` <span class="pill acc">angepasst</span>`:""}</span>
+  <ul class="hlist">${upcomingSpecial().map(x=>`<li><span class="mono">${DN[pdate(x.k).getDay()]} ${pdate(x.k).toLocaleDateString("de-DE")}</span><span>${esc(x.label)}${x.override?.open?` <span class="pill hol">${x.override.open}–${x.override.close}</span>`:""}${x.override?.type?` <span class="pill acc">angepasst</span>`:""}</span>
     <select data-ov="${x.k}" aria-label="Tagestyp" ${dis}><option value="">automatisch</option>${[["normal","Normaler Tag"],["vorFeiertag","Vor Feiertag"],["geschlossen","Geschlossen"]].map(([v,l])=>`<option value="${v}" ${x.override?.type===v?"selected":""}>${l}</option>`).join("")}</select></li>`).join("")}</ul>
+  <div class="absrow edit-only" style="margin-top:6px"><input type="date" id="ohDate" aria-label="Datum"><select id="ohOpen" aria-label="öffnet">${tAll("06:00")}</select><span class="muted">bis</span><select id="ohClose" aria-label="schließt">${tAll("13:00")}</select><input type="text" id="ohNote" placeholder="Notiz, z. B. Heiligabend" aria-label="Notiz"><button class="btn" id="addOh">Öffnungszeit festlegen</button></div>
+  ${Object.entries(S.cfg.dayOverrides||{}).filter(([k,o])=>o&&o.open).sort().map(([k,o])=>`<div class="absrow"><span class="mono">${DN[pdate(k).getDay()]} ${pdate(k).toLocaleDateString("de-DE")}</span><span class="pill hol">${o.open}–${o.close}</span><span>${esc(o.note||"")}</span><button class="btn ghost danger edit-only" data-ohdel="${k}">Öffnungszeit entfernen</button></div>`).join("")}
   <div class="absrow edit-only"><input type="date" id="ovDate" aria-label="Datum"><select id="ovType" aria-label="Tagestyp"><option value="vorFeiertag">Wie Tag vor Feiertag</option><option value="geschlossen">Geschlossen</option><option value="normal">Normaler Tag</option></select><input type="text" id="ovNote" placeholder="Notiz, z. B. Inventur" aria-label="Notiz"><button class="btn" id="addOv">Tag festlegen</button></div>
   </div></div>`;
   $("#view").innerHTML=h;
+  collapsible($("#view"),["Besetzung Fläche"]);
   if(S.ro)return;
   const v=$("#view");
   v.querySelectorAll("[data-ah]").forEach(x=>x.addEventListener(x.type==="number"?"input":"change",()=>{const [area,d]=x.dataset.ah.split("|");S.cfg.areaHours=S.cfg.areaHours||{};const m=S.cfg.areaHours[area]=S.cfg.areaHours[area]||{};
     m[d]=m[d]||{on:false,from:"08:00",to:"20:00",min:1};const k=x.dataset.k;m[d][k]=k==="on"?x.checked:k==="min"?(parseInt(x.value)||1):x.value;saveCfg();if(k==="on")render()}));
   v.querySelectorAll("[data-ahcopy]").forEach(b=>b.onclick=()=>{const m=S.cfg.areaHours?.[b.dataset.ahcopy];if(!m)return;const first=WD.map(d=>m[d]).find(x=>x&&x.on);if(!first)return;WD.forEach(d=>{if(m[d]?.on)m[d]={...m[d],from:first.from,to:first.to,min:first.min}});saveCfg();render()});
+  const saa=$("#s_aa");if(saa)saa.onchange=()=>{st.autoAusgleich=saa.value==="1";saveCfg()};
   v.querySelectorAll("[data-s]").forEach(s=>s.onchange=()=>{st[s.dataset.s]=s.value;saveCfg();render()});
   v.querySelectorAll("[data-r]").forEach(inp=>inp.addEventListener(inp.tagName==="SELECT"?"change":"input",()=>{const r=S.cfg.rules[+inp.dataset.r];r[inp.dataset.k]=inp.dataset.num!==undefined?(parseInt(inp.value)||0):inp.value;saveCfg()}));
   v.querySelectorAll("[data-rd]").forEach(inp=>inp.onchange=()=>{const r=S.cfg.rules[+inp.dataset.rd];const d=+inp.value;r.days=inp.checked?[...new Set([...(r.days||[]),d])].sort():r.days.filter(x=>x!==d);saveCfg()});
   v.querySelectorAll("[data-rdel]").forEach(b=>b.onclick=()=>{S.cfg.rules.splice(+b.dataset.rdel,1);saveCfg();render()});
   $("#addRule").onclick=()=>{S.cfg.rules.push({id:uid(),label:"Neue Regel",days:[1,2,3,4,5,6],applies:"immer",area:"leergut",from:"09:00",to:"21:15",min:1});saveCfg();render()};
-  v.querySelectorAll("[data-ov]").forEach(s=>s.onchange=()=>{const k=s.dataset.ov;S.cfg.dayOverrides=S.cfg.dayOverrides||{};if(!s.value)delete S.cfg.dayOverrides[k];else S.cfg.dayOverrides[k]={...(S.cfg.dayOverrides[k]||{}),type:s.value};saveCfg();render()});
+  const ah2=$("#addOh");if(ah2)ah2.onclick=()=>{const k=$("#ohDate").value;if(!k){$("#ohDate").focus();return}S.cfg.dayOverrides=S.cfg.dayOverrides||{};S.cfg.dayOverrides[k]={...(S.cfg.dayOverrides[k]||{}),open:$("#ohOpen").value,close:$("#ohClose").value,note:$("#ohNote").value.trim()||(S.cfg.dayOverrides[k]||{}).note||""};saveCfg();render()};
+  v.querySelectorAll("[data-ohdel]").forEach(b=>b.onclick=()=>{const o=S.cfg.dayOverrides[b.dataset.ohdel];delete o.open;delete o.close;if(!o.type&&!o.note)delete S.cfg.dayOverrides[b.dataset.ohdel];saveCfg();render()});
+  v.querySelectorAll("[data-ov]").forEach(s=>s.onchange=()=>{const k=s.dataset.ov;S.cfg.dayOverrides=S.cfg.dayOverrides||{};if(!s.value){const o=S.cfg.dayOverrides[k];if(o){delete o.type;if(!o.open&&!o.note)delete S.cfg.dayOverrides[k]}}else S.cfg.dayOverrides[k]={...(S.cfg.dayOverrides[k]||{}),type:s.value};saveCfg();render()});
   v.querySelectorAll("[data-rt]").forEach(x=>x.onchange=()=>{st.leadRotation={...rot(),[x.dataset.rt]:x.value};saveCfg()});
   v.querySelectorAll("[data-lc]").forEach(x=>x.onchange=()=>{st.leadCover={...lc(),[x.dataset.lc]:x.value};saveCfg()});
-  v.querySelectorAll("[data-dt]").forEach(inp=>inp.addEventListener(inp.tagName==="SELECT"?"change":"input",()=>{S.cfg.dayTasks[+inp.dataset.dt][inp.dataset.k]=inp.value;saveCfg()}));
-  v.querySelectorAll("[data-dtd]").forEach(inp=>inp.onchange=()=>{const t=S.cfg.dayTasks[+inp.dataset.dtd];const d=+inp.value;t.days=(t.days||[]).filter(x=>x!==d);if(inp.checked)t.days.push(d);t.days.sort();saveCfg()});
-  v.querySelectorAll("[data-dtdel]").forEach(b=>b.onclick=()=>{S.cfg.dayTasks.splice(+b.dataset.dtdel,1);saveCfg();render()});
-  $("#addDt").onclick=()=>{S.cfg.dayTasks=S.cfg.dayTasks||[];S.cfg.dayTasks.push({id:uid(),label:"Neue Aufgabe",days:[],skill:"",time:""});saveCfg();render()};
   v.querySelectorAll("[data-sk]").forEach(inp=>inp.addEventListener("input",()=>{S.cfg.skills[+inp.dataset.sk].label=inp.value;saveCfg()}));
   v.querySelectorAll("[data-skdel]").forEach(b=>b.onclick=()=>{const id=S.cfg.skills[+b.dataset.skdel].id;S.cfg.skills.splice(+b.dataset.skdel,1);emps().forEach(e=>e.skills=(e.skills||[]).filter(x=>x!==id));saveCfg();render()});
   $("#addSk").onclick=()=>{S.cfg.skills=S.cfg.skills||[];S.cfg.skills.push({id:uid(),label:"Neue Fähigkeit"});saveCfg();render()};
@@ -1348,8 +1792,8 @@ function buildWeekPdf(){
     // header lines
     const headLines=dates.map(k=>{const di=dayInfo(k);const L=[];
       if(di.type==="geschlossen")L.push({t:di.hol||"geschlossen",c:C.red,b:true});
-      else{if(di.type==="vorFeiertag")L.push({t:"Vor Feiertag",c:C.red,b:true});if(di.override?.note)L.push({t:di.override.note,c:C.acc,b:true});
-        dayTasks(k,shifts).forEach(x=>{L.push({t:"• "+x.t.label+(x.t.time?" bis "+x.t.time:""),c:x.ok?C.ink:C.red,b:true});if(x.t.skill)L.push({t:"   "+(x.who.length?x.who.join(", "):"niemand eingeplant"),c:x.ok?C.muted:C.red,b:!x.ok})});}
+      else{{const dw=dayWindow(k);if(dw.special)L.push({t:"Geöffnet "+dw.open+"–"+dw.close,c:C.red,b:true})}if(di.type==="vorFeiertag")L.push({t:"Vor Feiertag",c:C.red,b:true});if(di.override?.note)L.push({t:di.override.note,c:C.acc,b:true});
+        dayTasks(k,shifts).forEach(x=>{L.push({t:(x.done?"[x] ":"[  ] ")+x.t.label+(x.t.time?" bis "+x.t.time:""),c:x.ok?C.ink:C.red,b:true});const nm=x.doer?x.doer.name+(x.level>0?" (Vertretung)":""):x.who.length&&!x.chain.length?x.who.join(", "):(x.t.skill||x.chain.length)?"niemand da":"";if(nm)L.push({t:"     "+nm,c:x.ok?C.muted:C.red,b:!x.ok})});}
       return L});
     const hh=26+Math.max(0,...headLines.map(l=>l.length))*9.5;
     // rows
