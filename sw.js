@@ -1,6 +1,6 @@
 // Hält die App-Dateien auf dem Gerät, damit sie ohne Internet startet.
 // Bei einer neuen App-Version die Nummer erhöhen.
-const CACHE = "schichtplan-v12";
+const CACHE = "schichtplan-v21";
 const FILES = ["./", "index.html", "firebase-config.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png", "fb-app.js", "fb-auth.js", "fb-firestore.js"];
 
 self.addEventListener("install", (e) => {
