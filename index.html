@@ -642,7 +642,7 @@ function dayInfo(k){
 const S={cfg:null,weeks:{},week:mondayOf(addDays(new Date(),7)),tab:"plan",selEmp:null,ro:false,mode:"loading",lastPlan:null,role:null,me:null,members:[],done:{}};
 const pending={};const timers={};
 const LS="schichtplan-getraenke-v1";
-const APP_VERSION="2.5 · 20.11.2026";
+const APP_VERSION="2.7 · 21.11.2026";
 const TEAM="getraenke";
 const MAIL_DOMAIN="schichtplan.local";
 const FB_CONFIG=(window.FB_CONFIG&&window.FB_CONFIG.apiKey&&!/HIER/.test(window.FB_CONFIG.apiKey))?window.FB_CONFIG:null;
@@ -1315,10 +1315,19 @@ function renderData(){
   $("#bkSave").onclick=()=>shareFile(new Blob([JSON.stringify({format:"schichtplan-sicherung",version:1,erstellt:new Date().toISOString(),cfg:S.cfg,weeks:S.weeks,done:S.done},null,1)],{type:"application/json"}),`Schichtplan-Sicherung_${dkey(new Date())}.json`);
   const bl=$("#bkLoad");if(bl)bl.onchange=async()=>{const f=bl.files[0];if(!f)return;try{const o=JSON.parse(await f.text());if(o.format!=="schichtplan-sicherung")throw new Error("Das ist keine Schichtplan-Sicherung.");await importBackup(o);S.dataMsg="Sicherung geladen."}catch(e){S.dataMsg="Laden fehlgeschlagen: "+(e.message||e)}render()};
 }
+/* Datei ausgeben: am PC direkt herunterladen, auf iPad/Handy über „Teilen“ (Sichern in Dateien, Drucken, Mail).
+   Klappt das Teilen nicht, erscheint ein Fenster mit einem Knopf zum Öffnen/Herunterladen. */
+const isTouchDevice=()=>/iPad|iPhone|iPod|Android/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 async function shareFile(blob,name){
-  const file=new File([blob],name,{type:blob.type});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:name});return}catch(e){if(e&&e.name==="AbortError")return}}
-  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+  const touch=isTouchDevice();
+  if(touch){let file=null;try{file=new File([blob],name,{type:blob.type})}catch(e){}
+    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file]});return}catch(e){if(e&&e.name==="AbortError")return}}}
+  const url=URL.createObjectURL(blob);
+  if(!touch){const a=document.createElement("a");a.href=url;a.download=name;a.rel="noopener";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);return}
+  openSheet(`<div class="sheeth"><h2>Datei ist fertig</h2><button class="btn ghost" data-close>Schließen</button></div>
+    <p class="muted" style="margin:0 0 14px">${esc(name)}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn primary" href="${url}" download="${esc(name)}" target="_blank" rel="noopener">Öffnen / Herunterladen</a></div>
+    <p class="muted sm" style="margin-top:12px">Im geöffneten Dokument kannst du es über das Teilen-Symbol sichern oder drucken.</p>`,null);
 }
 
 /* ---------- Vertretungsmatrix ---------- */
@@ -2277,7 +2286,8 @@ function renderUrlaub(){
     ${S.vacMsg?`<p class="freemsg">${esc(S.vacMsg)}${S.vacUndo&&!ro?` <button class="btn ghost" id="vUndo">Rückgängig</button>`:""}</p>`:""}
     ${S.uv==="l"?vacListHtml(y,iss):`<div class="panel vplan ${S.uv==="y"?"year":""}"><div class="vin">${head}${cal}${rows}</div></div>
     <div class="vleg muted sm"><span><i class="lg ok"></i>genehmigt</span><span><i class="lg wish"></i>Wunsch (wird noch nicht im Schichtplan berücksichtigt)</span><span><i class="lg bl"></i>Urlaubssperre für diese Person</span><span><i class="lg cf"></i>Konflikt</span><span><i class="lg fer"></i>Schulferien</span>${ro?"":`<span>Leere Fläche antippen = Urlaub ab diesem Tag eintragen · Balken gedrückt halten und ziehen = verschieben</span>`}</div>`}
-    <div class="form" style="gap:22px;margin-top:16px">${konto}${regeln}</div>`;
+    <div class="form" style="gap:22px;margin-top:16px">${konto}${regeln}
+    ${ro?"":`<div class="sect"><h3>Urlaub aus Datei übernehmen</h3><p class="muted sm" style="margin:0">Übernimmt aus einer Schichtplan-Sicherung nur den Urlaub, das Urlaubskonto und die Urlaubsregeln, zum Beispiel aus der Testversion. Der Wochenplan und alles andere bleiben, wie sie sind. Urlaube, die es schon gibt, werden nicht doppelt angelegt.</p><div><label class="btn" for="vImp">Sicherungsdatei wählen …</label><input type="file" id="vImp" accept=".json,application/json" hidden></div></div>`}</div>`;
   S.vacMsg="";
   const v=$("#view");
   const un=$("#vUndo");if(un)un.onclick=()=>{const u=S.vacUndo;S.vacUndo=null;if(!u)return;const e=empById(u.emp),a=(e?.absences||[])[u.i];if(!a)return render();
@@ -2317,6 +2327,7 @@ function renderUrlaub(){
   const ul=$("#ulW");if(ul)ul.onchange=()=>{U.long=U.long||{members:[]};U.long.weeks=+ul.value||0;sv()};
   v.querySelectorAll("[data-ulm]").forEach(s=>s.onchange=()=>{U.long=U.long||{weeks:3,members:[]};U.long.members=tog(U.long.members,s.value,s.checked);sv()});
   if(S.uv==="l")bindVacList(v,y);
+  const vi=$("#vImp");if(vi)vi.onchange=async()=>{const f=vi.files[0];if(!f)return;try{const o=JSON.parse(await f.text());if(o.format!=="schichtplan-sicherung")throw new Error("Das ist keine Schichtplan-Sicherung.");S.vacMsg=mergeVacations(o)}catch(e){S.vacMsg="Übernehmen fehlgeschlagen: "+(e.message||e)}render();window.scrollTo(0,0)};
   collapsible(v,[]);
 }
 /* ---------- Liste: pro Mitarbeiter mehrere Zeilen ---------- */
@@ -2371,6 +2382,28 @@ function bindVacList(v,y){
     if(k==="from"&&d.from&&(!d.to||d.to<d.from)){const f=pdate(d.from);d.to=f.getDay()===1?dkey(addDays(f,5)):""}
     if(d.from&&d.to&&d.from<=d.to){const e=empById(id);e.absences=e.absences||[];const rec={from:d.from,to:d.to,kind:"Urlaub",status:d.status||"genehmigt"};if(d.note)rec.note=d.note;e.absences.push(rec);delete S.vacDraft[id];fin(e,rec,null,true)}
     else if(k!=="status")render()})});
+}
+/* Urlaub aus einer Sicherungsdatei übernehmen (z. B. aus der Testversion): nur Urlaub, Urlaubskonto und Urlaubsregeln */
+function mergeVacations(o){
+  const src=(o&&o.cfg&&o.cfg.employees)||[];if(!src.length)throw new Error("In der Datei sind keine Mitarbeiter.");
+  const norm=x=>String(x||"").trim().toLowerCase();
+  let added=0,updated=0,same=0,konto=0;const miss=[],touched=[];
+  src.forEach(se=>{
+    const e=empById(se.id)&&norm(empById(se.id).name)===norm(se.name)?empById(se.id):emps().find(x=>norm(x.name)===norm(se.name))||empById(se.id);
+    const sv=(se.absences||[]).filter(a=>a&&a.kind==="Urlaub"&&a.from&&a.to);
+    if(!e){if(sv.length)miss.push(se.name);return}
+    e.absences=e.absences||[];
+    sv.forEach(a=>{const ex=e.absences.find(x=>x.kind==="Urlaub"&&x.from===a.from&&x.to===a.to);
+      if(ex){const ch=(ex.status||"genehmigt")!==(a.status||"genehmigt")||(ex.note||"")!==(a.note||"");if(ch){const wasW=vacWish(ex);ex.status=a.status||"genehmigt";if(a.note)ex.note=a.note;else delete ex.note;updated++;if(wasW&&!vacWish(ex))touched.push([e,ex])}else same++}
+      else{const rec={from:a.from,to:a.to,kind:"Urlaub",status:a.status||"genehmigt"};if(a.note)rec.note=a.note;e.absences.push(rec);added++;touched.push([e,rec])}});
+    let k=false;["vacEntitle","vacCount","vacStart"].forEach(f=>{if(se[f]!=null&&se[f]!==""&&se[f]!==e[f]){e[f]=se[f];k=true}});
+    if(se.vacRest&&Object.keys(se.vacRest).length){e.vacRest={...(e.vacRest||{}),...se.vacRest};k=true}
+    if(k)konto++;
+  });
+  if(o.cfg.urlaub)S.cfg.urlaub=clean(o.cfg.urlaub);
+  saveCfg();
+  const ws=new Set();touched.forEach(([e,a])=>applyVac(e,a).forEach(w=>ws.add(w)));
+  return `Urlaub übernommen: ${added} neu${updated?`, ${updated} geändert`:""}${same?`, ${same} schon vorhanden`:""}${konto?`, Urlaubskonto bei ${konto} Mitarbeiter${konto>1?"n":""}`:""}${o.cfg.urlaub?", Urlaubsregeln":""}.`+(miss.length?` Nicht gefunden: ${miss.join(", ")}.`:"")+(ws.size?` Schichtplan neu geplant: ${[...ws].join(", ")}.`:"");
 }
 function issueHtml(list){return list.length?`<ul class="issues">${list.map(i=>`<li><span class="sev ${i.lv}"></span><div><b>${fmtR(i.from,i.to)}</b>${i.wish?` <span class="pill warn">Wunsch</span>`:""}<br>${esc(i.msg)}</div></li>`).join("")}</ul>`:`<p class="muted">Keine Konflikte.</p>`}
 function openVacIssues(){

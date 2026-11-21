@@ -2,7 +2,7 @@
 
 Übergabe-Dokument für weitere Arbeit mit Claude. **Im neuen Chat immer die aktuelle `index.html` (und bei Bedarf `sw.js`) mitgeben.**
 
-Stand: 20.11.2026 · Version 2.5
+Stand: 21.11.2026 · Version 2.7
 
 ## Worum es geht
 Wochen-Schichtplan für die Getränkeabteilung (Edeka Wehrmann): Leergut, Fläche, Einweg, Leitung. Nutzer: Dan (Abteilungsleiter, Admin), Marktleitung (nur ansehen). Gerät: vor allem iPad, als Web-App auf dem Home-Bildschirm, offline-fähig.
@@ -57,3 +57,5 @@ Wochen-Schichtplan für die Getränkeabteilung (Edeka Wehrmann): Leergut, Fläch
 - 2.3: PDF-Urlaubsplan: Sperren deutlich sichtbar. Eigene Zeilen „URLAUBSSPERRE“ (für alle) und „SPERRE <Namen>“ mit roter Umrandung, Schraffur und Beschriftung (Karwoche, Vor Pfingsten, Feiertagsname, Dezember-Sperre); in jeder betroffenen Mitarbeiterzeile rot schraffierter Hintergrund. `makePdf` hat `g.hatch()`. CACHE schichtplan-v24.
 - 2.4: Urlaub-Ansicht „Liste“ (`vacListHtml`/`bindVacList`): pro Mitarbeiter eine Karte mit beliebig vielen Zeilen (Von, Bis, Tage, Status, Notiz, löschen) für das gewählte Jahr, darunter immer eine leere Zeile (Entwurf in `S.vacDraft`, Status vorbelegt „genehmigt“); Von+Bis gefüllt = gespeichert, neue Leerzeile erscheint. Regelverstöße direkt unter der Zeile. `vacReplan(e,a,old,oldOk)` gibt bei Statuswechsel/Löschen die alten Tage frei. CACHE schichtplan-v25.
 - 2.5: Dialog „Urlaub eintragen“ mit mehreren Zeiträumen (Zeilen, „+ Weiterer Zeitraum“, Status/Notiz gelten für alle) und zwei Eingabearten: „Ganze Wochen“ (ab KW + Anzahl Wochen → Mo–Sa, Standard) oder „Einzelne Tage“. Neue Regel `cfg.urlaub.wholeWeeks` (Standard an): Hinweis, wenn ein Urlaub nicht Mo–Sa umfasst (`wholeWeeks()`, Feiertage am Rand zählen mit). Verschieben per Ziehen rastet bei Wochen-Urlaub in ganzen Wochen ein. Liste: Von = Montag setzt Bis auf Samstag. Hinweis-Knopf zeigt „Hinweise“ statt „Rücksprache“. Dialog breiter (`vwide`). CACHE schichtplan-v26.
+- 2.6: Urlaub-Reiter: „Urlaub aus Datei übernehmen“ (`mergeVacations`): liest eine Schichtplan-Sicherung und übernimmt nur Urlaubseinträge (Abgleich über id+Name, sonst Name; gleiche Von/Bis werden nicht doppelt angelegt, Status/Notiz aktualisiert), Urlaubskonto-Felder und `cfg.urlaub`. Genehmigter Urlaub nimmt die Person aus geplanten Schichten. Wochenplan und Rest bleiben unberührt. Anlass: Urlaub versehentlich in der Testversion eingetragen. CACHE schichtplan-v27.
+- 2.7: `shareFile` neu: am PC (kein Touch-Gerät) immer direkter Download (vorher öffnete Chrome unter Windows den Teilen-Dialog statt herunterzuladen); auf iPad/Handy weiter Teilen-Menü, und falls das nicht geht, ein Fenster „Datei ist fertig“ mit Knopf „Öffnen / Herunterladen“. Gilt für Wochenplan-PDF, Urlaubsplan-PDF und Sicherung. CACHE schichtplan-v28.
