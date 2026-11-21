@@ -494,6 +494,69 @@ h1{font-size:26px;font-weight:700}
 .ovr small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .ovr.on{border-style:solid}
 .mitem.exc{border-style:dashed;border-color:var(--warn)}
+
+/* Urlaubsplaner */
+.vplan{padding:10px 12px;overflow-x:auto}
+.vin{min-width:880px}
+.vrow,.vhead{display:grid;grid-template-columns:150px 1fr;align-items:stretch}
+.vname{display:flex;align-items:center;gap:6px;padding-right:8px;min-width:0;font-size:14px}
+.vname .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vname small{margin-left:auto;color:var(--muted);font-size:11px;white-space:nowrap}
+.vname small.neg,.neg{color:var(--bad)!important}
+.vtrack{position:relative;min-height:30px;border-bottom:1px solid var(--line)}
+.vtrack.clk{cursor:copy}
+.vhead .vtrack{min-height:0;border:0}
+.vmon{height:22px}.vmon span{position:absolute;top:0;bottom:2px;font-weight:700;font-size:13px;padding-left:4px;border-left:1px solid var(--line);white-space:nowrap;overflow:hidden}
+.vdays{height:16px}.vdays span{position:absolute;top:0;font-size:10px;padding-left:2px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.vdays span.so{color:var(--ink);opacity:.45}.vdays span.hol{color:var(--holiday);font-weight:700}
+.vkw{height:16px;border-bottom:1px solid var(--line)!important}.vkw span{position:absolute;top:0;font-size:10px;color:var(--muted);padding-left:2px;border-left:1px solid var(--line)}
+.vhead .vname.lbl{font-size:10px}
+.vcal .vtrack{min-height:18px}
+.vfer{position:absolute;top:3px;bottom:3px;background:var(--fer-soft);color:var(--fer);font-size:10px;padding-left:3px;border-radius:3px;overflow:hidden;white-space:nowrap}
+.vblk{position:absolute;top:3px;bottom:3px;border-radius:3px;background:repeating-linear-gradient(135deg,var(--bad) 0 3px,transparent 3px 6px);opacity:.75}
+.vblk.part{opacity:.35}
+.vgrp{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;padding:10px 0 2px}
+.vbg{position:absolute;top:0;bottom:0;background:var(--surface-2);pointer-events:none}.vbg.hol{background:var(--holiday-soft)}
+.vsep{position:absolute;top:0;bottom:0;width:1px;background:var(--line);pointer-events:none}
+.vtoday{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--accent);pointer-events:none;z-index:2}
+.vbl{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--bad) 22%,transparent) 0 3px,transparent 3px 7px);pointer-events:none}
+.vcf{position:absolute;bottom:0;height:4px;background:var(--bad);pointer-events:none;z-index:1}.vcf.warn{background:var(--warn)}
+.vbar{position:absolute;top:5px;bottom:7px;border:0;border-radius:4px;padding:0 4px;background:hsl(var(--h) 55% 46%);color:#fff;font-size:11px;font-weight:700;overflow:hidden;white-space:nowrap;text-align:left;z-index:3;min-width:4px}
+.vbar span{pointer-events:none}
+.vbar{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.vbar.lift{z-index:6;transform:translateY(-2px);box-shadow:0 6px 16px rgb(0 0 0 / .3);cursor:grabbing;overflow:visible;transition:left .06s}
+body.vdragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
+.vbar.wish{background:repeating-linear-gradient(135deg,hsl(var(--h) 60% 85%) 0 5px,hsl(var(--h) 60% 76%) 5px 10px);color:hsl(var(--h) 60% 22%);box-shadow:inset 0 0 0 1.5px hsl(var(--h) 55% 46%)}
+.vbar.bad{outline:2px solid var(--bad);outline-offset:1px}
+.vplan.year .vbar{padding:0;top:6px;bottom:8px}
+.vleg{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;align-items:center}
+.vleg span{display:inline-flex;align-items:center;gap:6px}
+.lg{display:inline-block;width:18px;height:10px;border-radius:3px}
+.lg.ok{background:hsl(200 55% 46%)}.lg.wish{background:repeating-linear-gradient(135deg,hsl(200 60% 85%) 0 4px,hsl(200 60% 76%) 4px 8px);box-shadow:inset 0 0 0 1.5px hsl(200 55% 46%)}
+.lg.bl{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--bad) 35%,transparent) 0 3px,transparent 3px 6px)}.lg.cf{background:var(--bad);height:4px}.lg.fer{background:var(--fer-soft)}
+.vrule{display:grid;gap:8px}
+.rcard{border:1px solid var(--line);border-radius:var(--r);padding:10px;display:grid;gap:8px}
+.rcard .rhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rcard .rhead input[type=text]{flex:1;min-width:140px;font-weight:600}
+.vk input[type=number]{width:72px}
+.vinfo{border:1px solid var(--bad);background:var(--bad-soft);border-radius:var(--r);padding:8px 10px;display:grid;gap:6px}
+.okn{color:var(--ok)}
+.overlay.vwide .modal{max-width:560px}
+.vranges{display:grid;gap:6px}
+.vrh,.vrr{display:grid;grid-template-columns:1fr 1fr 44px 40px;gap:8px;align-items:center}
+.vrr input[type=date]{width:100%}.vrr .mono{text-align:right}
+.vrr.badr input{border-color:var(--bad)}
+.vranges.wk .vrh,.vranges.wk .vrr{grid-template-columns:1.6fr 1fr 44px 40px}.vrr select{width:100%}.vrr .vrd{grid-column:1/-1;margin-top:-4px}
+.vlist{display:grid;gap:10px}
+.vlist .vgrp{padding-top:6px}
+.vlcard{background:var(--surface);border:1px solid var(--line);border-left:4px solid hsl(var(--h) 55% 46%);border-radius:var(--r);padding:10px 12px}
+.vlhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}.vlhead .dot{background:hsl(var(--h) 55% 50%)}
+.vlt{min-width:640px;width:100%}.vlt td{padding:4px 8px 4px 0;vertical-align:middle}.vlt input[type=text]{width:100%;min-width:120px}
+.vlt tr.vrbad td:first-child{box-shadow:inset 3px 0 0 var(--bad)}.vlt tr.vrwarn td:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+.vlt{table-layout:fixed}.vlt th:nth-child(1){width:34px}.vlt th:nth-child(2),.vlt th:nth-child(3){width:170px}.vlt th:nth-child(4){width:56px}.vlt th:nth-child(5){width:130px}.vlt th:nth-child(7){width:56px}.vlt input[type=date]{width:100%}
+.vlt tr.vlinfo td{border-bottom:1px solid var(--line);font-size:12px;padding-top:0}.vlinfo .err{color:var(--bad)}.vlinfo .warn{color:var(--warn)}
+.vlt tr.vdraft input{background:var(--surface-2)}
+@media print{.vplan{overflow:visible}}
 </style>
 
 </head>
@@ -579,7 +642,7 @@ function dayInfo(k){
 const S={cfg:null,weeks:{},week:mondayOf(addDays(new Date(),7)),tab:"plan",selEmp:null,ro:false,mode:"loading",lastPlan:null,role:null,me:null,members:[],done:{}};
 const pending={};const timers={};
 const LS="schichtplan-getraenke-v1";
-const APP_VERSION="2.0 · 04.11.2026";
+const APP_VERSION="2.5 · 20.11.2026";
 const TEAM="getraenke";
 const MAIL_DOMAIN="schichtplan.local";
 const FB_CONFIG=(window.FB_CONFIG&&window.FB_CONFIG.apiKey&&!/HIER/.test(window.FB_CONFIG.apiKey))?window.FB_CONFIG:null;
@@ -630,7 +693,7 @@ async function init(){
     S.mode="local";
     if(!S.cfg){try{const r=await fetch("startdaten.json");const o=await r.json();if(o&&o.cfg){S.cfg=o.cfg;S.weeks=o.weeks||{};saveLocal()}}catch(e){}}
     if(!S.cfg)S.cfg=blankCfg();
-    {const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover(),m4=migrateSpringer();if(m1||m2||m3||m4)saveLocal()}
+    {const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover(),m4=migrateSpringer(),m5=migrateUrlaub();if(m1||m2||m3||m4||m5)saveLocal()}
     showNotice(FB_CONFIG?"Die Firebase-Dateien (fb-app.js, fb-auth.js, fb-firestore.js) fehlen. Der Plan wird nur auf diesem Gerät gespeichert.":"Firebase ist noch nicht eingerichtet (firebase-config.js). Der Plan wird nur auf diesem Gerät gespeichert.");
     render();return;
   }
@@ -662,7 +725,7 @@ async function onUser(u){
     if(pending["plan/config"])return;
     const d=snap.exists?snap.data():null;
     if(d)S.cfg=clean(d);else if(!S.cfg)S.cfg=blankCfg();
-    if(d){const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover(),m4=migrateSpringer();if(m1||m2||m3||m4)saveCfg()}
+    if(d){const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover(),m4=migrateSpringer(),m5=migrateUrlaub();if(m1||m2||m3||m4||m5)saveCfg()}
     saveLocal();
     if(!d&&S.role==="admin")maybeSeed();
     if(gotWeeks)render();
@@ -688,7 +751,7 @@ async function maybeSeed(){
 }
 async function importBackup(o,silent){
   if(!o||!o.cfg)throw new Error("Keine gültige Sicherung");
-  S.cfg=clean(o.cfg);S.weeks=clean(o.weeks||{});S.done=clean(o.done||{});migrateFixed();migrateHours();migrateCover();migrateSpringer();saveLocal();
+  S.cfg=clean(o.cfg);S.weeks=clean(o.weeks||{});S.done=clean(o.done||{});migrateFixed();migrateHours();migrateCover();migrateSpringer();migrateUrlaub();saveLocal();
   if(S.mode==="cloud"&&fdb){
     const ops=[["plan/config",S.cfg],...Object.entries(S.weeks).map(([w,sh])=>["weeks/"+w,{shifts:sh,done:S.done[w]||{}}])];
     for(let i=0;i<ops.length;i+=400){const b=fdb.batch();ops.slice(i,i+400).forEach(([p,d])=>b.set(refFor(p),clean(d)));await track(b.commit())}
@@ -825,7 +888,7 @@ function availFor(e,k,noRot){const wd=pdate(k).getDay();let a=(e.vacAvail?.on&&f
   const kd=noRot?null:empRotKind(e,k);if(kd){const r=e.rot;f=Math.max(f,toMin(kd==="frueh"?r.eFrom:r.lFrom));t=Math.min(t,toMin(kd==="frueh"?r.eTo:r.lTo));if(t-f<SLOT)return null}
   const w=dayWindow(k);if(w.special){if(f<=w.nws)f=Math.min(f,toMin(w.open));f=Math.max(f,w.ws);t=Math.min(t,w.we);if(t-f<SLOT)return null}
   return {from:f,to:t}}
-function absentOn(e,k){if(e.dayMarks?.[k]==="seminar")return {kind:"Seminar"};if(S.cfg?.abbau?.[weekId(mondayOf(pdate(k)))]?.[e.id]==="all")return {kind:"Abbau"};if((e.freeDays||[]).includes(k))return {kind:"Frei"};return (e.absences||[]).find(a=>a.from&&a.to&&k>=a.from&&k<=a.to)}
+function absentOn(e,k){if(e.dayMarks?.[k]==="seminar")return {kind:"Seminar"};if(S.cfg?.abbau?.[weekId(mondayOf(pdate(k)))]?.[e.id]==="all")return {kind:"Abbau"};if((e.freeDays||[]).includes(k))return {kind:"Frei"};return (e.absences||[]).find(a=>a.from&&a.to&&k>=a.from&&k<=a.to&&a.status!=="wunsch")}
 const isLead=e=>e&&(e.role==="al"||e.role==="stv");
 function empRoles(e){const r=new Set([defTask(e)]);if(isLead(e)){r.add("leitung");r.add("flaeche")}if(e.canLeergut)r.add("leergut");if(e.canFlaeche)r.add("flaeche");if(e.canEinweg)r.add("einweg");return [...r]}
 const tasksOf=s=>(s.tasks&&s.tasks.length?s.tasks:[s.task||"leergut"]);
@@ -1178,9 +1241,10 @@ function renderChrome(){
   $("#prevW").onclick=()=>{S.week=addDays(S.week,-7);render()};
   $("#nextW").onclick=()=>{S.week=addDays(S.week,7);render()};
   $("#todayW").onclick=()=>{S.week=mondayOf(new Date());render()};
-  const tabs=[["plan","Wochenplan"],["team","Mitarbeiter"],["matrix","Vertretung"],["rules","Regeln & Feiertage"],["auto","Automatik"]];
+  const tabs=[["plan","Wochenplan"],["team","Mitarbeiter"],["matrix","Vertretung"],["urlaub","Urlaub"],["rules","Regeln & Feiertage"],["auto","Automatik"]];
   $("#tabs").innerHTML=tabs.map(([id,l])=>`<button class="tab" role="tab" aria-selected="${S.tab===id}" data-tab="${id}">${l}</button>`).join("");
   $("#tabs").querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;render()});
+  $("#weeknav").style.visibility=S.tab==="urlaub"?"hidden":"";
 }
 /* ---------- Zugänge (nur Admin) ---------- */
 function renderAccess(){
@@ -1351,7 +1415,7 @@ function render(){
   if(!S.cfg){$("#view").innerHTML=`<div class="empty">Plan wird geladen …</div>`;return}
   const y=window.scrollY;
   renderSync();
-  if(S.tab==="plan")renderPlan();else if(S.tab==="team")renderTeam();else if(S.tab==="access")renderAccess();else if(S.tab==="matrix")renderMatrix();else if(S.tab==="auto")renderAuto();else if(S.tab==="data")renderData();else renderRules();
+  if(S.tab==="plan")renderPlan();else if(S.tab==="team")renderTeam();else if(S.tab==="access")renderAccess();else if(S.tab==="matrix")renderMatrix();else if(S.tab==="auto")renderAuto();else if(S.tab==="urlaub")renderUrlaub();else if(S.tab==="data")renderData();else renderRules();
   window.scrollTo(0,y);
 }
 
@@ -1853,7 +1917,7 @@ function renderTeam(){
       <p class="muted" style="margin:0;font-size:13px">Die Automatik füllt zuerst Lücken mit dem eigentlichen Team des Bereichs, dann mit Leuten, die einspringen können. Danach verteilt sie die restlichen Wochenstunden dorthin, wo am wenigsten Leute da sind. „Max. Arbeitstage pro Woche“ gilt bei der Leitung auch für die automatische Wahl der freien Tage.</p></div>
     <div class="sect"><h3>Fähigkeiten</h3><div style="display:flex;gap:18px;flex-wrap:wrap">${skillsList().map(x=>`<label class="check"><input type="checkbox" data-skill="${x.id}" ${(e.skills||[]).includes(x.id)?"checked":""} ${dis}>${esc(x.label)}</label>`).join("")||`<span class="muted">Noch keine Fähigkeiten angelegt (unter „Regeln & Feiertage“).</span>`}</div></div>
     <div class="sect"><h3>Urlaub & Abwesenheiten</h3><div class="abslist">${(e.absences||[]).map((a,i)=>`<div class="absrow"><input type="date" data-ab="${i}" data-k="from" value="${a.from||""}" aria-label="Von" ${dis}><span class="muted">bis</span><input type="date" data-ab="${i}" data-k="to" value="${a.to||""}" aria-label="Bis" ${dis}>
-      <select data-ab="${i}" data-k="kind" aria-label="Art" ${dis}>${["Urlaub","Schule/Prüfung","Frei-Wunsch","Sonstiges"].map(k=>`<option ${a.kind===k?"selected":""}>${k}</option>`).join("")}</select><button class="btn ghost danger edit-only" data-abdel="${i}">Entfernen</button></div>`).join("")||`<p class="muted" style="margin:0">Nichts eingetragen.</p>`}
+      <select data-ab="${i}" data-k="kind" aria-label="Art" ${dis}>${["Urlaub","Schule/Prüfung","Frei-Wunsch","Sonstiges"].map(k=>`<option ${a.kind===k?"selected":""}>${k}</option>`).join("")}</select>${a.kind==="Urlaub"?`<select data-ab="${i}" data-k="status" aria-label="Status" ${dis}><option value="genehmigt" ${a.status!=="wunsch"?"selected":""}>genehmigt</option><option value="wunsch" ${a.status==="wunsch"?"selected":""}>Wunsch</option></select>`:""}<button class="btn ghost danger edit-only" data-abdel="${i}">Entfernen</button></div>`).join("")||`<p class="muted" style="margin:0">Nichts eingetragen.</p>`}
       <div><button class="btn edit-only" id="addAbs">+ Abwesenheit</button></div></div></div>
     <div class="sect"><h3>Notizen</h3><textarea id="e_notes" data-f="notes" placeholder="z. B. Berufsschule donnerstags, möchte lieber früh" ${dis}>${esc(e.notes)}</textarea></div>
     <div class="edit-only"><button class="btn danger" id="delEmp">${S.confirmDel===e.id?"Wirklich löschen? Schichten bleiben im Plan":"Mitarbeiter löschen"}</button></div>
@@ -1889,7 +1953,7 @@ function bindTeam(){
   v.querySelectorAll("[data-rotex]").forEach(x=>x.onchange=()=>{const d=+x.dataset.rotex;e.rot.except=(e.rot.except||[]).filter(y=>y!==d);if(x.checked)e.rot.except.push(d);saveCfg()});
   const rs=$("#rot_swap");if(rs)rs.onclick=()=>{const cur=weekRotKind(e,S.week);e.rot.refMon=dkey(S.week);e.rot.refEarly=cur!=="frueh";saveCfg();render()};
   v.querySelectorAll("[data-skill]").forEach(inp=>inp.addEventListener("change",()=>{const id=inp.dataset.skill;e.skills=(e.skills||[]).filter(x=>x!==id);if(inp.checked)e.skills.push(id);saveCfg()}));
-  v.querySelectorAll("[data-ab]").forEach(inp=>inp.addEventListener("change",()=>{e.absences[+inp.dataset.ab][inp.dataset.k]=inp.value;saveCfg()}));
+  v.querySelectorAll("[data-ab]").forEach(inp=>inp.addEventListener("change",()=>{e.absences[+inp.dataset.ab][inp.dataset.k]=inp.value;saveCfg();if(inp.dataset.k==="kind"||inp.dataset.k==="status")render()}));
   v.querySelectorAll("[data-abdel]").forEach(b=>b.onclick=()=>{e.absences.splice(+b.dataset.abdel,1);saveCfg();render()});
   const aa=$("#addAbs");if(aa)aa.onclick=()=>{e.absences=e.absences||[];const t=dkey(new Date());e.absences.push({from:t,to:t,kind:"Urlaub"});saveCfg();render()};
   const de=$("#delEmp");if(de)de.onclick=()=>{if(S.confirmDel!==e.id){S.confirmDel=e.id;render();return}S.cfg.employees=emps().filter(x=>x.id!==e.id);S.confirmDel=null;S.selEmp=null;saveCfg();render()};
@@ -1979,6 +2043,505 @@ function upcomingSpecial(){
   return out;
 }
 
+/* ---------- Urlaubsplaner ---------- */
+const MONL=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const MONS=["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
+const isVac=a=>a&&a.kind==="Urlaub";
+const vacWish=a=>a.status==="wunsch";
+const fmtD=k=>{const d=pdate(k);return d.getDate()+"."+(d.getMonth()+1)+"."+String(d.getFullYear()).slice(2)};
+const fmtR=(a,b)=>a===b?fmtD(a):`${shortD(a)}–${fmtD(b)}`;
+const vacList=e=>(e.absences||[]).filter(a=>isVac(a)&&a.from&&a.to&&a.from<=a.to);
+const vacState=()=>S.cfg?.settings?.state||"HE";
+function defaultUrlaub(){
+  const has=id=>!!empById(id);
+  const L=leadersL().map(e=>e.id);
+  const tim=empById("einw")||emps().find(e=>(e.fixed||[]).some(f=>f.coverLead));
+  const stud=["sch1","sch2","sch3","stud"].filter(has);
+  return {
+    groups:[{id:"g1",name:"Leitung & Einweg",members:[...L,...(tim?[tim.id]:[])],max:1,note:"es müssen immer 2 da sein"},
+            {id:"g2",name:"Schüler",members:stud,max:1,note:""}],
+    deps:[{id:"d1",ifAny:L,then:has("stud")?["stud"]:[]}],
+    blocks:[{id:"b1",type:"karwoche",who:"all"},{id:"b2",type:"vorPfingsten",who:"all"},{id:"b3",type:"dezember",who:"all"},{id:"b4",type:"feiertagswoche",who:L}],
+    long:{members:stud,weeks:3}
+  };
+}
+function migrateUrlaub(){
+  if(!S.cfg||S.cfg.migrUrlaub1||S.ro)return false;
+  if(!S.cfg.urlaub)S.cfg.urlaub=defaultUrlaub();
+  S.cfg.migrUrlaub1=true;return true;
+}
+const urlCfg=()=>S.cfg.urlaub||(S.cfg.urlaub=defaultUrlaub());
+const BLOCK_TYPES={karwoche:"Karwoche (Woche vor Ostern)",vorPfingsten:"Woche vor Pfingsten",dezember:"Dezember ab der 3. Woche",feiertagswoche:"Jede Woche mit Feiertag",custom:"Eigener Zeitraum"};
+function blockRanges(b,y){
+  const E=easter(y);
+  if(b.type==="karwoche")return [{from:dkey(addDays(E,-6)),to:dkey(addDays(E,-1)),label:"Karwoche"}];
+  if(b.type==="vorPfingsten")return [{from:dkey(addDays(E,43)),to:dkey(addDays(E,48)),label:"Woche vor Pfingsten"}];
+  if(b.type==="dezember")return [{from:dkey(mondayOf(new Date(y,11,15))),to:`${y}-12-31`,label:"Dezember-Sperre"}];
+  if(b.type==="feiertagswoche"){const H=holidays(y,vacState()),out=[],seen=new Set();
+    Object.keys(H).sort().forEach(k=>{const d=pdate(k);if(d.getDay()===0)return;const m=mondayOf(d),mk=dkey(m);if(seen.has(mk))return;seen.add(mk);out.push({from:mk,to:dkey(addDays(m,5)),label:"Feiertagswoche ("+H[k]+")"})});return out}
+  if(b.type==="custom"&&b.from&&b.to)return [{from:b.from,to:b.to,label:b.label||"Sperre"}];
+  return [];
+}
+const blockWho=b=>b.who==="all"||!Array.isArray(b.who)?emps().map(e=>e.id):b.who;
+const blockAll=b=>b.who==="all"||!Array.isArray(b.who);
+/* Sperren eines Jahres (inkl. Ränder ins Nachbarjahr) */
+function yearBlocks(y){const out=[];(urlCfg().blocks||[]).forEach(b=>[y-1,y,y+1].forEach(yy=>blockRanges(b,yy).forEach(r=>{if(r.to>=`${y}-01-01`&&r.from<=`${y}-12-31`&&!out.some(o=>o.b===b&&o.from===r.from))out.push({...r,b})})));return out.sort((a,b)=>a.from.localeCompare(b.from))}
+/* Urlaubstage zählen */
+function vacWD(e){const m=e.vacCount||"6";if(m==="5")return [1,2,3,4,5];if(m==="avail"){const d=[1,2,3,4,5,6].filter(w=>e.avail?.[w]?.on);return d.length?d:[1,2,3,4,5,6]}return [1,2,3,4,5,6]}
+const VAC_COUNT={"6":"Mo–Sa","5":"Mo–Fr",avail:"Arbeitstage"};
+function vacDays(e,from,to){if(!from||!to||from>to)return 0;const wd=vacWD(e);let n=0;for(let d=pdate(from);dkey(d)<=to;d=addDays(d,1)){if(wd.includes(d.getDay())&&!holidayName(dkey(d)))n++}return n}
+function vacTaken(e,y,wish){const a0=`${y}-01-01`,a1=`${y}-12-31`;return vacList(e).filter(a=>vacWish(a)===wish&&a.to>=a0&&a.from<=a1).reduce((s,a)=>s+vacDays(e,a.from<a0?a0:a.from,a.to>a1?a1:a.to),0)}
+function vacRest(e,y,depth=0){
+  const m=e.vacRest?.[y];if(m!=null&&m!=="")return +m;
+  if(depth>6||!e.vacEntitle)return 0;const p=y-1;
+  /* automatischer Übertrag erst ab dem Jahr, in dem der Anspruch eingetragen wurde */
+  if(!e.vacStart||p<e.vacStart)return 0;
+  return Math.max(0,(+e.vacEntitle||0)+vacRest(e,p,depth+1)-vacTaken(e,p,false));
+}
+const vacLeft=(e,y)=>(+e.vacEntitle||0)+vacRest(e,y)-vacTaken(e,y,false)-vacTaken(e,y,true);
+/* Prüfung aller Regeln für ein Jahr */
+/* ganze Wochen: beginnt montags und endet samstags (Feiertage am Rand zählen mit) */
+function wholeWeeks(a){const off=k=>{const d=pdate(k);return d.getDay()===0||!!holidayName(k)};
+  for(let d=addDays(pdate(a.from),-1);d.getDay()!==0;d=addDays(d,-1))if(!off(dkey(d)))return false;
+  for(let d=addDays(pdate(a.to),1);d.getDay()!==0;d=addDays(d,1))if(!off(dkey(d)))return false;
+  return true}
+function vacIssues(y){
+  const U=urlCfg(),E=emps(),out=[];const blocks=yearBlocks(y);
+  const runs={};let openIdx=-1;
+  const onDay=(e,k)=>vacList(e).find(a=>k>=a.from&&k<=a.to);
+  const hit=(sig,k,mk)=>{const r=runs[sig];if(r&&r.last===openIdx-1){r.to=k;r.last=openIdx;r.wish=r.wish||mk.wish}else{const n={...mk,from:k,to:k,last:openIdx};runs[sig]=n;out.push(n)}};
+  for(let d=new Date(y,0,1);d.getFullYear()===y;d=addDays(d,1)){
+    const k=dkey(d);if(d.getDay()===0||holidayName(k))continue;openIdx++;
+    const away={};E.forEach(e=>{const a=onDay(e,k);if(a)away[e.id]=a});
+    const wishOf=ids=>ids.some(id=>away[id]&&vacWish(away[id]));
+    (U.groups||[]).forEach(g=>{const ids=(g.members||[]).filter(id=>away[id]&&empById(id));if(ids.length>(+g.max||0)){
+      hit("g|"+g.id+"|"+ids.join(","),k,{lv:"err",type:"group",emps:ids,wish:wishOf(ids),
+        msg:`${ids.map(id=>empById(id).name).join(" und ")} gleichzeitig im Urlaub. In „${g.name}“ darf höchstens ${g.max} weg sein${g.note?` (${g.note})`:""}.`})}});
+    (U.deps||[]).forEach(dp=>{const a=(dp.ifAny||[]).filter(id=>away[id]&&empById(id)),b=(dp.then||[]).filter(id=>away[id]&&empById(id));if(a.length&&b.length){
+      hit("d|"+dp.id+"|"+a.join(",")+"|"+b.join(","),k,{lv:"err",type:"dep",emps:[...a,...b],wish:wishOf([...a,...b]),
+        msg:`${a.map(id=>empById(id).name).join(" und ")} im Urlaub, dann darf ${b.map(id=>empById(id).name).join(" und ")} keinen Urlaub haben.`})}});
+    blocks.filter(r=>k>=r.from&&k<=r.to).forEach(r=>blockWho(r.b).filter(id=>away[id]&&empById(id)).forEach(id=>{
+      hit("b|"+r.b.id+"|"+r.from+"|"+id,k,{lv:"err",type:"block",emps:[id],wish:wishOf([id]),
+        msg:r.b.type==="feiertagswoche"?`${empById(id).name}: Urlaub in der ${r.label}. Die Leitung soll in Feiertagswochen da sein.`:`${empById(id).name}: Urlaub in der Urlaubssperre „${r.label}“.`})}));
+  }
+  /* 3 Wochen am Stück (Sonntage/Feiertage verbinden zwei Einträge) */
+  const L=U.long||{};const lim=(+L.weeks||0)*7-2;
+  if(lim>0)(L.members||[]).map(empById).filter(Boolean).forEach(e=>{
+    const v=vacList(e).sort((a,b)=>a.from.localeCompare(b.from));const spans=[];
+    v.forEach(a=>{const s=spans[spans.length-1];if(s){let x=addDays(pdate(s.to),1);while(dkey(x)<a.from&&(x.getDay()===0||holidayName(dkey(x))))x=addDays(x,1);if(dkey(x)>=a.from){if(a.to>s.to)s.to=a.to;s.wish=s.wish||vacWish(a);return}}spans.push({from:a.from,to:a.to,wish:vacWish(a)})});
+    spans.filter(s=>s.to>=`${y}-01-01`&&s.from<=`${y}-12-31`).forEach(s=>{const len=Math.round((pdate(s.to)-pdate(s.from))/864e5)+1;if(len>=lim)
+      out.push({lv:"warn",type:"long",emps:[e.id],from:s.from,to:s.to,wish:s.wish,msg:`${e.name}: ${(Math.round(len/7*10)/10).toLocaleString("de-DE")} Wochen am Stück. Ab ${L.weeks} Wochen nur mit Rücksprache.`})});
+  });
+  if(U.wholeWeeks!==false)E.forEach(e=>vacList(e).filter(a=>a.to>=`${y}-01-01`&&a.from<=`${y}-12-31`&&!wholeWeeks(a)).forEach(a=>
+    out.push({lv:"warn",type:"week",emps:[e.id],from:a.from,to:a.to,wish:vacWish(a),msg:`${e.name}: ${fmtR(a.from,a.to)} sind keine ganzen Wochen (Mo–Sa). In der Regel nur ganze Wochen.`})));
+  out.forEach(o=>delete o.last);
+  return out.sort((a,b)=>a.from.localeCompare(b.from)||(a.lv==="err"?-1:1));
+}
+function vacIssuesFor(e,a){
+  const ys=[...new Set([+a.from.slice(0,4),+a.to.slice(0,4)])];
+  return ys.flatMap(vacIssues).filter(i=>i.emps.includes(e.id)&&i.to>=a.from&&i.from<=a.to);
+}
+/* Nach genehmigtem Urlaub: vorhandene Schichten an diesen Tagen entfernen und betroffene Wochen neu planen */
+function applyVac(e,a){
+  if(!a||vacWish(a))return [];
+  const today=dkey(new Date()),ws=new Set();
+  Object.keys(S.weeks||{}).forEach(w=>{const arr=S.weeks[w]||[];const hit=arr.filter(x=>x.empId===e.id&&x.date>=a.from&&x.date<=a.to&&x.date>=today);
+    if(hit.length){S.weeks[w]=arr.filter(x=>!hit.includes(x));saveWeek(w);ws.add(w)}});
+  [...ws].forEach(w=>replanWeek(w));
+  return [...ws].map(w=>"KW "+(+w.split("-W")[1]));
+}
+/* ---------- Ansicht ---------- */
+function vacRange(){const y=S.uy;if(S.uv==="y")return {from:`${y}-01-01`,to:`${y}-12-31`};const q=S.uq||0;const a=new Date(y,q*3,1),b=new Date(y,q*3+3,0);return {from:dkey(a),to:dkey(b)}}
+function vacGroups(){const U=urlCfg(),seen=new Set(),out=[];
+  (U.groups||[]).forEach(g=>{const m=(g.members||[]).map(empById).filter(e=>e&&!seen.has(e.id));m.forEach(e=>seen.add(e.id));if(m.length)out.push({name:g.name,emps:m})});
+  const rest=emps().filter(e=>!seen.has(e.id));if(rest.length)out.push({name:"Weitere",emps:rest});return out}
+/* Nach Verschieben: alte Tage freigeben, neue Tage belegen, betroffene Wochen neu planen */
+function vacReplan(e,a,old,oldOk){
+  const today=dkey(new Date()),set=new Set();
+  if(oldOk||(oldOk==null&&!vacWish(a)))for(let d=pdate(old.from);dkey(d)<=old.to;d=addDays(d,1)){const k=dkey(d);if(k>=today){const w=weekId(mondayOf(d));if((S.weeks[w]||[]).length)set.add(w)}}
+  if(!vacWish(a)){
+    Object.keys(S.weeks||{}).forEach(w=>{const arr=S.weeks[w]||[];const hit=arr.filter(x=>x.empId===e.id&&x.date>=a.from&&x.date<=a.to&&x.date>=today);if(hit.length){S.weeks[w]=arr.filter(x=>!hit.includes(x));saveWeek(w);set.add(w)}});
+  }
+  [...set].sort().forEach(w=>replanWeek(w));
+  return [...set].sort().map(w=>"KW "+(+w.split("-W")[1]));
+}
+/* Gedrückt halten und ziehen: Urlaub tageweise verschieben */
+function vacDrag(b,n,R){
+  let timer=null,sx=0,sy=0,drag=false,delta=0,w=0,left0=0,pid=null;
+  const [id,ix]=b.dataset.vac.split("|");const e=empById(id),a=(e.absences||[])[+ix];if(!a)return;
+  const lab=b.querySelector("span");const lab0=lab?lab.textContent:"";const wk=pdate(a.from).getDay()===1&&wholeWeeks(a);
+  const cancel=()=>{clearTimeout(timer);timer=null};
+  const end=ev=>{cancel();document.removeEventListener("pointermove",move);document.removeEventListener("pointerup",end);document.removeEventListener("pointercancel",end);document.removeEventListener("touchmove",block,{passive:false});
+    if(!drag)return;drag=false;b.classList.remove("lift");document.body.classList.remove("vdragging");b.dataset.dragged="1";setTimeout(()=>{delete b.dataset.dragged},400);
+    if(!delta||ev.type==="pointercancel"){b.style.left=left0+"%";if(lab)lab.textContent=lab0;return}
+    const old={from:a.from,to:a.to};a.from=dkey(addDays(pdate(a.from),delta));a.to=dkey(addDays(pdate(a.to),delta));
+    saveCfg();const iss=vacIssuesFor(e,a);const ws=vacReplan(e,a,old);
+    S.vacUndo={emp:e.id,i:+ix,from:old.from,to:old.to};S._keepUndo=true;
+    S.vacMsg=`${e.name}: Urlaub verschoben auf ${fmtR(a.from,a.to)} (${vacDays(e,a.from,a.to)} Tage).`+(iss.length?` Info: ${iss.map(i=>i.msg).join(" ")}`:"")+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");
+    render()};
+  const block=ev=>{if(drag)ev.preventDefault()};
+  const move=ev=>{if(ev.pointerId!==pid)return;
+    if(!drag){if(Math.hypot(ev.clientX-sx,ev.clientY-sy)>8)end(ev);return}
+    ev.preventDefault();const raw=(ev.clientX-sx)/(w/n);const d=wk?Math.round(raw/7)*7:Math.round(raw);if(d===delta)return;delta=d;
+    b.style.left=(left0+delta/n*100)+"%";
+    const f=dkey(addDays(pdate(a.from),delta)),t=dkey(addDays(pdate(a.to),delta));if(lab)lab.textContent=fmtR(f,t);b.title=fmtR(f,t)};
+  b.addEventListener("contextmenu",ev=>ev.preventDefault());
+  b.addEventListener("pointerdown",ev=>{if(ev.button>0)return;pid=ev.pointerId;sx=ev.clientX;sy=ev.clientY;delta=0;
+    const tr=b.parentElement.getBoundingClientRect();w=tr.width;left0=parseFloat(b.style.left);
+    document.addEventListener("pointermove",move);document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);document.addEventListener("touchmove",block,{passive:false});
+    timer=setTimeout(()=>{timer=null;drag=true;b.classList.add("lift");document.body.classList.add("vdragging");if(lab&&!lab.textContent)lab.textContent=fmtR(a.from,a.to);try{navigator.vibrate&&navigator.vibrate(15)}catch(x){}},380)});
+}
+function renderUrlaub(){
+  if(S.uy==null){const t=new Date();S.uy=t.getFullYear();S.uq=Math.floor(t.getMonth()/3);S.uv="q"}
+  const y=S.uy,U=urlCfg(),R=vacRange(),n=Math.round((pdate(R.to)-pdate(R.from))/864e5)+1;
+  const idx=k=>Math.round((pdate(k)-pdate(R.from))/864e5);
+  const pct=v=>(v/n*100).toFixed(3)+"%";
+  const iss=vacIssues(y);S.vacIss=iss;const errs=iss.filter(i=>i.lv==="err").length,warns=iss.length-errs;
+  const blocks=yearBlocks(y);const H=holidays(y,vacState());const ro=S.ro;
+  const clip=(a,b)=>{const f=a<R.from?R.from:a,t=b>R.to?R.to:b;return f>t?null:{l:idx(f),w:idx(t)-idx(f)+1}};
+  /* Kopf */
+  let head=`<div class="vhead"><div class="vname"></div><div class="vtrack vmon">`;
+  for(let m=0;m<12;m++){const a=dkey(new Date(y,m,1)),b=dkey(new Date(y,m+1,0));const c=clip(a,b);if(c)head+=`<span style="left:${pct(c.l)};width:${pct(c.w)}">${S.uv==="y"?MONS[m]:MONL[m]+" "+y}</span>`}
+  head+=`</div></div>`;
+  if(S.uv!=="y"){head+=`<div class="vhead"><div class="vname"></div><div class="vtrack vdays">`;
+    for(let i=0;i<n;i++){const d=addDays(pdate(R.from),i),k=dkey(d);if(d.getDay()===1||H[k])head+=`<span class="${H[k]?"hol":""}" style="left:${pct(i)}" title="${DNL[d.getDay()]} ${fmtD(k)}${H[k]?" · "+H[k]:""}">${H[k]?"★":shortD(k)}</span>`}
+    head+=`</div></div>`}
+  head+=`<div class="vhead"><div class="vname lbl">KW</div><div class="vtrack vkw">`;
+  for(let d=mondayOf(pdate(R.from));dkey(d)<=R.to;d=addDays(d,7)){const c=clip(dkey(d),dkey(addDays(d,6)));if(c){const w=isoWeek(d).w;if(S.uv!=="y"||w%2===1)head+=`<span style="left:${pct(c.l)};width:${pct(c.w)}">${w}</span>`}}
+  head+=`</div></div>`;
+  /* Kalenderzeile: Schulferien + Sperren */
+  const fer=(S.cfg.vacations||[]).filter(v=>v.from&&v.to);
+  let cal=`<div class="vrow vcal"><div class="vname"><span class="lbl">Schulferien</span></div><div class="vtrack">${fer.map(v=>{const c=clip(v.from,v.to);return c?`<span class="vfer" style="left:${pct(c.l)};width:${pct(c.w)}" title="${esc(v.name||"Ferien")} ${fmtR(v.from,v.to)}">${esc(v.name||"")}</span>`:""}).join("")}</div></div>`;
+  cal+=`<div class="vrow vcal"><div class="vname"><span class="lbl">Sperren</span></div><div class="vtrack">${blocks.map(r=>{const c=clip(r.from,r.to);return c?`<span class="vblk ${blockAll(r.b)?"":"part"}" style="left:${pct(c.l)};width:${pct(c.w)}" title="${esc(r.label)} ${fmtR(r.from,r.to)}${blockAll(r.b)?" · alle":" · "+blockWho(r.b).map(id=>empById(id)?.name).filter(Boolean).join(", ")}"></span>`:""}).join("")}</div></div>`;
+  /* Hintergrund (Sonntage/Feiertage/heute) */
+  let bg="";if(S.uv!=="y")for(let i=0;i<n;i++){const d=addDays(pdate(R.from),i),k=dkey(d);if(d.getDay()===0||H[k])bg+=`<i class="vbg ${H[k]?"hol":""}" style="left:${pct(i)};width:${pct(1)}"></i>`}
+  else for(let m=1;m<12;m++)bg+=`<i class="vsep" style="left:${pct(idx(dkey(new Date(y,m,1))))}"></i>`;
+  const td=dkey(new Date());if(td>=R.from&&td<=R.to)bg+=`<i class="vtoday" style="left:${pct(idx(td)+.5)}"></i>`;
+  /* Zeilen */
+  let rows="";
+  vacGroups().forEach(g=>{
+    rows+=`<div class="vgrp">${esc(g.name)}</div>`;
+    g.emps.forEach(e=>{
+      const mine=blocks.filter(r=>blockWho(r.b).includes(e.id));
+      const conf=iss.filter(i=>i.emps.includes(e.id));
+      let t=bg+mine.map(r=>{const c=clip(r.from,r.to);return c?`<i class="vbl" style="left:${pct(c.l)};width:${pct(c.w)}"></i>`:""}).join("");
+      t+=conf.map(i=>{const c=clip(i.from,i.to);return c?`<i class="vcf ${i.lv}" style="left:${pct(c.l)};width:${pct(c.w)}"></i>`:""}).join("");
+      t+=vacList(e).map(a=>{const c=clip(a.from,a.to);if(!c)return "";const bad=conf.some(i=>i.lv==="err"&&i.to>=a.from&&i.from<=a.to);const dd=vacDays(e,a.from,a.to);
+        return `<button class="vbar ${vacWish(a)?"wish":""} ${bad?"bad":""}" style="--h:${e.hue};left:${pct(c.l)};width:${pct(c.w)}" data-vac="${e.id}|${(e.absences||[]).indexOf(a)}" title="${esc(e.name)}: ${fmtR(a.from,a.to)} · ${dd} Tage · ${vacWish(a)?"Wunsch":"genehmigt"}${a.note?" · "+esc(a.note):""}" ${ro?"tabindex=-1":""}><span>${S.uv==="y"?"":fmtR(a.from,a.to)}</span></button>`}).join("");
+      const left=vacLeft(e,y),ent=+e.vacEntitle||0;
+      rows+=`<div class="vrow"><div class="vname"><span class="dot" style="--h:${e.hue}"></span><span class="nm">${esc(e.name)}</span><small class="mono ${ent&&left<0?"neg":""}">${ent?`${left} übrig`:`${vacTaken(e,y,false)+vacTaken(e,y,true)} Tg.`}</small></div><div class="vtrack ${ro?"":"clk"}" data-vt="${e.id}">${t}</div></div>`;
+    });
+  });
+  /* Urlaubskonto */
+  const dis=ro?"disabled":"";
+  const konto=`<div class="sect"><h3>Urlaubskonto ${y}</h3>
+    <p class="muted sm" style="margin:0">Gezählt werden die eingestellten Wochentage ohne Feiertage. Den Rest aus dem Vorjahr trägst du im ersten Jahr selbst ein. Danach übernimmt die App, was am Jahresende übrig ist (nur genehmigter Urlaub zählt).</p>
+    <div class="ahwrap"><table class="aht vk"><thead><tr><th>Mitarbeiter</th><th>Zählt</th><th>Anspruch / Jahr</th><th>Rest ${y-1}</th><th>Genehmigt</th><th>Wunsch</th><th>Übrig</th></tr></thead><tbody>
+    ${emps().map(e=>{const ap=vacTaken(e,y,false),wi=vacTaken(e,y,true),rest=vacRest(e,y),man=e.vacRest?.[y]!=null&&e.vacRest[y]!=="";const left=vacLeft(e,y);
+      return `<tr><td><span class="dot" style="--h:${e.hue}"></span> ${esc(e.name)}</td>
+      <td><select data-vc="${e.id}" aria-label="Urlaubstage zählen für ${esc(e.name)}" ${dis}>${Object.entries(VAC_COUNT).map(([k,l])=>`<option value="${k}" ${(e.vacCount||"6")===k?"selected":""}>${l}</option>`).join("")}</select></td>
+      <td><input type="number" min="0" max="60" step="0.5" data-ve="${e.id}" value="${e.vacEntitle??""}" placeholder="–" aria-label="Anspruch ${esc(e.name)}" ${dis}></td>
+      <td><input type="number" min="0" max="60" step="0.5" data-vr="${e.id}" value="${man?e.vacRest[y]:""}" placeholder="${rest}" aria-label="Rest Vorjahr ${esc(e.name)}" ${dis}></td>
+      <td class="mono">${ap}</td><td class="mono">${wi||"–"}</td><td class="mono ${e.vacEntitle&&left<0?"neg":""}"><b>${e.vacEntitle?left:"–"}</b></td></tr>`}).join("")}
+    </tbody></table></div></div>`;
+  /* Regeln */
+  const chips=(arr,attr)=>`<div class="daypick">${emps().map(e=>`<label><input type="checkbox" ${attr} value="${e.id}" ${(arr||[]).includes(e.id)?"checked":""} ${dis}><span>${esc(e.name)}</span></label>`).join("")}</div>`;
+  const regeln=`<div class="sect"><h3>Urlaubsregeln</h3>
+    <p class="muted sm" style="margin:0">Verstöße erscheinen als Info und rot im Plan. Gespeichert wird der Urlaub trotzdem.</p>
+    <div class="vrule"><b>Nicht gleichzeitig weg</b>
+    ${(U.groups||[]).map((g,i)=>`<div class="rcard"><div class="rhead"><input type="text" data-ug="${i}" data-k="name" value="${esc(g.name)}" aria-label="Name der Gruppe" ${dis}><label class="muted sm">höchstens <input type="number" min="0" max="9" data-ug="${i}" data-k="max" value="${g.max}" style="width:56px" ${dis}> gleichzeitig weg</label><button class="btn ghost danger edit-only" data-ugdel="${i}">Entfernen</button></div>${chips(g.members,`data-ugm="${i}"`)}</div>`).join("")}
+    <div><button class="btn edit-only" id="ugAdd">+ Gruppe</button></div></div>
+    <div class="vrule"><b>Abhängigkeit</b>
+    ${(U.deps||[]).map((d,i)=>`<div class="rcard"><div class="rhead"><span class="muted sm">Wenn einer davon im Urlaub ist …</span><button class="btn ghost danger edit-only" data-uddel="${i}">Entfernen</button></div>${chips(d.ifAny,`data-udi="${i}"`)}<span class="muted sm">… darf keinen Urlaub haben:</span>${chips(d.then,`data-udt="${i}"`)}</div>`).join("")}
+    <div><button class="btn edit-only" id="udAdd">+ Abhängigkeit</button></div></div>
+    <div class="vrule"><b>Urlaubssperren</b>
+    ${(U.blocks||[]).map((b,i)=>{const rs=blockRanges(b,y);return `<div class="rcard"><div class="rhead"><select data-ub="${i}" data-k="type" aria-label="Art der Sperre" ${dis}>${Object.entries(BLOCK_TYPES).map(([k,l])=>`<option value="${k}" ${b.type===k?"selected":""}>${l}</option>`).join("")}</select>
+      ${b.type==="custom"?`<input type="text" data-ub="${i}" data-k="label" value="${esc(b.label||"")}" placeholder="Bezeichnung" ${dis}><input type="date" data-ub="${i}" data-k="from" value="${b.from||""}" ${dis}><input type="date" data-ub="${i}" data-k="to" value="${b.to||""}" ${dis}>`:""}
+      <select data-ub="${i}" data-k="whoMode" aria-label="Gilt für" ${dis}><option value="all" ${blockAll(b)?"selected":""}>gilt für alle</option><option value="sel" ${blockAll(b)?"":"selected"}>gilt für Auswahl</option></select>
+      <button class="btn ghost danger edit-only" data-ubdel="${i}">Entfernen</button></div>
+      <span class="muted sm">${y}: ${rs.length?rs.length>3?rs.length+" Wochen ("+rs.slice(0,3).map(r=>fmtR(r.from,r.to)).join(", ")+" …)":rs.map(r=>fmtR(r.from,r.to)).join(", "):"–"}</span>
+      ${blockAll(b)?"":chips(b.who,`data-ubw="${i}"`)}</div>`}).join("")}
+    <div><button class="btn edit-only" id="ubAdd">+ Sperre</button></div></div>
+    <div class="vrule"><b>Ganze Wochen</b><div class="rcard"><label class="muted sm"><input type="checkbox" id="uWW" ${U.wholeWeeks!==false?"checked":""} ${dis}> Hinweis, wenn ein Urlaub nicht aus ganzen Wochen (Mo–Sa, 1 Woche = 6 Urlaubstage) besteht</label></div></div>
+    <div class="vrule"><b>Langer Urlaub</b><div class="rcard"><label class="muted sm">Ab <input type="number" min="0" max="8" id="ulW" value="${U.long?.weeks??3}" style="width:56px" ${dis}> Wochen am Stück nur mit Rücksprache (0 = aus), gilt für:</label>${chips(U.long?.members,`data-ulm="1"`)}</div></div>
+  </div>`;
+  $("#view").innerHTML=`<div class="ptop">
+      <div class="weeknav"><button class="btn" id="uyP" aria-label="Voriges Jahr">‹</button><div class="kw">${y}</div><button class="btn" id="uyN" aria-label="Nächstes Jahr">›</button></div>
+      <div class="seg" role="tablist" aria-label="Zeitraum"><button class="segb" role="tab" aria-selected="${S.uv==="q"}" data-uv="q">Quartal</button><button class="segb" role="tab" aria-selected="${S.uv==="y"}" data-uv="y">Jahr</button><button class="segb" role="tab" aria-selected="${S.uv==="l"}" data-uv="l">Liste</button></div>
+      ${S.uv==="q"?`<div class="seg" role="tablist" aria-label="Quartal">${[0,1,2,3].map(q=>`<button class="segb" role="tab" aria-selected="${S.uq===q}" data-uq="${q}">${MONS[q*3]}–${MONS[q*3+2]}</button>`).join("")}</div>`:""}
+      <span class="spacer"></span>
+      <button class="issuebtn ${errs?"bad":warns?"warn":"ok"}" id="vIss" aria-haspopup="dialog"><span class="sdot"></span>${errs?`${errs} Konflikt${errs>1?"e":""}`:"Keine Konflikte"}${warns?` · ${warns} Hinweis${warns>1?"e":""}`:""}</button>
+      <button class="btn primary edit-only" id="vAdd">+ Urlaub eintragen</button>
+      <button class="btn" id="vPdf">PDF (A3 quer)</button>
+    </div>
+    ${S.vacMsg?`<p class="freemsg">${esc(S.vacMsg)}${S.vacUndo&&!ro?` <button class="btn ghost" id="vUndo">Rückgängig</button>`:""}</p>`:""}
+    ${S.uv==="l"?vacListHtml(y,iss):`<div class="panel vplan ${S.uv==="y"?"year":""}"><div class="vin">${head}${cal}${rows}</div></div>
+    <div class="vleg muted sm"><span><i class="lg ok"></i>genehmigt</span><span><i class="lg wish"></i>Wunsch (wird noch nicht im Schichtplan berücksichtigt)</span><span><i class="lg bl"></i>Urlaubssperre für diese Person</span><span><i class="lg cf"></i>Konflikt</span><span><i class="lg fer"></i>Schulferien</span>${ro?"":`<span>Leere Fläche antippen = Urlaub ab diesem Tag eintragen · Balken gedrückt halten und ziehen = verschieben</span>`}</div>`}
+    <div class="form" style="gap:22px;margin-top:16px">${konto}${regeln}</div>`;
+  S.vacMsg="";
+  const v=$("#view");
+  const un=$("#vUndo");if(un)un.onclick=()=>{const u=S.vacUndo;S.vacUndo=null;if(!u)return;const e=empById(u.emp),a=(e?.absences||[])[u.i];if(!a)return render();
+    const cur={from:a.from,to:a.to};a.from=u.from;a.to=u.to;saveCfg();const ws=vacReplan(e,a,cur);S.vacMsg=`${e.name}: zurück auf ${fmtR(a.from,a.to)}.`+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");render()};
+  S.vacUndo=S._keepUndo?S.vacUndo:null;S._keepUndo=false;
+  $("#uyP").onclick=()=>{S.uy--;render()};$("#uyN").onclick=()=>{S.uy++;render()};
+  v.querySelectorAll("[data-uv]").forEach(b=>b.onclick=()=>{S.uv=b.dataset.uv;render()});
+  v.querySelectorAll("[data-uq]").forEach(b=>b.onclick=()=>{S.uq=+b.dataset.uq;render()});
+  $("#vIss").onclick=openVacIssues;
+  $("#vPdf").onclick=()=>exportVacPdf($("#vPdf"));
+  const va=$("#vAdd");if(va)va.onclick=()=>openVac(null,-1,null);
+  if(!ro){
+    v.querySelectorAll("[data-vac]").forEach(b=>{b.onclick=ev=>{ev.stopPropagation();if(b.dataset.dragged){delete b.dataset.dragged;return}const [id,i]=b.dataset.vac.split("|");openVac(empById(id),+i)};vacDrag(b,n,R)});
+    v.querySelectorAll("[data-vt]").forEach(t=>t.onclick=ev=>{const r=t.getBoundingClientRect();const i=Math.max(0,Math.min(n-1,Math.floor((ev.clientX-r.left)/r.width*n)));openVac(empById(t.dataset.vt),-1,dkey(addDays(pdate(R.from),i)))});
+  }
+  const E=id=>empById(id);
+  v.querySelectorAll("[data-vc]").forEach(s=>s.onchange=()=>{E(s.dataset.vc).vacCount=s.value;saveCfg();render()});
+  v.querySelectorAll("[data-ve]").forEach(s=>s.onchange=()=>{const e=E(s.dataset.ve);e.vacEntitle=s.value===""?null:+s.value;if(e.vacEntitle&&(!e.vacStart||y<e.vacStart))e.vacStart=y;saveCfg();render()});
+  v.querySelectorAll("[data-vr]").forEach(s=>s.onchange=()=>{const e=E(s.dataset.vr);e.vacRest=e.vacRest||{};if(s.value==="")delete e.vacRest[y];else e.vacRest[y]=+s.value;saveCfg();render()});
+  const tog=(arr,id,on)=>on?[...new Set([...(arr||[]),id])]:(arr||[]).filter(x=>x!==id);
+  const sv=()=>{saveCfg();render()};
+  v.querySelectorAll("[data-ug]").forEach(s=>s.onchange=()=>{const g=U.groups[+s.dataset.ug];g[s.dataset.k]=s.dataset.k==="max"?+s.value:s.value;sv()});
+  v.querySelectorAll("[data-ugm]").forEach(s=>s.onchange=()=>{const g=U.groups[+s.dataset.ugm];g.members=tog(g.members,s.value,s.checked);sv()});
+  v.querySelectorAll("[data-ugdel]").forEach(b=>b.onclick=()=>{U.groups.splice(+b.dataset.ugdel,1);sv()});
+  const ga=$("#ugAdd");if(ga)ga.onclick=()=>{U.groups=U.groups||[];U.groups.push({id:uid(),name:"Neue Gruppe",members:[],max:1,note:""});sv()};
+  v.querySelectorAll("[data-udi]").forEach(s=>s.onchange=()=>{const d=U.deps[+s.dataset.udi];d.ifAny=tog(d.ifAny,s.value,s.checked);sv()});
+  v.querySelectorAll("[data-udt]").forEach(s=>s.onchange=()=>{const d=U.deps[+s.dataset.udt];d.then=tog(d.then,s.value,s.checked);sv()});
+  v.querySelectorAll("[data-uddel]").forEach(b=>b.onclick=()=>{U.deps.splice(+b.dataset.uddel,1);sv()});
+  const da=$("#udAdd");if(da)da.onclick=()=>{U.deps=U.deps||[];U.deps.push({id:uid(),ifAny:[],then:[]});sv()};
+  v.querySelectorAll("[data-ub]").forEach(s=>s.onchange=()=>{const b=U.blocks[+s.dataset.ub];const k=s.dataset.k;
+    if(k==="whoMode")b.who=s.value==="all"?"all":leadersL().map(e=>e.id);else b[k]=s.value;
+    if(k==="type"&&s.value==="custom"&&!b.from){b.from=`${y}-08-01`;b.to=`${y}-08-15`}sv()});
+  v.querySelectorAll("[data-ubw]").forEach(s=>s.onchange=()=>{const b=U.blocks[+s.dataset.ubw];b.who=tog(blockWho(b),s.value,s.checked);sv()});
+  v.querySelectorAll("[data-ubdel]").forEach(b=>b.onclick=()=>{U.blocks.splice(+b.dataset.ubdel,1);sv()});
+  const ba=$("#ubAdd");if(ba)ba.onclick=()=>{U.blocks=U.blocks||[];U.blocks.push({id:uid(),type:"custom",label:"Sperre",from:`${y}-08-01`,to:`${y}-08-15`,who:"all"});sv()};
+  const ww=$("#uWW");if(ww)ww.onchange=()=>{U.wholeWeeks=ww.checked;sv()};
+  const ul=$("#ulW");if(ul)ul.onchange=()=>{U.long=U.long||{members:[]};U.long.weeks=+ul.value||0;sv()};
+  v.querySelectorAll("[data-ulm]").forEach(s=>s.onchange=()=>{U.long=U.long||{weeks:3,members:[]};U.long.members=tog(U.long.members,s.value,s.checked);sv()});
+  if(S.uv==="l")bindVacList(v,y);
+  collapsible(v,[]);
+}
+/* ---------- Liste: pro Mitarbeiter mehrere Zeilen ---------- */
+function vacListHtml(y,iss){
+  const ro=S.ro,dis=ro?"disabled":"";S.vacDraft=S.vacDraft||{};
+  const a0=`${y}-01-01`,a1=`${y}-12-31`;
+  const stSel=(attr,val)=>`<select ${attr} aria-label="Status" ${dis}><option value="genehmigt" ${val!=="wunsch"?"selected":""}>genehmigt</option><option value="wunsch" ${val==="wunsch"?"selected":""}>Wunsch</option></select>`;
+  return `<div class="vlist">${vacGroups().map(g=>`<div class="vgrp">${esc(g.name)}</div>`+g.emps.map(e=>{
+    const list=(e.absences||[]).map((a,i)=>({a,i})).filter(({a})=>isVac(a)&&a.from&&a.to&&a.to>=a0&&a.from<=a1).sort((x,z)=>x.a.from.localeCompare(z.a.from));
+    const ent=+e.vacEntitle||0,left=vacLeft(e,y),sum=vacTaken(e,y,false)+vacTaken(e,y,true);
+    const dr=S.vacDraft[e.id]||{};
+    const rows=list.map(({a,i},n)=>{const is=iss.filter(x=>x.emps.includes(e.id)&&x.to>=a.from&&x.from<=a.to);const bad=is.some(x=>x.lv==="err");
+      return `<tr class="${is.length?(bad?"vrbad":"vrwarn"):""}"><td class="mono muted">${n+1}</td>
+        <td><input type="date" data-lv="${e.id}|${i}" data-k="from" value="${a.from}" aria-label="Von" ${dis}></td>
+        <td><input type="date" data-lv="${e.id}|${i}" data-k="to" value="${a.to}" min="${a.from}" aria-label="Bis" ${dis}></td>
+        <td class="mono">${vacDays(e,a.from,a.to)}</td><td>${stSel(`data-lv="${e.id}|${i}" data-k="status"`,a.status)}</td>
+        <td><input type="text" data-lv="${e.id}|${i}" data-k="note" value="${esc(a.note||"")}" placeholder="Notiz" aria-label="Notiz" ${dis}></td>
+        <td>${ro?"":`<button class="btn ghost danger" data-lvdel="${e.id}|${i}" aria-label="Zeile löschen">✕</button>`}</td></tr>
+        ${is.length?`<tr class="vlinfo"><td></td><td colspan="6">${is.map(x=>`<span class="${x.lv}">● ${esc(x.msg)}</span>`).join("<br>")}</td></tr>`:""}`}).join("");
+    const draft=ro?"":`<tr class="vdraft"><td class="mono muted">${list.length+1}</td>
+        <td><input type="date" data-ld="${e.id}" data-k="from" value="${dr.from||""}" aria-label="Neuer Urlaub von"></td>
+        <td><input type="date" data-ld="${e.id}" data-k="to" value="${dr.to||""}" min="${dr.from||""}" aria-label="Neuer Urlaub bis"></td>
+        <td class="mono muted">${dr.from&&dr.to&&dr.from<=dr.to?vacDays(e,dr.from,dr.to):"–"}</td><td>${stSel(`data-ld="${e.id}" data-k="status"`,dr.status||"genehmigt")}</td>
+        <td><input type="text" data-ld="${e.id}" data-k="note" value="${esc(dr.note||"")}" placeholder="neue Zeile" aria-label="Notiz"></td><td></td></tr>`;
+    return `<div class="vlcard" style="--h:${e.hue}"><div class="vlhead"><span class="dot"></span><b>${esc(e.name)}</b><span class="muted sm">${sum} Tage eingetragen${ent?` · Anspruch ${ent}${vacRest(e,y)?` + ${vacRest(e,y)} Rest`:""} · <b class="${left<0?"neg":""}">${left} übrig</b>`:""}</span></div>
+      <div class="ahwrap"><table class="aht vlt"><thead><tr><th>#</th><th>Von</th><th>Bis</th><th>Tage</th><th>Status</th><th>Notiz</th><th></th></tr></thead><tbody>${rows}${draft}</tbody></table></div></div>`}).join("")).join("")}
+    ${ro?"":`<p class="muted sm">In die letzte Zeile Von und Bis eintragen, dann wird der Urlaub gespeichert und eine neue leere Zeile erscheint. Ist Von ein Montag, setzt die App Bis auf den Samstag (1 Woche); für mehr Wochen danach Bis ändern.</p>`}</div>`;
+}
+function bindVacList(v,y){
+  if(S.ro)return;
+  const fin=(e,a,old,isNew)=>{saveCfg();const iss=vacIssuesFor(e,a);let ws=[];
+    if(old)ws=vacReplan(e,a,old);else if(isNew)ws=applyVac(e,a);
+    S.vacMsg=`${e.name}: Urlaub ${fmtR(a.from,a.to)} (${vacWish(a)?"Wunsch":"genehmigt"}) ${isNew?"eingetragen":"geändert"}.`+(iss.length?` Info: ${iss.map(i=>i.msg).join(" ")}`:"")+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");render()};
+  v.querySelectorAll("[data-lv]").forEach(inp=>inp.onchange=()=>{
+    const [id,i]=inp.dataset.lv.split("|");const e=empById(id),a=e.absences[+i];const k=inp.dataset.k;
+    if(k==="note"){if(inp.value)a.note=inp.value;else delete a.note;saveCfg();return}
+    const old={from:a.from,to:a.to,status:a.status};
+    if(k==="status"){a.status=inp.value;saveCfg();const wasW=old.status==="wunsch";
+      let ws=[];if(wasW&&!vacWish(a))ws=applyVac(e,a);else if(!wasW&&vacWish(a))ws=vacReplan(e,a,old,true);
+      S.vacMsg=`${e.name}: ${fmtR(a.from,a.to)} ist jetzt ${vacWish(a)?"Wunsch":"genehmigt"}.`+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");render();return}
+    if(!inp.value){render();return}
+    a[k]=inp.value;if(a.to<a.from){if(k==="from")a.to=a.from;else a.from=a.to}
+    fin(e,a,vacWish(a)?null:old,false)});
+  v.querySelectorAll("[data-lvdel]").forEach(b=>b.onclick=()=>{
+    if(!b.dataset.sure){b.dataset.sure=1;b.textContent="Löschen?";return}
+    const [id,i]=b.dataset.lvdel.split("|");const e=empById(id),a=e.absences[+i];e.absences.splice(+i,1);saveCfg();
+    let ws=[];if(!vacWish(a))ws=vacReplan(e,{...a,status:"wunsch"},{from:a.from,to:a.to},true);
+    S.vacMsg=`${e.name}: Urlaub ${fmtR(a.from,a.to)} gelöscht.`+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");render()});
+  v.querySelectorAll("[data-ld]").forEach(inp=>{const ev=inp.type==="text"?"input":"change";inp.addEventListener(ev,()=>{
+    const id=inp.dataset.ld,k=inp.dataset.k;const d=S.vacDraft[id]=S.vacDraft[id]||{status:"genehmigt"};d[k]=inp.value;
+    if(k==="note")return;
+    if(k==="from"&&d.from&&(!d.to||d.to<d.from)){const f=pdate(d.from);d.to=f.getDay()===1?dkey(addDays(f,5)):""}
+    if(d.from&&d.to&&d.from<=d.to){const e=empById(id);e.absences=e.absences||[];const rec={from:d.from,to:d.to,kind:"Urlaub",status:d.status||"genehmigt"};if(d.note)rec.note=d.note;e.absences.push(rec);delete S.vacDraft[id];fin(e,rec,null,true)}
+    else if(k!=="status")render()})});
+}
+function issueHtml(list){return list.length?`<ul class="issues">${list.map(i=>`<li><span class="sev ${i.lv}"></span><div><b>${fmtR(i.from,i.to)}</b>${i.wish?` <span class="pill warn">Wunsch</span>`:""}<br>${esc(i.msg)}</div></li>`).join("")}</ul>`:`<p class="muted">Keine Konflikte.</p>`}
+function openVacIssues(){
+  const list=S.vacIss||[];
+  openSheet(`<div class="sheeth"><h2>Urlaub ${S.uy}: Konflikte & Hinweise</h2><button class="btn ghost" data-close>Schließen</button></div>${issueHtml(list)}`,null,"side");
+}
+function openVac(e,i,preset){
+  const ro=S.ro;const isNew=!e||i<0;
+  const a0=!isNew?e.absences[i]:null;
+  const p0=preset||dkey(new Date());
+  const m0=dkey(mondayOf(pdate(p0)));
+  const st={emp:e?e.id:(emps()[0]||{}).id,status:a0?(a0.status||"genehmigt"):"wunsch",note:a0?.note||"",
+    mode:a0?(pdate(a0.from).getDay()===1&&wholeWeeks(a0)?"w":"d"):"w",
+    ranges:a0?[{from:a0.from,to:a0.to}]:[{from:m0,to:dkey(addDays(pdate(m0),5))},{from:"",to:""},{from:"",to:""}]};
+  /* Wochen-Modus: Montag + Anzahl Wochen → Mo bis Sa */
+  const wkOf=r=>{if(!r.from)return {mon:"",n:1};const mon=mondayOf(pdate(r.from));return {mon:dkey(mon),n:Math.max(1,Math.round(((r.to?pdate(r.to):pdate(r.from))-mon)/864e5/7+.2)+0)}};
+  const setWk=(r,mon,n)=>{if(!mon){r.from="";r.to="";return}r.from=mon;r.to=dkey(addDays(pdate(mon),7*(n-1)+5))};
+  const yy=S.uy||new Date().getFullYear();const mons=[];for(let d=mondayOf(new Date(yy,0,1));d<=new Date(yy+1,11,31);d=addDays(d,7))mons.push(d);
+  const wkOpts=sel=>`<option value="">– KW wählen –</option>`+mons.map(d=>{const k=dkey(d);return `<option value="${k}" ${k===sel?"selected":""}>KW ${isoWeek(d).w}${d.getFullYear()!==yy?"/"+String(isoWeek(d).y||d.getFullYear()).slice(2):""} · ${shortD(k)}–${shortD(dkey(addDays(d,5)))}</option>`}).join("");
+  const valid=r=>r.from&&r.to&&r.from<=r.to;
+  const draw=close=>{
+    const E=empById(st.emp);const good=st.ranges.filter(valid);const bad=st.ranges.some(r=>(r.from||r.to)&&!valid(r));
+    let info="";
+    if(E&&good.length){const bak=E.absences;const drafts=good.map(r=>({from:r.from,to:r.to,kind:"Urlaub",status:st.status}));
+      E.absences=(bak||[]).filter(x=>!(a0&&x===a0)).concat(drafts);
+      const seen=new Set();const iss=drafts.flatMap(d=>vacIssuesFor(E,d)).filter(x=>{const k=x.msg+x.from;if(seen.has(k))return false;seen.add(k);return true}).sort((a,b)=>a.from.localeCompare(b.from));
+      const dd=good.reduce((s,r)=>s+vacDays(E,r.from,r.to),0);const ys=[...new Set(good.map(r=>+r.from.slice(0,4)))];
+      const lefts=ys.map(y=>({y,l:vacLeft(E,y)}));E.absences=bak;
+      info=`<p class="muted" style="margin:0"><b>${dd} Urlaubstag${dd===1?"":"e"}</b>${good.length>1?` in ${good.length} Zeiträumen`:""} (${VAC_COUNT[E.vacCount||"6"]}, ohne Feiertage)${E.vacEntitle?` · danach noch ${lefts.map(x=>`<b class="${x.l<0?"neg":""}">${x.l}</b> übrig für ${x.y}`).join(", ")}`:""}</p>${iss.length?`<div class="vinfo"><b>Info:</b>${issueHtml(iss)}</div>`:`<p class="okn" style="margin:0">✓ Passt zu allen Urlaubsregeln.</p>`}`}
+    if(bad)info+=`<p class="neg" style="margin:0">Bei einer Zeile fehlt ein Datum oder Bis liegt vor Von.</p>`;
+    const multi=st.ranges.length>1;
+    $("#vform").innerHTML=`
+      <label class="field"><span class="lbl">Mitarbeiter</span><select id="vE" ${isNew&&!ro?"":"disabled"}>${emps().map(x=>`<option value="${x.id}" ${x.id===st.emp?"selected":""}>${esc(x.name)}</option>`).join("")}</select></label>
+      <div class="seg" role="radiogroup" aria-label="Eingabe"><button class="segb" role="radio" aria-checked="${st.mode==="w"}" aria-selected="${st.mode==="w"}" data-vm="w" ${ro?"disabled":""}>Ganze Wochen</button><button class="segb" role="radio" aria-checked="${st.mode==="d"}" aria-selected="${st.mode==="d"}" data-vm="d" ${ro?"disabled":""}>Einzelne Tage</button></div>
+      <div class="vranges ${st.mode==="w"?"wk":""}">${st.mode==="w"?`<div class="vrh"><span class="lbl">Ab Woche</span><span class="lbl">Dauer</span><span class="lbl">Tage</span><span></span></div>`:`<div class="vrh"><span class="lbl">Von</span><span class="lbl">Bis</span><span class="lbl">Tage</span><span></span></div>`}
+      ${st.ranges.map((r,j)=>{const x=!ro&&multi&&!(a0&&j===0)?`<button class="btn ghost danger" data-rx="${j}" aria-label="Zeile ${j+1} entfernen">✕</button>`:"<span></span>";const dd=`<span class="mono">${valid(r)&&E?vacDays(E,r.from,r.to):"–"}</span>`;
+        if(st.mode==="w"){const w=wkOf(r);return `<div class="vrr"><select data-rw="${j}" aria-label="Zeitraum ${j+1}: ab Kalenderwoche" ${ro?"disabled":""}>${wkOpts(w.mon)}</select><select data-rn="${j}" aria-label="Zeitraum ${j+1}: Anzahl Wochen" ${ro?"disabled":""}>${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${n===w.n?"selected":""}>${n} Woche${n>1?"n":""}</option>`).join("")}</select>${dd}${x}${valid(r)?`<small class="muted vrd">${fmtR(r.from,r.to)}</small>`:""}</div>`}
+        return `<div class="vrr ${(r.from||r.to)&&!valid(r)?"badr":""}"><input type="date" data-rf="${j}" value="${r.from}" aria-label="Zeitraum ${j+1} von" ${ro?"disabled":""}><input type="date" data-rt="${j}" value="${r.to}" min="${r.from}" aria-label="Zeitraum ${j+1} bis" ${ro?"disabled":""}>${dd}${x}</div>`}).join("")}
+      ${ro?"":`<button class="btn ghost" id="vRAdd" style="justify-self:start">+ Weiterer Zeitraum</button>`}</div>
+      <div class="seg" role="radiogroup" aria-label="Status"><button class="segb" role="radio" aria-checked="${st.status==="wunsch"}" aria-selected="${st.status==="wunsch"}" data-vs="wunsch" ${ro?"disabled":""}>Wunsch</button><button class="segb" role="radio" aria-checked="${st.status!=="wunsch"}" aria-selected="${st.status!=="wunsch"}" data-vs="genehmigt" ${ro?"disabled":""}>Genehmigt</button></div>
+      <label class="field"><span class="lbl">Notiz</span><input type="text" id="vN" value="${esc(st.note)}" placeholder="optional, gilt für alle Zeilen" ${ro?"disabled":""}></label>
+      ${info}`;
+    const m=$("#modal");
+    const ve=$("#vE");if(ve)ve.onchange=()=>{st.emp=ve.value;draw(close)};
+    m.querySelectorAll("[data-rf]").forEach(x=>x.onchange=()=>{const r=st.ranges[+x.dataset.rf];r.from=x.value;if(r.from&&(!r.to||r.to<r.from))r.to=r.from;draw(close)});
+    m.querySelectorAll("[data-rt]").forEach(x=>x.onchange=()=>{const r=st.ranges[+x.dataset.rt];r.to=x.value;draw(close)});
+    m.querySelectorAll("[data-vm]").forEach(b=>b.onclick=()=>{st.mode=b.dataset.vm;if(st.mode==="w")st.ranges.forEach(r=>{if(r.from){const w=wkOf(r);setWk(r,w.mon,w.n)}});draw(close)});
+    m.querySelectorAll("[data-rw]").forEach(x=>x.onchange=()=>{const r=st.ranges[+x.dataset.rw];setWk(r,x.value,wkOf(r).n);draw(close)});
+    m.querySelectorAll("[data-rn]").forEach(x=>x.onchange=()=>{const r=st.ranges[+x.dataset.rn];const w=wkOf(r);if(!w.mon)return;setWk(r,w.mon,+x.value);draw(close)});
+    m.querySelectorAll("[data-rx]").forEach(x=>x.onclick=()=>{st.ranges.splice(+x.dataset.rx,1);draw(close)});
+    const ra=$("#vRAdd");if(ra)ra.onclick=()=>{st.ranges.push({from:"",to:""});draw(close);const ins=m.querySelectorAll("[data-rf],[data-rw]");ins[ins.length-1].focus()};
+    $("#vN").oninput=()=>{st.note=$("#vN").value};
+    m.querySelectorAll("[data-vs]").forEach(b=>b.onclick=()=>{st.status=b.dataset.vs;draw(close)});
+    const sb=$("#vSave");if(sb){sb.disabled=!good.length||bad;sb.textContent=good.length>1?`${good.length} Zeiträume speichern`:"Speichern"}
+  };
+  openSheet(`<div class="sheeth"><h2>${isNew?"Urlaub eintragen":"Urlaub bearbeiten"}</h2><button class="btn ghost" data-close>Schließen</button></div>
+    <div class="form" id="vform" style="gap:12px"></div>
+    ${ro?"":`<div class="mfoot" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">${isNew?"":`<button class="btn ghost danger" id="vDel">Löschen</button>`}<span class="spacer"></span><button class="btn" data-close>Abbrechen</button><button class="btn primary" id="vSave">Speichern</button></div>`}`,
+  close=>{
+    draw(close);
+    const sb=$("#vSave");if(sb)sb.onclick=()=>{
+      const E=empById(st.emp);const good=st.ranges.filter(valid);if(!E||!good.length||st.ranges.some(r=>(r.from||r.to)&&!valid(r)))return;
+      E.absences=E.absences||[];const saved=[];let ws=[];
+      good.forEach((r,j)=>{const rec={from:r.from,to:r.to,kind:"Urlaub",status:st.status};if(st.note)rec.note=st.note;
+        if(a0&&j===0&&e===E){const old={from:a0.from,to:a0.to,status:a0.status};Object.assign(a0,rec);if(!rec.note)delete a0.note;saved.push(a0);
+          ws.push(...vacReplan(E,a0,old,old.status!=="wunsch"))}
+        else{E.absences.push(rec);saved.push(rec);ws.push(...applyVac(E,rec))}});
+      saveCfg();
+      const seen=new Set();const iss=saved.flatMap(a=>vacIssuesFor(E,a)).filter(x=>{const k=x.msg+x.from;if(seen.has(k))return false;seen.add(k);return true});
+      ws=[...new Set(ws)];
+      S.vacMsg=`${E.name}: Urlaub ${saved.map(a=>fmtR(a.from,a.to)).join(", ")} (${st.status==="wunsch"?"Wunsch":"genehmigt"}) gespeichert.`+(iss.length?` Info: ${iss.map(i=>i.msg).join(" ")}`:"")+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");
+      close();render();
+    };
+    const db=$("#vDel");if(db)db.onclick=()=>{
+      if(!db.dataset.sure){db.dataset.sure=1;db.textContent="Wirklich löschen?";return}
+      const r={...a0};e.absences=e.absences.filter(x=>x!==a0);saveCfg();
+      const ws=vacWish(r)?[]:vacReplan(e,{...r,status:"wunsch"},{from:r.from,to:r.to},true);
+      S.vacMsg=`${e.name}: Urlaub ${fmtR(r.from,r.to)} gelöscht.`+(ws.length?` Schichtplan neu geplant: ${ws.join(", ")}.`:"");close();render();
+    };
+   },"vwide");
+}
+/* ---------- PDF Urlaubsplan (A3 quer) ---------- */
+function hsl2rgb(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return [f(0),f(8),f(4)]}
+function buildVacPdf(y){
+  const C={ink:[.09,.13,.11],muted:[.38,.42,.40],line:[.80,.83,.81],head:[.91,.93,.92],sun:[.90,.91,.90],hol:[.88,.84,.95],blk:[.99,.90,.88],blkS:[.85,.45,.40],blkT:[.99,.93,.92],blkH:[.90,.60,.56],red:[.72,.22,.16],fer:[.97,.88,.93],ferS:[.60,.21,.44],amber:[.80,.52,.05]};
+  const iss=vacIssues(y),H=holidays(y,vacState()),blocks=yearBlocks(y),groups=vacGroups();
+  return makePdf(g=>{
+    const M=26;let top=26;
+    g.text(M,top+16,`Urlaubsplan ${y} · Getränkeabteilung`,20,true,C.ink);
+    const st="Stand: "+new Date().toLocaleDateString("de-DE")+" "+new Date().toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
+    g.text(g.W-M-tw(st,9,false),top+16,st,9,false,C.muted);
+    const nameW=104,x0=M+nameW,rowH=19,grpH=12;
+    const halves=[[0,6],[6,12]];let y0=top+34;
+    halves.forEach(([m0,m1])=>{
+      const a=new Date(y,m0,1),b=new Date(y,m1,0);const n=Math.round((b-a)/864e5)+1;const dw=(g.W-M-x0)/n;
+      const X=k=>x0+Math.round((pdate(k)-a)/864e5)*dw;
+      const inR=(f,t)=>{const A=dkey(a),B=dkey(b);const ff=f<A?A:f,tt=t>B?B:t;return ff>tt?null:{x:X(ff),w:X(tt)-X(ff)+dw}};
+      /* Monatskopf */
+      for(let m=m0;m<m1;m++){const r=inR(dkey(new Date(y,m,1)),dkey(new Date(y,m+1,0)));g.fill(C.head);g.rect(r.x,y0,r.w,13);g.text(r.x+4,y0+9.5,MONL[m],8.5,true,C.ink)}
+      /* Tage */
+      const yd=y0+13;
+      for(let i=0;i<n;i++){const d=addDays(a,i),k=dkey(d);const x=x0+i*dw;if(d.getDay()===0||H[k]){g.fill(H[k]?C.hol:C.sun);g.rect(x,yd,dw,10)}
+        const s=String(d.getDate());g.text(x+(dw-tw(s,4.6,false))/2,yd+7,s,4.6,false,d.getDay()===0?C.muted:C.ink)}
+      /* KW */
+      const yk=yd+10;g.text(M,yk+6.5,"KW",6,true,C.muted);
+      for(let d=mondayOf(a);d<=b;d=addDays(d,7)){const r=inR(dkey(d),dkey(addDays(d,6)));if(!r)continue;g.stroke(C.line);g.lw(.4);g.line(r.x,yk,r.x,yk+9);const s=String(isoWeek(d).w);if(r.w>12)g.text(r.x+2,yk+6.5,s,5.5,false,C.muted)}
+      /* Schulferien & Sperren */
+      let yy=yk+9;
+      g.text(M,yy+6.5,"Schulferien",6,true,C.muted);
+      (S.cfg.vacations||[]).filter(v=>v.from&&v.to).forEach(v=>{const r=inR(v.from,v.to);if(!r)return;g.fill(C.fer);g.rect(r.x,yy+1,r.w,7);const nm=fit(v.name||"",5.5,false,r.w-3);if(r.w>18)g.text(r.x+2,yy+6.5,nm,5.5,false,C.ferS)});
+      yy+=10;
+      const bRows=[];blocks.forEach(bl=>{const key=blockAll(bl.b)?"all":[...blockWho(bl.b)].sort().join(",");let r=bRows.find(x=>x.key===key);if(!r)bRows.push(r={key,list:[]});r.list.push(bl)});
+      bRows.sort((a,b)=>a.key==="all"?-1:b.key==="all"?1:0);
+      bRows.forEach(br=>{
+        const lbl=br.key==="all"?"URLAUBSSPERRE":"SPERRE "+br.key.split(",").map(id=>empById(id)?.name).filter(Boolean).join(", ").toUpperCase();
+        g.text(M,yy+8,fit(lbl,6.2,true,nameW-6),6.2,true,C.red);
+        br.list.forEach(bl=>{const r=inR(bl.from,bl.to);if(!r)return;g.fill(C.blk);g.rect(r.x,yy+.5,r.w,11);g.hatch(r.x,yy+.5,r.w,11,C.blkS,3.5,.5);g.stroke(C.red);g.lw(.8);g.rect(r.x,yy+.5,r.w,11,"S");
+          const t=bl.b.type==="feiertagswoche"?bl.label.replace(/^Feiertagswoche \((.*)\)$/,"$1"):bl.b.type==="dezember"?"Dezember-Sperre":bl.b.type==="vorPfingsten"?"Vor Pfingsten":bl.label;
+          const tt=fit(t,6,true,r.w-4);if(r.w>14){const tw0=tw(tt,6,true);g.fill([1,1,1]);g.rect(r.x+2,yy+2.5,tw0+3,7.5);g.text(r.x+3.5,yy+8.3,tt,6,true,C.red)}});
+        yy+=13});
+      yy+=2;
+      /* Mitarbeiter */
+      const rowsTop=yy;
+      groups.forEach(gr=>{
+        g.text(M,yy+8,gr.name.toUpperCase(),6.2,true,C.muted);g.stroke(C.line);g.lw(.5);g.line(M,yy+grpH-.5,g.W-M,yy+grpH-.5);yy+=grpH;
+        gr.emps.forEach(e=>{
+          for(let i=0;i<n;i++){const d=addDays(a,i),k=dkey(d);if(d.getDay()===0||H[k]){g.fill(H[k]?C.hol:C.sun);g.rect(x0+i*dw,yy,dw,rowH)}}
+          blocks.filter(bl=>blockWho(bl.b).includes(e.id)).forEach(bl=>{const r=inR(bl.from,bl.to);if(r){g.fill(C.blkT);g.rect(r.x,yy,r.w,rowH);g.hatch(r.x,yy,r.w,rowH,C.blkH,4,.45)}});
+          const rgb=hsl2rgb(e.hue||200,55,48),lite=hsl2rgb(e.hue||200,60,86);
+          vacList(e).forEach(v=>{const r=inR(v.from,v.to);if(!r)return;const wish=vacWish(v);
+            g.fill(wish?lite:rgb);g.rect(r.x+.3,yy+2.5,r.w-.6,rowH-6.5);
+            if(wish){g.stroke(rgb);g.lw(.7);g.rect(r.x+.3,yy+2.5,r.w-.6,rowH-6.5,"S")}
+            const bad=iss.some(i=>i.lv==="err"&&i.emps.includes(e.id)&&i.to>=v.from&&i.from<=v.to);
+            if(bad){g.stroke(C.red);g.lw(1.3);g.rect(r.x-.4,yy+1.8,r.w+.8,rowH-5.1,"S")}
+            const lab=fit(`${shortD(v.from)}–${shortD(v.to)}`,5.6,true,r.w-3);if(r.w>26)g.text(r.x+2,yy+rowH/2+1.3,lab,5.6,true,wish?C.ink:[1,1,1])});
+          g.fill(rgb);g.rect(M,yy+5,4,4);g.text(M+7,yy+9.2,fit(e.name,8,true,nameW-12),8,true,C.ink);
+          g.stroke(C.line);g.lw(.3);g.line(M,yy+rowH,g.W-M,yy+rowH);yy+=rowH;
+        });
+      });
+      /* Monatslinien */
+      g.stroke([.55,.58,.56]);g.lw(.6);for(let m=m0;m<=m1;m++){const k=dkey(new Date(y,m,1));const x=m===m1?g.W-M:X(k);g.line(x,y0,x,yy)}
+      y0=yy+14;
+    });
+    /* Unten: Urlaubskonto + Hinweise */
+    let yb=y0+2;
+    g.text(M,yb,"Urlaubskonto",10,true,C.ink);
+    const cols=[["Mitarbeiter",110],["Anspruch",50],["Rest "+(y-1),46],["Genehmigt",52],["Wunsch",44],["Übrig",40]];
+    let cx=M;yb+=6;g.fill(C.head);g.rect(M,yb,cols.reduce((s,c)=>s+c[1],0),11);cols.forEach(([l,w])=>{g.text(cx+3,yb+7.8,l,6.5,true,C.ink);cx+=w});yb+=11;
+    emps().forEach(e=>{const vals=[e.name,e.vacEntitle?String(e.vacEntitle):"–",String(vacRest(e,y)),String(vacTaken(e,y,false)),String(vacTaken(e,y,true)||"–"),e.vacEntitle?String(vacLeft(e,y)):"–"];
+      cx=M;vals.forEach((s,j)=>{g.text(cx+3,yb+7.6,fit(s,7,j===0||j===5,cols[j][1]-5),7,j===0||j===5,j===5&&e.vacEntitle&&vacLeft(e,y)<0?C.red:C.ink);cx+=cols[j][1]});g.stroke(C.line);g.lw(.3);g.line(M,yb+10.5,cx,yb+10.5);yb+=10.5});
+    /* Hinweise rechts */
+    const hx=M+360;let hy=y0+2;const hw=g.W-M-hx;
+    g.text(hx,hy,`Konflikte & Hinweise (${iss.length})`,10,true,C.ink);hy+=12;
+    const maxY=g.H-40;let shown=0;
+    for(const i of iss){if(hy>maxY)break;const line=`${fmtR(i.from,i.to)}${i.wish?" (Wunsch)":""}: ${i.msg}`;g.fill(i.lv==="err"?C.red:C.amber);g.rect(hx,hy-5,4,4);g.text(hx+8,hy-1,fit(line,7,false,hw-10),7,false,C.ink);hy+=10;shown++}
+    if(!iss.length)g.text(hx,hy,"Keine Konflikte mit den Urlaubsregeln.",7.5,false,C.muted);
+    else if(shown<iss.length)g.text(hx,hy,`… und ${iss.length-shown} weitere (siehe App).`,7,false,C.muted);
+    /* Legende */
+    const ly=g.H-20;let lx=M;
+    const leg=(c,label,outline)=>{g.fill(c);g.rect(lx,ly-6,12,6);if(outline){g.stroke(outline);g.lw(1);g.rect(lx,ly-6,12,6,"S")}g.text(lx+15,ly-1,label,7,false,C.muted);lx+=15+tw(label,7,false)+16};
+    leg(hsl2rgb(200,55,48),"genehmigt");leg(hsl2rgb(200,60,86),"Wunsch",hsl2rgb(200,55,48));leg([1,1,1],"Konflikt",C.red);{g.fill(C.blk);g.rect(lx,ly-6,12,6);g.hatch(lx,ly-6,12,6,C.blkS,3,.5);g.stroke(C.red);g.lw(.8);g.rect(lx,ly-6,12,6,"S");g.text(lx+15,ly-1,"Urlaubssperre (in der Zeile: gilt für diese Person)",7,false,C.muted);lx+=15+tw("Urlaubssperre (in der Zeile: gilt für diese Person)",7,false)+16}leg(C.hol,"Feiertag");leg(C.sun,"Sonntag");leg(C.fer,"Schulferien");
+    const rl=(urlCfg().groups||[]).map(g2=>`${g2.name}: max. ${g2.max} gleichzeitig`).join(" · ");
+    g.text(g.W-M-tw(fit(rl,7,false,420),7,false),ly-1,fit(rl,7,false,420),7,false,C.muted);
+  },1190.55,841.89);
+}
+async function exportVacPdf(btn){
+  try{btn.disabled=true;await shareFile(new Blob([buildVacPdf(S.uy)],{type:"application/pdf"}),`Urlaubsplan_${S.uy}.pdf`)}
+  catch(e){showNotice("PDF konnte nicht erstellt werden: "+(e.message||e))}
+  finally{btn.disabled=false}
+}
+
 /* ---------- PDF (A4 quer) ---------- */
 const HW=[278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
 const HBW=[278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584];
@@ -1987,14 +2550,15 @@ function winCode(ch){if(WIN[ch])return WIN[ch];const c=ch.charCodeAt(0);return c
 function tw(str,size,bold){const W=bold?HBW:HW;let w=0;for(const ch of str){const c=winCode(ch);let b=c>=32&&c<=126?W[c-32]:(ch==="ä"||ch==="ö"||ch==="ü")?556:(ch==="Ä"||ch==="Ö"||ch==="Ü")?722:ch==="ß"?(bold?611:611):ch==="–"?556:556;w+=b}return w*size/1000}
 function fit(str,size,bold,max){if(tw(str,size,bold)<=max)return str;let s=str;while(s.length>1&&tw(s+"…",size,bold)>max)s=s.slice(0,-1);return s+"…"}
 function pdfStr(s){let o="";for(const ch of s){const c=winCode(ch);const x=String.fromCharCode(c);o+=(x==="("||x===")"||x==="\\")?"\\"+x:x}return "("+o+")"}
-function makePdf(draw){
-  const W=841.89,H=595.28;const ops=[];const n=v=>(+v).toFixed(2);
+function makePdf(draw,W0,H0){
+  const W=W0||841.89,H=H0||595.28;const ops=[];const n=v=>(+v).toFixed(2);
   const g={
     W,H,
     fill(c){ops.push(`${n(c[0])} ${n(c[1])} ${n(c[2])} rg`)},stroke(c){ops.push(`${n(c[0])} ${n(c[1])} ${n(c[2])} RG`)},
     lw(w){ops.push(`${n(w)} w`)},
     rect(x,y,w,h,mode){ops.push(`${n(x)} ${n(H-y-h)} ${n(w)} ${n(h)} re ${mode||"f"}`)},
     line(x1,y1,x2,y2){ops.push(`${n(x1)} ${n(H-y1)} m ${n(x2)} ${n(H-y2)} l S`)},
+    hatch(x,y,w,h,c,gap,lw){ops.push("q",`${n(x)} ${n(H-y-h)} ${n(w)} ${n(h)} re W n`,`${n(c[0])} ${n(c[1])} ${n(c[2])} RG`,`${n(lw||.6)} w`);for(let t=-h;t<w;t+=gap||4)ops.push(`${n(x+t)} ${n(H-y-h)} m ${n(x+t+h)} ${n(H-y)} l S`);ops.push("Q")},
     text(x,y,s,size,bold,color){ops.push(`BT ${color?`${n(color[0])} ${n(color[1])} ${n(color[2])} rg `:""}/${bold?"F2":"F1"} ${n(size)} Tf ${n(x)} ${n(H-y)} Td ${pdfStr(s)} Tj ET`)},
   };
   draw(g);
