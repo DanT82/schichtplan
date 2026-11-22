@@ -542,6 +542,13 @@ body.vdragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
 .vinfo{border:1px solid var(--bad);background:var(--bad-soft);border-radius:var(--r);padding:8px 10px;display:grid;gap:6px}
 .okn{color:var(--ok)}
 .overlay.vwide .modal{max-width:560px}
+.bkhero{border:2px solid var(--accent);border-radius:var(--r);padding:14px 16px}
+.bkt td{vertical-align:middle}
+.vhave{display:grid;gap:6px;background:var(--surface-2);border-radius:var(--r);padding:10px 12px}
+.vhl{display:flex;flex-wrap:wrap;gap:6px}
+.vh{font-size:12.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:hsl(var(--h) 55% 46%);color:#fff;white-space:nowrap}
+.vh.wish{background:hsl(var(--h) 60% 88%);color:hsl(var(--h) 60% 22%);box-shadow:inset 0 0 0 1.5px hsl(var(--h) 55% 46%)}
+.vh.cur{outline:2px dashed var(--ink);outline-offset:1px}
 .vranges{display:grid;gap:6px}
 .vrh,.vrr{display:grid;grid-template-columns:1fr 1fr 44px 40px;gap:8px;align-items:center}
 .vrr input[type=date]{width:100%}.vrr .mono{text-align:right}
@@ -642,7 +649,7 @@ function dayInfo(k){
 const S={cfg:null,weeks:{},week:mondayOf(addDays(new Date(),7)),tab:"plan",selEmp:null,ro:false,mode:"loading",lastPlan:null,role:null,me:null,members:[],done:{}};
 const pending={};const timers={};
 const LS="schichtplan-getraenke-v1";
-const APP_VERSION="2.7 · 21.11.2026";
+const APP_VERSION="2.9 · 22.11.2026";
 const TEAM="getraenke";
 const MAIL_DOMAIN="schichtplan.local";
 const FB_CONFIG=(window.FB_CONFIG&&window.FB_CONFIG.apiKey&&!/HIER/.test(window.FB_CONFIG.apiKey))?window.FB_CONFIG:null;
@@ -657,15 +664,38 @@ const ROLE_LBL={admin:"Admin (alles, Zugänge verwalten)",bearbeiten:"Bearbeiten
 function saveLocal(){try{localStorage.setItem(LS,JSON.stringify({cfg:S.cfg,weeks:S.weeks,done:S.done}))}catch(e){}}
 function loadLocal(){try{const raw=localStorage.getItem(LS);if(raw){const o=JSON.parse(raw);S.cfg=o.cfg||null;S.weeks=o.weeks||{};S.done=o.done||{}}}catch(e){}}
 function track(p){inflight++;renderSync();p.then(()=>{syncErr=""},err=>{syncErr=err&&err.code==="permission-denied"?"Keine Berechtigung zum Speichern. Firestore-Regeln oder Rolle prüfen.":"Übertragung fehlgeschlagen: "+(err&&err.message||err);showNotice(syncErr)}).finally(()=>{inflight--;renderSync()});return p}
+/* Schutz gegen veraltete Stände (z. B. iPad mit altem Stand, Urlaub am PC eingetragen):
+   - Die Konfiguration wird erst geschrieben, wenn der aktuelle Stand vom Server da ist (max. 15 s warten).
+   - Kommt während einer eigenen Änderung ein neuer Stand vom Server, werden Urlaub & Abwesenheiten
+     dreiseitig zusammengeführt (gemeinsamer Ausgangsstand, eigene Änderungen, fremde Änderungen). */
+let cfgFresh=false,cfgBase=null,cfgWait=0;
+const absKey=(id,a)=>id+"|"+a.kind+"|"+a.from+"|"+a.to;
+function absMap(cfg){const m=new Map();((cfg&&cfg.employees)||[]).forEach(e=>(e.absences||[]).forEach(a=>{if(a&&a.from&&a.to)m.set(absKey(e.id,a),JSON.stringify(a))}));return m}
+function mergeAbs(remote){
+  const B=cfgBase||new Map(),R=absMap(remote),L=absMap(S.cfg);let changed=false;
+  (S.cfg.employees||[]).forEach(e=>{
+    const keys=new Set([...L.keys(),...R.keys()].filter(k=>k.startsWith(e.id+"|")));const out=[];
+    keys.forEach(k=>{const inL=L.has(k),inR=R.has(k),inB=B.has(k);
+      if(inB&&(!inL||!inR))return;
+      const v=inL&&inR?(L.get(k)!==B.get(k)?L.get(k):R.get(k)):(inL?L.get(k):R.get(k));out.push(JSON.parse(v))});
+    (e.absences||[]).filter(a=>!(a&&a.from&&a.to)).forEach(a=>out.push(a));
+    out.sort((a,b)=>String(a.from).localeCompare(String(b.from)));
+    if(JSON.stringify(out)!==JSON.stringify((e.absences||[]).slice().sort((a,b)=>String(a.from).localeCompare(String(b.from))))){e.absences=out;changed=true}
+  });
+  return changed;
+}
 function save(docPath,body){
   if(S.ro||S.dry)return;
   saveLocal();
   if(S.mode!=="cloud"||!fdb)return;
   pending[docPath]=(pending[docPath]||0)+1;
   clearTimeout(timers[docPath]);
-  timers[docPath]=setTimeout(()=>{
+  const go=()=>{
+    if(docPath==="plan/config"&&!cfgFresh&&navigator.onLine!==false&&cfgWait<30){cfgWait++;timers[docPath]=setTimeout(go,500);return}
+    cfgWait=0;
     track(refFor(docPath).set(clean(body()))).catch(()=>{}).finally(()=>{pending[docPath]=0});
-  },450);
+  };
+  timers[docPath]=setTimeout(go,450);
 }
 const saveCfg=()=>save("plan/config",()=>S.cfg);
 const saveWeek=wid=>save("weeks/"+wid,()=>({shifts:S.weeks[wid]||[],done:S.done[wid]||{}}));
@@ -694,6 +724,7 @@ async function init(){
     if(!S.cfg){try{const r=await fetch("startdaten.json");const o=await r.json();if(o&&o.cfg){S.cfg=o.cfg;S.weeks=o.weeks||{};saveLocal()}}catch(e){}}
     if(!S.cfg)S.cfg=blankCfg();
     {const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover(),m4=migrateSpringer(),m5=migrateUrlaub();if(m1||m2||m3||m4||m5)saveLocal()}
+    setTimeout(bkAuto,3000);
     showNotice(FB_CONFIG?"Die Firebase-Dateien (fb-app.js, fb-auth.js, fb-firestore.js) fehlen. Der Plan wird nur auf diesem Gerät gespeichert.":"Firebase ist noch nicht eingerichtet (firebase-config.js). Der Plan wird nur auf diesem Gerät gespeichert.");
     render();return;
   }
@@ -720,11 +751,20 @@ async function onUser(u){
   document.body.classList.toggle("ro",S.ro);
   S.mode="cloud";renderSync();
   let gotCfg=false,gotWeeks=false;
-  unsubs.push(teamRef().collection("plan").doc("config").onSnapshot(snap=>{
+  cfgFresh=false;cfgBase=null;
+  unsubs.push(teamRef().collection("plan").doc("config").onSnapshot({includeMetadataChanges:true},snap=>{
     gotCfg=true;
-    if(pending["plan/config"])return;
+    const md=snap.metadata||{};
+    if(!md.fromCache)cfgFresh=true;
+    if(md.hasPendingWrites)return;
+    if(pending["plan/config"]){
+      const d=snap.exists?snap.data():null;
+      if(d&&S.cfg&&cfgBase&&JSON.stringify([...absMap(d)])!==JSON.stringify([...cfgBase])){const ch=mergeAbs(clean(d));cfgBase=absMap(d);if(ch){saveCfg();if(gotWeeks)render()}}
+      else if(d)cfgBase=absMap(d);
+      return;
+    }
     const d=snap.exists?snap.data():null;
-    if(d)S.cfg=clean(d);else if(!S.cfg)S.cfg=blankCfg();
+    if(d){S.cfg=clean(d);cfgBase=absMap(d)}else if(!S.cfg)S.cfg=blankCfg();
     if(d){const m1=migrateFixed(),m2=migrateHours(),m3=migrateCover(),m4=migrateSpringer(),m5=migrateUrlaub();if(m1||m2||m3||m4||m5)saveCfg()}
     saveLocal();
     if(!d&&S.role==="admin")maybeSeed();
@@ -735,6 +775,7 @@ async function onUser(u){
     qs.docs.forEach(d=>{if(pending["weeks/"+d.id])return;S.weeks[d.id]=clean(d.data().shifts||[]);S.done[d.id]=clean(d.data().done||{})});
     saveLocal();
     if(gotCfg)render();
+    if(gotCfg)setTimeout(bkAuto,6000);
   },e=>{}));
   if(S.role==="admin")unsubs.push(teamRef().collection("members").onSnapshot(qs=>{S.members=qs.docs.map(d=>({uid:d.id,...d.data()}));if(S.tab==="access")render()},e=>{}));
   render();
@@ -1241,10 +1282,10 @@ function renderChrome(){
   $("#prevW").onclick=()=>{S.week=addDays(S.week,-7);render()};
   $("#nextW").onclick=()=>{S.week=addDays(S.week,7);render()};
   $("#todayW").onclick=()=>{S.week=mondayOf(new Date());render()};
-  const tabs=[["plan","Wochenplan"],["team","Mitarbeiter"],["matrix","Vertretung"],["urlaub","Urlaub"],["rules","Regeln & Feiertage"],["auto","Automatik"]];
+  const tabs=[["plan","Wochenplan"],["team","Mitarbeiter"],["matrix","Vertretung"],["urlaub","Urlaub"],["rules","Regeln & Feiertage"],["auto","Automatik"],["backup","Sicherung"]];
   $("#tabs").innerHTML=tabs.map(([id,l])=>`<button class="tab" role="tab" aria-selected="${S.tab===id}" data-tab="${id}">${l}</button>`).join("");
   $("#tabs").querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;render()});
-  $("#weeknav").style.visibility=S.tab==="urlaub"?"hidden":"";
+  $("#weeknav").style.visibility=S.tab==="urlaub"||S.tab==="backup"?"hidden":"";
 }
 /* ---------- Zugänge (nur Admin) ---------- */
 function renderAccess(){
@@ -1303,17 +1344,16 @@ function renderData(){
   </div>
   ${S.role==="admin"?`<div class="sect"><h3>Zugänge</h3><p class="muted" style="margin:0;font-size:14px">Benutzer anlegen, Rollen ändern, Zugänge sperren.</p><div><button class="btn" id="goAcc">Zugänge verwalten</button></div></div>`:""}
   <div class="sect"><h3>Sicherung</h3>
-    <p class="muted" style="margin:0;font-size:14px">Speichert Mitarbeiter, Regeln und alle Wochen als Datei. Damit kannst du den Plan wiederherstellen oder auf ein anderes Gerät übertragen.</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="bkSave">Sicherung speichern</button>
-    ${S.ro?"":`<label class="btn" for="bkLoad">Sicherung laden …</label><input type="file" id="bkLoad" accept=".json,application/json" hidden>`}</div>
+    <p class="muted" style="margin:0;font-size:14px">Sichern, Sicherungen ansehen und wiederherstellen findest du im Reiter „Sicherung“.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="goBk">Zur Sicherung</button><button class="btn" id="bkSave">Als Datei speichern</button></div>
   </div>
   <p class="muted" style="font-size:12px">Version ${APP_VERSION}</p></div>`;
   const ga=$("#goAcc");if(ga)ga.onclick=()=>{S.tab="access";render()};
   const o=$("#dOut");if(o)o.onclick=async()=>{await fauth.signOut();S.dataMsg="";};
   const pf=$("#pwForm");if(pf)pf.onsubmit=async ev=>{ev.preventDefault();const pw=$("#pwNew").value;if(pw.length<6){S.dataMsg="Das Passwort braucht mindestens 6 Zeichen.";render();return}
     try{await fauth.currentUser.updatePassword(pw);S.dataMsg="Passwort geändert."}catch(err){S.dataMsg=/requires-recent-login/.test(err.code||"")?"Bitte einmal ab- und wieder anmelden, dann erneut versuchen.":authError(err)}render()};
-  $("#bkSave").onclick=()=>shareFile(new Blob([JSON.stringify({format:"schichtplan-sicherung",version:1,erstellt:new Date().toISOString(),cfg:S.cfg,weeks:S.weeks,done:S.done},null,1)],{type:"application/json"}),`Schichtplan-Sicherung_${dkey(new Date())}.json`);
-  const bl=$("#bkLoad");if(bl)bl.onchange=async()=>{const f=bl.files[0];if(!f)return;try{const o=JSON.parse(await f.text());if(o.format!=="schichtplan-sicherung")throw new Error("Das ist keine Schichtplan-Sicherung.");await importBackup(o);S.dataMsg="Sicherung geladen."}catch(e){S.dataMsg="Laden fehlgeschlagen: "+(e.message||e)}render()};
+  $("#bkSave").onclick=()=>shareFile(new Blob([JSON.stringify({format:"schichtplan-sicherung",version:1,erstellt:new Date().toISOString(),von:S.me?.name||"",cfg:S.cfg,weeks:S.weeks,done:S.done},null,1)],{type:"application/json"}),bkFileName());
+  $("#goBk").onclick=()=>{S.tab="backup";render()};
 }
 /* Datei ausgeben: am PC direkt herunterladen, auf iPad/Handy über „Teilen“ (Sichern in Dateien, Drucken, Mail).
    Klappt das Teilen nicht, erscheint ein Fenster mit einem Knopf zum Öffnen/Herunterladen. */
@@ -1328,6 +1368,95 @@ async function shareFile(blob,name){
     <p class="muted" style="margin:0 0 14px">${esc(name)}</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn primary" href="${url}" download="${esc(name)}" target="_blank" rel="noopener">Öffnen / Herunterladen</a></div>
     <p class="muted sm" style="margin-top:12px">Im geöffneten Dokument kannst du es über das Teilen-Symbol sichern oder drucken.</p>`,null);
+}
+
+/* ---------- Sicherungen ----------
+   Cloud: Inhalt in plan/bk-<zeit>, Liste in plan/backups (nur Metadaten). Ohne Cloud: im Gerätespeicher.
+   Jeden Tag beim ersten Öffnen durch jemanden mit Bearbeiten-Recht automatisch eine Sicherung. */
+const BK_KEEP_AUTO=30,BK_KEEP_MAN=30,BK_KEEP_LOCAL=8;
+const bkCloud=()=>S.mode==="cloud"&&!!fdb;
+function bkBody(){
+  /* Wochen: letztes Jahr bis nächstes Jahr, damit die Sicherung klein bleibt */
+  const from=weekId(mondayOf(addDays(new Date(),-400))),to=weekId(mondayOf(addDays(new Date(),400)));
+  const weeks={},done={};Object.keys(S.weeks||{}).filter(w=>w>=from&&w<=to).forEach(w=>{weeks[w]=S.weeks[w];if(S.done&&S.done[w])done[w]=S.done[w]});
+  return {format:"schichtplan-sicherung",version:1,erstellt:new Date().toISOString(),von:S.me?.name||"",cfg:S.cfg,weeks,done};
+}
+function bkMeta(id,o,kind,label){
+  const vac=(o.cfg.employees||[]).reduce((s,e)=>s+(e.absences||[]).filter(a=>a.kind==="Urlaub").length,0);
+  return {id,erstellt:o.erstellt,kind,label:label||"",von:o.von||"",emps:(o.cfg.employees||[]).length,weeks:Object.keys(o.weeks||{}).length,vac};
+}
+async function bkIndex(){
+  if(bkCloud()){const d=await refFor("plan/backups").get();return (d.exists&&d.data().list)||[]}
+  try{return JSON.parse(localStorage.getItem("sp-bk-index")||"[]")}catch(e){return []}
+}
+async function bkPut(kind,label){
+  if(!S.cfg)throw new Error("Noch keine Daten geladen.");
+  const o=clean(bkBody());const id="bk-"+o.erstellt.replace(/[:.]/g,"-");const meta=bkMeta(id,o,kind,label);
+  let idx=await bkIndex();idx=[meta,...idx.filter(x=>x.id!==id)];
+  const auto=idx.filter(x=>x.kind==="auto"),man=idx.filter(x=>x.kind!=="auto");
+  const keepA=bkCloud()?BK_KEEP_AUTO:BK_KEEP_LOCAL,keepM=bkCloud()?BK_KEEP_MAN:BK_KEEP_LOCAL;
+  const drop=[...auto.slice(keepA),...man.slice(keepM)];const keep=idx.filter(x=>!drop.includes(x));
+  if(bkCloud()){
+    const s=JSON.stringify(o);if(s.length>950000)throw new Error("Die Sicherung ist zu groß für die Cloud. Bitte als Datei speichern.");
+    await track(refFor("plan/"+id).set(o));
+    await track(refFor("plan/backups").set({list:keep}));
+    drop.forEach(x=>refFor("plan/"+x.id).delete().catch(()=>{}));
+  }else{
+    try{localStorage.setItem("sp-"+id,JSON.stringify(o));localStorage.setItem("sp-bk-index",JSON.stringify(keep));drop.forEach(x=>localStorage.removeItem("sp-"+x.id))}
+    catch(e){throw new Error("Der Gerätespeicher ist voll. Bitte als Datei speichern.")}
+  }
+  S.bkIdx=keep;return meta;
+}
+async function bkGet(id){
+  if(bkCloud()){const d=await refFor("plan/"+id).get();if(!d.exists)throw new Error("Sicherung nicht gefunden.");return d.data()}
+  const raw=localStorage.getItem("sp-"+id);if(!raw)throw new Error("Sicherung nicht gefunden.");return JSON.parse(raw);
+}
+let bkAutoDone=false;
+async function bkAuto(){
+  if(bkAutoDone||S.ro||!S.cfg||!emps().length)return;bkAutoDone=true;
+  try{const idx=await bkIndex();const today=dkey(new Date());if(idx.some(x=>x.kind==="auto"&&String(x.erstellt).slice(0,10)===today))return;
+    if(bkCloud()&&!cfgFresh){bkAutoDone=false;setTimeout(bkAuto,5000);return}
+    await bkPut("auto");if(S.tab==="backup")render()}catch(e){}
+}
+const bkFileName=iso=>{const d=iso?new Date(iso):new Date(),z=n=>String(n).padStart(2,"0");return `Schichtplan-Sicherung_${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}_${z(d.getHours())}-${z(d.getMinutes())}.json`};
+const bkFile=o=>shareFile(new Blob([JSON.stringify(o,null,1)],{type:"application/json"}),bkFileName(o.erstellt));
+function fmtDT(iso){const d=new Date(iso);return d.toLocaleDateString("de-DE",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"})+", "+d.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})+" Uhr"}
+function renderBackup(){
+  const ro=S.ro,cloud=bkCloud();
+  if(!S.bkIdx&&!S.bkLoading){S.bkLoading=true;bkIndex().then(x=>{S.bkIdx=x}).catch(e=>{S.bkIdx=[];S.bkMsg="Liste konnte nicht geladen werden: "+(e.message||e)}).finally(()=>{S.bkLoading=false;if(S.tab==="backup")render()})}
+  const idx=S.bkIdx||[];
+  const last=idx[0];
+  $("#view").innerHTML=`<div class="form" style="gap:22px">
+  <div class="sect bkhero"><h3>Jetzt sichern</h3>
+    <p class="muted sm" style="margin:0">Sichert den kompletten Stand: Mitarbeiter, Regeln, Urlaub und die Wochenpläne. ${cloud?"Die Sicherung liegt in der Cloud und kann von jedem Gerät aus wiederhergestellt werden.":"Die Sicherung liegt auf diesem Gerät."} Zusätzlich sichert die App jeden Tag automatisch.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${ro?"":`<button class="btn primary" id="bkNow">Jetzt sichern</button>`}<button class="btn" id="bkFile">Als Datei speichern</button></div>
+    <p class="muted sm" style="margin:0">${last?`Letzte Sicherung: <b>${fmtDT(last.erstellt)}</b> (${last.kind==="auto"?"automatisch":last.label||"von Hand"}).`:S.bkLoading?"Lade …":"Noch keine Sicherung vorhanden."}</p>
+    ${S.bkMsg?`<p class="freemsg" style="margin:0">${esc(S.bkMsg)}</p>`:""}
+  </div>
+  <div class="sect"><h3>Gespeicherte Sicherungen${idx.length?` (${idx.length})`:""}</h3>
+    ${idx.length?`<div class="ahwrap"><table class="aht bkt"><thead><tr><th>Wann</th><th>Art</th><th>Inhalt</th><th></th></tr></thead><tbody>
+    ${idx.map(x=>`<tr><td><b>${fmtDT(x.erstellt)}</b></td><td>${x.kind==="auto"?"automatisch":esc(x.label||"von Hand")}${x.von?` · ${esc(x.von)}`:""}</td><td class="muted sm">${x.emps} Mitarbeiter · ${x.weeks} Wochen · ${x.vac} Urlaube</td>
+      <td style="text-align:right;white-space:nowrap"><button class="btn ghost" data-bkdl="${x.id}">Als Datei</button>${ro?"":` <button class="btn ghost danger" data-bkrs="${x.id}">Wiederherstellen</button>`}</td></tr>`).join("")}
+    </tbody></table></div>`:`<p class="muted" style="margin:0">${S.bkLoading?"Lade …":"Noch keine Sicherung. Tippe auf „Jetzt sichern“."}</p>`}
+    <p class="muted sm" style="margin:0">Behalten werden die letzten ${cloud?BK_KEEP_AUTO:BK_KEEP_LOCAL} automatischen und ${cloud?BK_KEEP_MAN:BK_KEEP_LOCAL} von Hand gemachten Sicherungen. Vor jedem Wiederherstellen sichert die App den aktuellen Stand.</p>
+  </div>
+  ${ro?"":`<div class="sect"><h3>Aus einer Datei wiederherstellen</h3>
+    <p class="muted sm" style="margin:0">„Alles wiederherstellen“ ersetzt Mitarbeiter, Regeln, Urlaub und die Wochen aus der Datei. „Nur Urlaub übernehmen“ ändert sonst nichts.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn" for="bkLoad2">Alles wiederherstellen …</label><input type="file" id="bkLoad2" accept=".json,application/json" hidden>
+    <label class="btn" for="bkVac2">Nur Urlaub übernehmen …</label><input type="file" id="bkVac2" accept=".json,application/json" hidden></div></div>`}
+  <p class="muted bkver" style="font-size:12px">Version ${APP_VERSION}</p></div>`;
+  const msg=m=>{S.bkMsg=m;render();window.scrollTo(0,0)};
+  const now=$("#bkNow");if(now)now.onclick=async()=>{now.disabled=true;now.textContent="Sichere …";try{const m=await bkPut("manual","von Hand");msg(`Gesichert: ${fmtDT(m.erstellt)} · ${m.emps} Mitarbeiter, ${m.weeks} Wochen, ${m.vac} Urlaube.`)}catch(e){msg("Sichern fehlgeschlagen: "+(e.message||e))}};
+  $("#bkFile").onclick=()=>bkFile(clean(bkBody()));
+  $("#view").querySelectorAll("[data-bkdl]").forEach(b=>b.onclick=async()=>{try{bkFile(await bkGet(b.dataset.bkdl))}catch(e){msg("Fehler: "+(e.message||e))}});
+  $("#view").querySelectorAll("[data-bkrs]").forEach(b=>b.onclick=async()=>{
+    if(!b.dataset.sure){b.dataset.sure=1;b.textContent="Wirklich wiederherstellen?";return}
+    b.disabled=true;b.textContent="Stelle wieder her …";
+    try{const o=await bkGet(b.dataset.bkrs);await bkPut("manual","vor Wiederherstellung");await importBackup(o);S.bkIdx=null;msg(`Wiederhergestellt: Stand vom ${fmtDT(o.erstellt)}. Der vorherige Stand ist als Sicherung „vor Wiederherstellung“ gespeichert.`)}
+    catch(e){msg("Wiederherstellen fehlgeschlagen: "+(e.message||e))}});
+  const readFile=async inp=>{const f=inp.files[0];if(!f)return null;const o=JSON.parse(await f.text());if(o.format!=="schichtplan-sicherung")throw new Error("Das ist keine Schichtplan-Sicherung.");return o};
+  const l2=$("#bkLoad2");if(l2)l2.onchange=async()=>{try{const o=await readFile(l2);if(!o)return;await bkPut("manual","vor Wiederherstellung");await importBackup(o);S.bkIdx=null;msg(`Aus Datei wiederhergestellt (Stand ${o.erstellt?fmtDT(o.erstellt):"unbekannt"}). Der vorherige Stand ist als Sicherung gespeichert.`)}catch(e){msg("Wiederherstellen fehlgeschlagen: "+(e.message||e))}};
+  const v2=$("#bkVac2");if(v2)v2.onchange=async()=>{try{const o=await readFile(v2);if(!o)return;await bkPut("manual","vor Urlaub-Übernahme");msg(mergeVacations(o))}catch(e){msg("Übernehmen fehlgeschlagen: "+(e.message||e))}};
 }
 
 /* ---------- Vertretungsmatrix ---------- */
@@ -1424,7 +1553,7 @@ function render(){
   if(!S.cfg){$("#view").innerHTML=`<div class="empty">Plan wird geladen …</div>`;return}
   const y=window.scrollY;
   renderSync();
-  if(S.tab==="plan")renderPlan();else if(S.tab==="team")renderTeam();else if(S.tab==="access")renderAccess();else if(S.tab==="matrix")renderMatrix();else if(S.tab==="auto")renderAuto();else if(S.tab==="urlaub")renderUrlaub();else if(S.tab==="data")renderData();else renderRules();
+  if(S.tab==="plan")renderPlan();else if(S.tab==="team")renderTeam();else if(S.tab==="access")renderAccess();else if(S.tab==="matrix")renderMatrix();else if(S.tab==="auto")renderAuto();else if(S.tab==="urlaub")renderUrlaub();else if(S.tab==="backup")renderBackup();else if(S.tab==="data")renderData();else renderRules();
   window.scrollTo(0,y);
 }
 
@@ -1444,6 +1573,7 @@ function renderPlan(){
     <button class="btn primary edit-only" id="autoPlan">Automatisch planen</button>
     <div class="more"><button class="btn" id="moreBtn" aria-haspopup="menu" aria-expanded="${!!S.moreOpen}">Mehr ▾</button>${S.moreOpen?`<div class="menu" role="menu">
       <button role="menuitem" id="pdfBtn">PDF / Drucken (A4 quer)</button>
+      <button role="menuitem" id="bkMenu">Sicherung …</button>
       ${S.ro?"":`<button role="menuitem" id="fillLead">Früh/Spät der Leitung eintragen</button><button role="menuitem" id="swapRot">Früh und Spät der Leitung tauschen</button><button role="menuitem" class="danger" id="clearWeek">${S.confirmClear?"Wirklich alle Schichten löschen?":"Woche leeren"}</button>`}</div>`:""}</div>
   </div>`;
   const leaders=leadersL();
@@ -1466,6 +1596,7 @@ function renderPlan(){
   v.querySelectorAll("[data-cell]").forEach(b=>b.onclick=()=>{const [id,k]=b.dataset.cell.split("|");openCellMenu(empById(id),k)});
   v.querySelectorAll("[data-gotasks]").forEach(b=>b.onclick=()=>{S.planView="tasks";render()});
   v.querySelectorAll("[data-done]").forEach(c=>c.onchange=()=>{const k=c.dataset.done.split("|")[0];const x=dayTasks(k,weekShifts(weekId(mondayOf(pdate(k))))).find(y=>y.key===c.dataset.done);if(x)toggleDone(x)});
+  const bm=$("#bkMenu");if(bm)bm.onclick=()=>{S.moreOpen=false;S.tab="backup";render()};
   const fl=$("#fillLead");if(fl)fl.onclick=()=>{S.moreOpen=false;fillLeadWeek();S.freeMsg="Früh- und Spätschichten der Leitung eingetragen.";render()};
   const sr=$("#swapRot");if(sr)sr.onclick=()=>{S.moreOpen=false;swapRotation();S.freeMsg="Früh und Spät getauscht. Der Wechsel läuft ab dieser Woche so weiter."};
   const ap=$("#autoPlan");if(ap)ap.onclick=()=>{planWeek();S.planView="plan";render()};
@@ -1962,9 +2093,13 @@ function bindTeam(){
   v.querySelectorAll("[data-rotex]").forEach(x=>x.onchange=()=>{const d=+x.dataset.rotex;e.rot.except=(e.rot.except||[]).filter(y=>y!==d);if(x.checked)e.rot.except.push(d);saveCfg()});
   const rs=$("#rot_swap");if(rs)rs.onclick=()=>{const cur=weekRotKind(e,S.week);e.rot.refMon=dkey(S.week);e.rot.refEarly=cur!=="frueh";saveCfg();render()};
   v.querySelectorAll("[data-skill]").forEach(inp=>inp.addEventListener("change",()=>{const id=inp.dataset.skill;e.skills=(e.skills||[]).filter(x=>x!==id);if(inp.checked)e.skills.push(id);saveCfg()}));
-  v.querySelectorAll("[data-ab]").forEach(inp=>inp.addEventListener("change",()=>{e.absences[+inp.dataset.ab][inp.dataset.k]=inp.value;saveCfg();if(inp.dataset.k==="kind"||inp.dataset.k==="status")render()}));
+  v.querySelectorAll("[data-ab]").forEach(inp=>inp.addEventListener("change",()=>{const e2=empById(e.id)||e;const a=(e2.absences||[])[+inp.dataset.ab];if(!a)return;const k=inp.dataset.k;const old={from:a.from,to:a.to,status:a.status};
+    a[k]=inp.value;if(k==="from"&&a.from&&(!a.to||a.to<a.from))a.to=pdate(a.from).getDay()===1?dkey(addDays(pdate(a.from),5)):a.from;if(k==="to"&&a.to&&a.from>a.to)a.from=a.to;
+    saveCfg();
+    if(a.kind==="Urlaub"&&a.from&&a.to&&(k==="from"||k==="to"||k==="status")){const ws=vacReplan(e2,a,old,old.status!=="wunsch"&&!!old.from);if(ws.length)S.freeMsg=`${e2.name}: Urlaub ${fmtR(a.from,a.to)} gespeichert. Schichtplan neu geplant: ${ws.join(", ")}.`}
+    render()}));
   v.querySelectorAll("[data-abdel]").forEach(b=>b.onclick=()=>{e.absences.splice(+b.dataset.abdel,1);saveCfg();render()});
-  const aa=$("#addAbs");if(aa)aa.onclick=()=>{e.absences=e.absences||[];const t=dkey(new Date());e.absences.push({from:t,to:t,kind:"Urlaub"});saveCfg();render()};
+  const aa=$("#addAbs");if(aa)aa.onclick=()=>{e.absences=e.absences||[];const m=mondayOf(addDays(new Date(),7));e.absences.push({from:dkey(m),to:dkey(addDays(m,5)),kind:"Urlaub",status:"wunsch"});saveCfg();render()};
   const de=$("#delEmp");if(de)de.onclick=()=>{if(S.confirmDel!==e.id){S.confirmDel=e.id;render();return}S.cfg.employees=emps().filter(x=>x.id!==e.id);S.confirmDel=null;S.selEmp=null;saveCfg();render()};
 }
 
@@ -2413,16 +2548,25 @@ function openVacIssues(){
 function openVac(e,i,preset){
   const ro=S.ro;const isNew=!e||i<0;
   const a0=!isNew?e.absences[i]:null;
-  const p0=preset||dkey(new Date());
-  const m0=dkey(mondayOf(pdate(p0)));
+  const p0=preset||null;
+  const m0=p0?dkey(mondayOf(pdate(p0))):"";
   const st={emp:e?e.id:(emps()[0]||{}).id,status:a0?(a0.status||"genehmigt"):"wunsch",note:a0?.note||"",
     mode:a0?(pdate(a0.from).getDay()===1&&wholeWeeks(a0)?"w":"d"):"w",
-    ranges:a0?[{from:a0.from,to:a0.to}]:[{from:m0,to:dkey(addDays(pdate(m0),5))},{from:"",to:""},{from:"",to:""}]};
+    ranges:a0?[{from:a0.from,to:a0.to}]:[m0?{from:m0,to:dkey(addDays(pdate(m0),5))}:{from:"",to:""},{from:"",to:""},{from:"",to:""}]};
   /* Wochen-Modus: Montag + Anzahl Wochen → Mo bis Sa */
   const wkOf=r=>{if(!r.from)return {mon:"",n:1};const mon=mondayOf(pdate(r.from));return {mon:dkey(mon),n:Math.max(1,Math.round(((r.to?pdate(r.to):pdate(r.from))-mon)/864e5/7+.2)+0)}};
   const setWk=(r,mon,n)=>{if(!mon){r.from="";r.to="";return}r.from=mon;r.to=dkey(addDays(pdate(mon),7*(n-1)+5))};
-  const yy=S.uy||new Date().getFullYear();const mons=[];for(let d=mondayOf(new Date(yy,0,1));d<=new Date(yy+1,11,31);d=addDays(d,7))mons.push(d);
-  const wkOpts=sel=>`<option value="">– KW wählen –</option>`+mons.map(d=>{const k=dkey(d);return `<option value="${k}" ${k===sel?"selected":""}>KW ${isoWeek(d).w}${d.getFullYear()!==yy?"/"+String(isoWeek(d).y||d.getFullYear()).slice(2):""} · ${shortD(k)}–${shortD(dkey(addDays(d,5)))}</option>`}).join("");
+  const yy=S.uy||new Date().getFullYear();const mons=[];const yStart=Math.min(yy,new Date().getFullYear(),a0?+a0.from.slice(0,4):yy);for(let d=mondayOf(new Date(yStart,0,1));d<=new Date(yy+1,11,31);d=addDays(d,7))mons.push(d);
+  /* Wochen-Auswahl: zeigt, ob die Person oder jemand aus ihrer Gruppe dort schon Urlaub hat */
+  const wkOpts=(sel,E)=>{const own=E?vacList(E).filter(a=>!(a0&&a===a0)):[];
+    const mates=E?[...new Set((urlCfg().groups||[]).filter(g=>(g.members||[]).includes(E.id)).flatMap(g=>g.members))].filter(id=>id!==E.id).map(empById).filter(Boolean):[];
+    return `<option value="">– KW wählen –</option>`+mons.map(d=>{const k=dkey(d),k2=dkey(addDays(d,5));const ov=a=>a.from<=k2&&a.to>=k;
+      const mine=own.some(ov);const others=mates.filter(m=>vacList(m).some(ov)).map(m=>m.name);
+      return `<option value="${k}" ${k===sel?"selected":""}>${mine?"● ":""}KW ${isoWeek(d).w}${d.getFullYear()!==yy?"/"+String(isoWeek(d).y||d.getFullYear()).slice(2):""} · ${shortD(k)}–${shortD(k2)}${mine?" · hat schon Urlaub":""}${others.length?" · weg: "+others.join(", "):""}</option>`}).join("")};
+  const haveHtml=E=>{if(!E)return "";const y0=`${yy}-01-01`;const list=vacList(E).filter(a=>a.to>=y0).sort((a,b)=>a.from.localeCompare(b.from));
+    const yrs=[yy,yy+1].filter(y=>list.some(a=>a.from.slice(0,4)<=String(y)&&a.to.slice(0,4)>=String(y))||y===yy);
+    const sum=yrs.map(y=>{const t=vacTaken(E,y,false)+vacTaken(E,y,true);return `${y}: ${t} Tag${t===1?"":"e"} eingetragen${E.vacEntitle?`, ${vacLeft(E,y)} von ${(+E.vacEntitle)+vacRest(E,y)} übrig`:""}`}).join(" · ");
+    return `<div class="vhave"><span class="lbl">Schon eingetragen bei ${esc(E.name)}</span>${list.length?`<div class="vhl">${list.map(a=>`<span class="vh ${vacWish(a)?"wish":""} ${a0&&a===a0?"cur":""}" style="--h:${E.hue}">KW ${isoWeek(pdate(a.from)).w}${isoWeek(pdate(a.to)).w!==isoWeek(pdate(a.from)).w?"–"+isoWeek(pdate(a.to)).w:""} · ${fmtR(a.from,a.to)} · ${vacDays(E,a.from,a.to)} T.${vacWish(a)?" · Wunsch":""}${a0&&a===a0?" · wird bearbeitet":""}</span>`).join("")}</div>`:`<span class="muted sm">Noch kein Urlaub ab ${yy}.</span>`}<span class="muted sm">${sum}</span></div>`};
   const valid=r=>r.from&&r.to&&r.from<=r.to;
   const draw=close=>{
     const E=empById(st.emp);const good=st.ranges.filter(valid);const bad=st.ranges.some(r=>(r.from||r.to)&&!valid(r));
@@ -2437,10 +2581,11 @@ function openVac(e,i,preset){
     const multi=st.ranges.length>1;
     $("#vform").innerHTML=`
       <label class="field"><span class="lbl">Mitarbeiter</span><select id="vE" ${isNew&&!ro?"":"disabled"}>${emps().map(x=>`<option value="${x.id}" ${x.id===st.emp?"selected":""}>${esc(x.name)}</option>`).join("")}</select></label>
+      ${haveHtml(E)}
       <div class="seg" role="radiogroup" aria-label="Eingabe"><button class="segb" role="radio" aria-checked="${st.mode==="w"}" aria-selected="${st.mode==="w"}" data-vm="w" ${ro?"disabled":""}>Ganze Wochen</button><button class="segb" role="radio" aria-checked="${st.mode==="d"}" aria-selected="${st.mode==="d"}" data-vm="d" ${ro?"disabled":""}>Einzelne Tage</button></div>
       <div class="vranges ${st.mode==="w"?"wk":""}">${st.mode==="w"?`<div class="vrh"><span class="lbl">Ab Woche</span><span class="lbl">Dauer</span><span class="lbl">Tage</span><span></span></div>`:`<div class="vrh"><span class="lbl">Von</span><span class="lbl">Bis</span><span class="lbl">Tage</span><span></span></div>`}
       ${st.ranges.map((r,j)=>{const x=!ro&&multi&&!(a0&&j===0)?`<button class="btn ghost danger" data-rx="${j}" aria-label="Zeile ${j+1} entfernen">✕</button>`:"<span></span>";const dd=`<span class="mono">${valid(r)&&E?vacDays(E,r.from,r.to):"–"}</span>`;
-        if(st.mode==="w"){const w=wkOf(r);return `<div class="vrr"><select data-rw="${j}" aria-label="Zeitraum ${j+1}: ab Kalenderwoche" ${ro?"disabled":""}>${wkOpts(w.mon)}</select><select data-rn="${j}" aria-label="Zeitraum ${j+1}: Anzahl Wochen" ${ro?"disabled":""}>${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${n===w.n?"selected":""}>${n} Woche${n>1?"n":""}</option>`).join("")}</select>${dd}${x}${valid(r)?`<small class="muted vrd">${fmtR(r.from,r.to)}</small>`:""}</div>`}
+        if(st.mode==="w"){const w=wkOf(r);return `<div class="vrr"><select data-rw="${j}" aria-label="Zeitraum ${j+1}: ab Kalenderwoche" ${ro?"disabled":""}>${wkOpts(w.mon,E)}</select><select data-rn="${j}" aria-label="Zeitraum ${j+1}: Anzahl Wochen" ${ro?"disabled":""}>${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${n===w.n?"selected":""}>${n} Woche${n>1?"n":""}</option>`).join("")}</select>${dd}${x}${valid(r)?`<small class="muted vrd">${fmtR(r.from,r.to)}</small>`:""}</div>`}
         return `<div class="vrr ${(r.from||r.to)&&!valid(r)?"badr":""}"><input type="date" data-rf="${j}" value="${r.from}" aria-label="Zeitraum ${j+1} von" ${ro?"disabled":""}><input type="date" data-rt="${j}" value="${r.to}" min="${r.from}" aria-label="Zeitraum ${j+1} bis" ${ro?"disabled":""}>${dd}${x}</div>`}).join("")}
       ${ro?"":`<button class="btn ghost" id="vRAdd" style="justify-self:start">+ Weiterer Zeitraum</button>`}</div>
       <div class="seg" role="radiogroup" aria-label="Status"><button class="segb" role="radio" aria-checked="${st.status==="wunsch"}" aria-selected="${st.status==="wunsch"}" data-vs="wunsch" ${ro?"disabled":""}>Wunsch</button><button class="segb" role="radio" aria-checked="${st.status!=="wunsch"}" aria-selected="${st.status!=="wunsch"}" data-vs="genehmigt" ${ro?"disabled":""}>Genehmigt</button></div>
